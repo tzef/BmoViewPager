@@ -7,31 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2B0EBC9D3CE7C38AF7F5CC99 /* Pods_BmoViewPager_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2DD128F077E599091DFBB7E /* Pods_BmoViewPager_Tests.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		77B6379129F34BD8149479F5 /* Pods_BmoViewPager_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 747DC0516D7659089D876197 /* Pods_BmoViewPager_Example.framework */; };
+		C990D2A11E90BCAF009528A6 /* DemoFromStoryboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C990D2A01E90BCAF009528A6 /* DemoFromStoryboardViewController.swift */; };
+		C990D2A41E90BE9D009528A6 /* DemoFromXibViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C990D2A21E90BE9D009528A6 /* DemoFromXibViewController.swift */; };
+		C990D2A51E90BE9D009528A6 /* DemoFromXibViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C990D2A31E90BE9D009528A6 /* DemoFromXibViewController.xib */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		607FACE61AFB9204008FA782 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 607FACCF1AFB9204008FA782;
-			remoteInfo = BmoViewPager;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		10C6EFA06AF0FCC4F6F8EF09 /* Pods-BmoViewPager_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BmoViewPager_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BmoViewPager_Example/Pods-BmoViewPager_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		2A5F862DE797648AC384A6B8 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		2A5F862DE797648AC384A6B8 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		39D2820CF964599648A4F184 /* Pods-BmoViewPager_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BmoViewPager_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-BmoViewPager_Example/Pods-BmoViewPager_Example.release.xcconfig"; sourceTree = "<group>"; };
-		3D1DEA75E97AD3554A242B82 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		3D1DEA75E97AD3554A242B82 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		45E7E5EAB86706B2FE63E254 /* Pods-BmoViewPager_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BmoViewPager_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BmoViewPager_Tests/Pods-BmoViewPager_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* BmoViewPager_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BmoViewPager_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -40,12 +31,14 @@
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		607FACE51AFB9204008FA782 /* BmoViewPager_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BmoViewPager_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		747DC0516D7659089D876197 /* Pods_BmoViewPager_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BmoViewPager_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7D2E37F019AAB9761C230EDB /* BmoViewPager.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = BmoViewPager.podspec; path = ../BmoViewPager.podspec; sourceTree = "<group>"; };
+		7D2E37F019AAB9761C230EDB /* BmoViewPager.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = BmoViewPager.podspec; path = ../BmoViewPager.podspec; sourceTree = "<group>"; };
 		846799C824A4F2F3A15BEA5D /* Pods-BmoViewPager_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BmoViewPager_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BmoViewPager_Tests/Pods-BmoViewPager_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		C990D2A01E90BCAF009528A6 /* DemoFromStoryboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DemoFromStoryboardViewController.swift; path = DemoViewcontrollers/DemoFromStoryboardViewController.swift; sourceTree = "<group>"; };
+		C990D2A21E90BE9D009528A6 /* DemoFromXibViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DemoFromXibViewController.swift; path = DemoViewcontrollers/DemoFromXibViewController.swift; sourceTree = "<group>"; };
+		C990D2A31E90BE9D009528A6 /* DemoFromXibViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DemoFromXibViewController.xib; path = DemoViewcontrollers/DemoFromXibViewController.xib; sourceTree = "<group>"; };
 		E2DD128F077E599091DFBB7E /* Pods_BmoViewPager_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BmoViewPager_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -55,14 +48,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				77B6379129F34BD8149479F5 /* Pods_BmoViewPager_Example.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		607FACE21AFB9204008FA782 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2B0EBC9D3CE7C38AF7F5CC99 /* Pods_BmoViewPager_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,7 +81,6 @@
 			isa = PBXGroup;
 			children = (
 				607FACD01AFB9204008FA782 /* BmoViewPager_Example.app */,
-				607FACE51AFB9204008FA782 /* BmoViewPager_Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -104,6 +88,7 @@
 		607FACD21AFB9204008FA782 /* Example for BmoViewPager */ = {
 			isa = PBXGroup;
 			children = (
+				C990D29F1E8FF07B009528A6 /* DemoViewControllers */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
@@ -159,6 +144,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C990D29F1E8FF07B009528A6 /* DemoViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				C990D2A01E90BCAF009528A6 /* DemoFromStoryboardViewController.swift */,
+				C990D2A21E90BE9D009528A6 /* DemoFromXibViewController.swift */,
+				C990D2A31E90BE9D009528A6 /* DemoFromXibViewController.xib */,
+			);
+			name = DemoViewControllers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -182,27 +177,6 @@
 			productReference = 607FACD01AFB9204008FA782 /* BmoViewPager_Example.app */;
 			productType = "com.apple.product-type.application";
 		};
-		607FACE41AFB9204008FA782 /* BmoViewPager_Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "BmoViewPager_Tests" */;
-			buildPhases = (
-				53553047E3FE5325F17801EA /* [CP] Check Pods Manifest.lock */,
-				607FACE11AFB9204008FA782 /* Sources */,
-				607FACE21AFB9204008FA782 /* Frameworks */,
-				607FACE31AFB9204008FA782 /* Resources */,
-				89D28F85F4C6CE656D333A0F /* [CP] Embed Pods Frameworks */,
-				FD0FD4497860AC6B4B3F05BB /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				607FACE71AFB9204008FA782 /* PBXTargetDependency */,
-			);
-			name = BmoViewPager_Tests;
-			productName = Tests;
-			productReference = 607FACE51AFB9204008FA782 /* BmoViewPager_Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -215,12 +189,8 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = SGW9NZTF78;
 						LastSwiftMigration = 0820;
-					};
-					607FACE41AFB9204008FA782 = {
-						CreatedOnToolsVersion = 6.3.1;
-						LastSwiftMigration = 0820;
-						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
 				};
 			};
@@ -238,7 +208,6 @@
 			projectRoot = "";
 			targets = (
 				607FACCF1AFB9204008FA782 /* BmoViewPager_Example */,
-				607FACE41AFB9204008FA782 /* BmoViewPager_Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -249,15 +218,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
+				C990D2A51E90BE9D009528A6 /* DemoFromXibViewController.xib in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		607FACE31AFB9204008FA782 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,21 +242,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BmoViewPager_Example/Pods-BmoViewPager_Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		53553047E3FE5325F17801EA /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
 		607FE1FC3C09C268A69A867A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -307,21 +255,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BmoViewPager_Example/Pods-BmoViewPager_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		89D28F85F4C6CE656D333A0F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BmoViewPager_Tests/Pods-BmoViewPager_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A4CBB62B6878B9520E0A850D /* [CP] Check Pods Manifest.lock */ = {
@@ -339,21 +272,6 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		FD0FD4497860AC6B4B3F05BB /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BmoViewPager_Tests/Pods-BmoViewPager_Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -362,27 +280,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				C990D2A41E90BE9D009528A6 /* DemoFromXibViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		607FACE11AFB9204008FA782 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+				C990D2A11E90BCAF009528A6 /* DemoFromStoryboardViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		607FACE71AFB9204008FA782 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 607FACCF1AFB9204008FA782 /* BmoViewPager_Example */;
-			targetProxy = 607FACE61AFB9204008FA782 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		607FACD91AFB9204008FA782 /* Main.storyboard */ = {
@@ -496,6 +400,7 @@
 			baseConfigurationReference = 10C6EFA06AF0FCC4F6F8EF09 /* Pods-BmoViewPager_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = SGW9NZTF78;
 				INFOPLIST_FILE = BmoViewPager/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
@@ -510,46 +415,11 @@
 			baseConfigurationReference = 39D2820CF964599648A4F184 /* Pods-BmoViewPager_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = SGW9NZTF78;
 				INFOPLIST_FILE = BmoViewPager/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
-		607FACF31AFB9204008FA782 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 45E7E5EAB86706B2FE63E254 /* Pods-BmoViewPager_Tests.debug.xcconfig */;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Debug;
-		};
-		607FACF41AFB9204008FA782 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 846799C824A4F2F3A15BEA5D /* Pods-BmoViewPager_Tests.release.xcconfig */;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -572,15 +442,6 @@
 			buildConfigurations = (
 				607FACF01AFB9204008FA782 /* Debug */,
 				607FACF11AFB9204008FA782 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "BmoViewPager_Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				607FACF31AFB9204008FA782 /* Debug */,
-				607FACF41AFB9204008FA782 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

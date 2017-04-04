@@ -17,12 +17,15 @@ enum DemoViewControllerType {
 }
 class ViewController: UIViewController, BmoViewPagerDataSource {
     @IBOutlet weak var viewPager: BmoViewPager!
-    
+
+    var demoTitles = ["Page 1", "Page 2", "Page 3", "Page 4", "Page 5"]
     var demoViewControllers: [DemoViewControllerType] = [.fromStoryboard, .tableView, .time, .fromXib, .time]
     var demoTableViewDataSource = DemoTableViewDataSource()
     override func viewDidLoad() {
         super.viewDidLoad()
         viewPager.dataSource = self
+        viewPager.presentedPageIndex = 2
+        viewPager.pageControlIsHidden = false
     }
     
     // MARK: - BmoViewPagerDataSource
@@ -54,6 +57,9 @@ class ViewController: UIViewController, BmoViewPagerDataSource {
             return vc
         }
         return UITableViewController()
+    }
+    func bmoViewPager(_ viewPager: BmoViewPager, titleForPageListAt page: Int) -> String? {
+        return demoTitles[page]
     }
 }
 

@@ -37,9 +37,6 @@ class BmoPageViewController: UIPageViewController, UIPageViewControllerDataSourc
         self.findScrollViewIfNeed()
         self.pageScrollView?.frame = self.view.bounds
     }
-    deinit {
-        print("BmoPageViewController deinit")
-    }
     
     // MARK: - Private
     func findScrollViewIfNeed() {

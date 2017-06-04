@@ -68,8 +68,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hj9-KG-RXa">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="520"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Easy to use" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kai-6d-zg1">
-                                                <rect key="frame" x="16" y="8" width="97.5" height="23"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Simple Usage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kai-6d-zg1">
+                                                <rect key="frame" x="16" y="8" width="117.5" height="23"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -155,8 +155,8 @@
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pts-9B-pfZ" customClass="DemoButton" customModule="BmoViewPager_Example" customModuleProvider="target">
-                                <rect key="frame" x="118" y="559" width="139" height="44"/>
-                                <state key="normal" title="See More Demo"/>
+                                <rect key="frame" x="100" y="559" width="175" height="44"/>
+                                <state key="normal" title="See Advanced Demo"/>
                                 <connections>
                                     <action selector="moreDemoAction:" destination="YJR-ZV-hsP" eventType="touchUpInside" id="8uh-go-CUs"/>
                                 </connections>
@@ -292,6 +292,96 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ENb-bi-kKb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1761" y="2285"/>
+        </scene>
+        <!--Demo View Controller2-->
+        <scene sceneID="09o-j9-c1d">
+            <objects>
+                <viewController storyboardIdentifier="DemoViewController2" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7Zg-nG-6rb" customClass="DemoViewController2" customModule="BmoViewPager_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="usg-l1-KsF"/>
+                        <viewControllerLayoutGuide type="bottom" id="8Ac-J2-Wwc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3lT-ct-bbs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uJC-wJ-fpL">
+                                <rect key="frame" x="8" y="28" width="359" height="631"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YGq-HG-5To" customClass="SegmentedView" customModule="BmoViewPager_Example" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="16" width="327" height="30"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="CqR-hP-T0y"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="segmentedCount">
+                                                <integer key="value" value="4"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="strokeColor">
+                                                <color key="value" red="0.0039215686274509803" green="0.1764705882352941" blue="0.3529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom ViewPagerList" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="45N-ZC-ojM">
+                                        <rect key="frame" x="16" y="54" width="192" height="23"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Assign container view to BmoViewPager" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QVl-C9-AIV">
+                                        <rect key="frame" x="16" y="85" width="327" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom position and layout" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2c7-W1-4U2">
+                                        <rect key="frame" x="16" y="111" width="327" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qHD-qI-jTY" customClass="BmoViewPager" customModule="BmoViewPager">
+                                        <rect key="frame" x="8" y="137" width="343" height="486"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="QVl-C9-AIV" firstAttribute="leading" secondItem="45N-ZC-ojM" secondAttribute="leading" id="Bp3-89-EfQ"/>
+                                    <constraint firstItem="2c7-W1-4U2" firstAttribute="trailing" secondItem="QVl-C9-AIV" secondAttribute="trailing" id="QhO-d6-uUL"/>
+                                    <constraint firstItem="qHD-qI-jTY" firstAttribute="top" secondItem="2c7-W1-4U2" secondAttribute="bottom" constant="8" id="Ruk-HV-m7u"/>
+                                    <constraint firstItem="45N-ZC-ojM" firstAttribute="leading" secondItem="YGq-HG-5To" secondAttribute="leading" id="T2G-7z-nYD"/>
+                                    <constraint firstItem="qHD-qI-jTY" firstAttribute="leading" secondItem="uJC-wJ-fpL" secondAttribute="leading" constant="8" id="aJ3-3b-d61"/>
+                                    <constraint firstItem="2c7-W1-4U2" firstAttribute="leading" secondItem="QVl-C9-AIV" secondAttribute="leading" id="atT-3s-RgI"/>
+                                    <constraint firstItem="45N-ZC-ojM" firstAttribute="top" secondItem="YGq-HG-5To" secondAttribute="bottom" constant="8" id="dyc-DB-e1f"/>
+                                    <constraint firstAttribute="bottom" secondItem="qHD-qI-jTY" secondAttribute="bottom" constant="8" id="h5U-NQ-AFK"/>
+                                    <constraint firstAttribute="trailing" secondItem="YGq-HG-5To" secondAttribute="trailing" constant="16" id="hTD-qG-PeV"/>
+                                    <constraint firstItem="QVl-C9-AIV" firstAttribute="top" secondItem="45N-ZC-ojM" secondAttribute="bottom" constant="8" id="j2u-Mx-Mud"/>
+                                    <constraint firstItem="QVl-C9-AIV" firstAttribute="trailing" secondItem="YGq-HG-5To" secondAttribute="trailing" id="loO-vo-Gsr"/>
+                                    <constraint firstAttribute="trailing" secondItem="qHD-qI-jTY" secondAttribute="trailing" constant="8" id="n9b-kX-oM0"/>
+                                    <constraint firstItem="YGq-HG-5To" firstAttribute="top" secondItem="uJC-wJ-fpL" secondAttribute="top" constant="16" id="pLt-Aa-Pqo"/>
+                                    <constraint firstItem="2c7-W1-4U2" firstAttribute="top" secondItem="QVl-C9-AIV" secondAttribute="bottom" constant="8" id="qdI-BK-AhE"/>
+                                    <constraint firstItem="YGq-HG-5To" firstAttribute="leading" secondItem="uJC-wJ-fpL" secondAttribute="leading" constant="16" id="vuY-xg-axW"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="uJC-wJ-fpL" secondAttribute="trailing" constant="8" id="Y5m-Db-ijO"/>
+                            <constraint firstItem="8Ac-J2-Wwc" firstAttribute="top" secondItem="uJC-wJ-fpL" secondAttribute="bottom" constant="8" id="bS2-gv-We4"/>
+                            <constraint firstItem="uJC-wJ-fpL" firstAttribute="leading" secondItem="3lT-ct-bbs" secondAttribute="leading" constant="8" id="cYI-sR-1St"/>
+                            <constraint firstItem="uJC-wJ-fpL" firstAttribute="top" secondItem="usg-l1-KsF" secondAttribute="bottom" constant="8" id="xrp-xx-t3C"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="viewPager" destination="qHD-qI-jTY" id="xSr-sw-Go9"/>
+                        <outlet property="viewPgerListView" destination="YGq-HG-5To" id="yLc-bJ-vw4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rLZ-Ex-mQH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1760.8" y="2987.8560719640182"/>
         </scene>
     </scenes>
     <resources>

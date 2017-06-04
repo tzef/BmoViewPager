@@ -76,9 +76,6 @@ class BmoDoubleLabel: UILabel {
         super.init(coder: aDecoder)
         commonInit()
     }
-    deinit {
-        print("BmoDoubleLabel deinit")
-    }
     func commonInit() {
         self.addSubview(rearView)
         rearView.backgroundColor = UIColor.clear

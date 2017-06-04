@@ -37,9 +37,6 @@ class BmoPageItemListLayout: UICollectionViewLayout {
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true
     }
-    deinit {
-        print("BmoPageItemListLayout deinit")
-    }
     override func prepare() {
         super.prepare()
         if attributesList.count == 0 {

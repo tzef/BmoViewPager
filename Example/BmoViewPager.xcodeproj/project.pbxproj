@@ -35,6 +35,7 @@
 		C9C67DFC1EE4283700B112A2 /* item0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C9C67DF91EE4283700B112A2 /* item0.jpg */; };
 		C9C67DFD1EE4283700B112A2 /* item1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C9C67DFA1EE4283700B112A2 /* item1.jpg */; };
 		C9C67DFE1EE4283700B112A2 /* item2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C9C67DFB1EE4283700B112A2 /* item2.jpg */; };
+		C9C67E001EE4335000B112A2 /* DemoViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C67DFF1EE4335000B112A2 /* DemoViewController2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +78,7 @@
 		C9C67DF91EE4283700B112A2 /* item0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = item0.jpg; path = Screenshot/item0.jpg; sourceTree = "<group>"; };
 		C9C67DFA1EE4283700B112A2 /* item1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = item1.jpg; path = Screenshot/item1.jpg; sourceTree = "<group>"; };
 		C9C67DFB1EE4283700B112A2 /* item2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = item2.jpg; path = Screenshot/item2.jpg; sourceTree = "<group>"; };
+		C9C67DFF1EE4335000B112A2 /* DemoViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DemoViewController2.swift; path = DemoViewControllers/DemoViewController2.swift; sourceTree = "<group>"; };
 		E2DD128F077E599091DFBB7E /* Pods_BmoViewPager_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BmoViewPager_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -192,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				C9C67DCA1EE4016C00B112A2 /* DemoViewController1.swift */,
+				C9C67DFF1EE4335000B112A2 /* DemoViewController2.swift */,
 			);
 			name = DemoViewControllers;
 			sourceTree = "<group>";
@@ -384,6 +387,7 @@
 				C9C67DC51EE3ED3800B112A2 /* Color+Image.swift in Sources */,
 				C9C67DC31EE3ECA700B112A2 /* String+Size.swift in Sources */,
 				C9C67DB91EE3DF6100B112A2 /* ViewControllerPage2.swift in Sources */,
+				C9C67E001EE4335000B112A2 /* DemoViewController2.swift in Sources */,
 				C9C67DC91EE3FE6B00B112A2 /* SegmentedView.swift in Sources */,
 				C9C67DC01EE3EC4900B112A2 /* DemoButton.swift in Sources */,
 				C9C67DCB1EE4016C00B112A2 /* DemoViewController1.swift in Sources */,

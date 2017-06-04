@@ -145,9 +145,6 @@ public class BmoViewPager: UIView, BmoPageItemListDelegate, UIScrollViewDelegate
     public func navigationLayoutChanged() {
         self.pageListView.collectionView?.contentInset = .zero
     }
-    deinit {
-        print("BmoViewPager deinit")
-    }
     fileprivate func addPageListIfNeed() {
         if dataSource?.bmoViewPagerDataSourceTitle != nil {
             if let containerView = pageListContainerView {

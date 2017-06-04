@@ -60,7 +60,7 @@ extension DemoViewController1: BmoViewPagerDataSource {
         if viewPager == customViewPager {
             return 3
         } else {
-            return 5
+            return 10
         }
     }
     func bmoViewPagerDataSource(_ viewPager: BmoViewPager, viewControllerForPageAt page: Int) -> UIViewController {

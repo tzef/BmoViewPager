@@ -15,6 +15,7 @@ class ViewControllerPage2: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()        
         viewPager.dataSource = self
+        
         viewPager.layer.borderWidth = 1.0
         viewPager.layer.cornerRadius = 5.0
         viewPager.layer.masksToBounds = true
@@ -36,7 +37,7 @@ extension ViewControllerPage2: BmoViewPagerDataSource {
             NSForegroundColorAttributeName : mainColor
         ]
     }
-    func bmoViewPagerDataSourceListItemHighlightedBackgroundView(_ viewPager: BmoViewPager, forPageListAt page: Int) -> UIView {
+    func bmoViewPagerDataSourceListItemHighlightedBackgroundView(_ viewPager: BmoViewPager, forPageListAt page: Int) -> UIView? {
         let view = UnderLineView()
         view.marginX = 8.0
         view.lineWidth = 5.0
@@ -44,17 +45,21 @@ extension ViewControllerPage2: BmoViewPagerDataSource {
         return view
     }
     func bmoViewPagerDataSourceTitle(_ viewPager: BmoViewPager, forPageListAt page: Int) -> String? {
-        return "Page \(page)"
+        return "Demo \(page)"
     }
     
     // Required
     func bmoViewPagerDataSourceNumberOfPage(in viewPager: BmoViewPager) -> Int {
-        return 5
+        return 3
     }
     func bmoViewPagerDataSource(_ viewPager: BmoViewPager, viewControllerForPageAt page: Int) -> UIViewController {
         switch page {
         case 0:
             if let vc = storyboard?.instantiateViewController(withIdentifier: "DemoViewController1") as? DemoViewController1 {
+                return vc
+            }
+        case 1:
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "DemoViewController2") as? DemoViewController2 {
                 return vc
             }
         default:

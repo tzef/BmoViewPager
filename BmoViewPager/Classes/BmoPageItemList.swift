@@ -47,9 +47,6 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         self.bmoViewPager = viewPager
         self.backgroundColor = .white
     }
-    deinit {
-        print("BmoPageItemList deinit")
-    }
     func setCollectionView() {
         bmoViewPagerCount = bmoDataSource?.bmoViewPagerDataSourceNumberOfPage(in: bmoViewPager) ?? 0
         horizontalLayout.delegate = self

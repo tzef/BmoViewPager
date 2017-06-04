@@ -26,6 +26,21 @@ class SegmentedView: UIView {
         }
     }
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    func setup() {
+        self.layer.borderWidth = 1.0
+        self.layer.cornerRadius = 5.0
+        self.layer.masksToBounds = true
+        self.layer.borderColor = strokeColor.cgColor
+    }
+    
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {

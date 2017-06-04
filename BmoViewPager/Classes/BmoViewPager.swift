@@ -27,6 +27,8 @@ import UIKit
     @objc optional func bmoViewPagerDelegate(_ viewPager: BmoViewPager, scrollProgress fraction: CGFloat, index: Int)
     @objc optional func bmoViewPagerDelegate(_ viewPager: BmoViewPager, didAppear viewController: UIViewController, page: Int)
 }
+
+@IBDesignable
 public class BmoViewPager: UIView, BmoPageItemListDelegate, UIScrollViewDelegate {
     @IBInspectable var isHorizontal: Bool = true
     
@@ -41,11 +43,16 @@ public class BmoViewPager: UIView, BmoPageItemListDelegate, UIScrollViewDelegate
         }
     }
     
-    /// if you need get parent viewController from viewPager's viewController, pass into the bmoViewPager's owner
+    /**
+     if you need get parent view controller from viewPager's view controller, pass into the bmoViewPager's owner
+     if the parent view controller as same as the datasource, it will autoset to bmoViewPager's parent view controller
+     */
     public weak var parentViewController: UIViewController? {
         didSet {
-            parentViewController?.addChildViewController(pageViewController)
-            pageViewController.didMove(toParentViewController: parentViewController)
+            if let vc = parentViewController {
+                vc.addChildViewController(pageViewController)
+                pageViewController.didMove(toParentViewController: vc)
+            }
         }
     }
     
@@ -94,6 +101,7 @@ public class BmoViewPager: UIView, BmoPageItemListDelegate, UIScrollViewDelegate
     }
     public weak var dataSource: BmoViewPagerDataSource? {
         didSet {
+            self.parentViewController = (dataSource as? UIViewController)
             pageViewController.bmoDataSource = dataSource
             pageListView.bmoDataSource = dataSource
             self.addPageListIfNeed()
@@ -225,5 +233,35 @@ public class BmoViewPager: UIView, BmoPageItemListDelegate, UIScrollViewDelegate
         }
         delegate?.bmoViewPagerDelegate?(self, scrollProgress: progressFraction, index: pageControlIndex)
         pageListView.updateFocusProgress(&progressFraction)
+    }
+    
+    public override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        if self.dataSource != nil { return }
+        let str1 = "BMO ViewPager"
+        let str2 = "Need to implement"
+        let str3 = "BmoViewPagerDataSource"
+        let str4 = "And assign to the BmoViewPager"
+        let mainAttributed = [
+            NSForegroundColorAttributeName  : UIColor.black,
+            NSFontAttributeName             : UIFont.boldSystemFont(ofSize: 24.0),
+        ]
+        let subAttributed = [
+            NSForegroundColorAttributeName  : UIColor.lightGray,
+            NSFontAttributeName             : UIFont.boldSystemFont(ofSize: 17.0),
+            ]
+        let str1Size = str1.bmoVP.size(attribute: mainAttributed, size: .zero)
+        let str2Size = str2.bmoVP.size(attribute: subAttributed, size: .zero)
+        let str3Size = str3.bmoVP.size(attribute: subAttributed, size: .zero)
+        let str4Size = str4.bmoVP.size(attribute: subAttributed, size: .zero)
+        let totalHeight = str1Size.height + str2Size.height + str3Size.height + str4Size.height + 8 * 3
+        let str1Point = CGPoint(x: rect.midX - str1Size.width / 2, y: rect.midY - totalHeight / 2)
+        let str2Point = CGPoint(x: rect.midX - str2Size.width / 2, y: str1Point.y + str1Size.height + 8)
+        let str3Point = CGPoint(x: rect.midX - str3Size.width / 2, y: str2Point.y + str2Size.height + 8)
+        let str4Point = CGPoint(x: rect.midX - str4Size.width / 2, y: str3Point.y + str3Size.height + 8)
+        (str1 as NSString).draw(at: str1Point, withAttributes: mainAttributed)
+        (str2 as NSString).draw(at: str2Point, withAttributes: subAttributed)
+        (str3 as NSString).draw(at: str3Point, withAttributes: subAttributed)
+        (str4 as NSString).draw(at: str4Point, withAttributes: subAttributed)
     }
 }

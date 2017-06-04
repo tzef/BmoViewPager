@@ -9,14 +9,21 @@
 import UIKit
 
 class BmoDoubleLabel: UILabel {
-    let focusLabel = UILabel()
-    var focusColor = UIColor.black {
+    let foreLabel = UILabel()
+    var foreColor = UIColor.black {
         didSet {
-            focusLabel.textColor = focusColor
+            foreLabel.textColor = foreColor
             self.setNeedsDisplay()
         }
     }
-    let maskLayer = CAShapeLayer()
+    let foreMaskLayer = CAShapeLayer()
+    
+    let rearLabel = UILabel()
+    let rearMaskLayer = CAShapeLayer()
+    
+    var rearView = UIView()
+    var foreView = UIView()
+    
     var maskProgress: CGFloat = 0.0 {
         didSet {
             self.setNeedsDisplay()
@@ -24,12 +31,41 @@ class BmoDoubleLabel: UILabel {
     }
     override var text: String? {
         didSet {
-            focusLabel.text = text
+            if text != nil {
+                foreLabel.text = text
+                rearLabel.text = text
+                self.text = nil
+            }
+        }
+    }
+    override var font: UIFont! {
+        didSet {
+            foreLabel.font = font
+            rearLabel.font = font
+        }
+    }
+    override var textColor: UIColor! {
+        didSet {
+            rearLabel.textColor = textColor
         }
     }
     override var textAlignment: NSTextAlignment {
         didSet {
-            focusLabel.textAlignment = textAlignment
+            foreLabel.textAlignment = textAlignment
+            rearLabel.textAlignment = textAlignment
+        }
+    }
+    override var attributedText: NSAttributedString? {
+        didSet {
+            if attributedText != nil {
+                rearLabel.attributedText = attributedText
+                self.attributedText = nil
+            }
+        }
+    }
+    var foreAttributedText: NSAttributedString? {
+        didSet {
+            foreLabel.attributedText = foreAttributedText
         }
     }
     override init(frame: CGRect) {
@@ -40,22 +76,66 @@ class BmoDoubleLabel: UILabel {
         super.init(coder: aDecoder)
         commonInit()
     }
+    deinit {
+        print("BmoDoubleLabel deinit")
+    }
     func commonInit() {
-        self.addSubview(focusLabel)
-        focusLabel.layout.autoFit(self)
-        focusLabel.textColor = focusColor
-        focusLabel.layer.mask = maskLayer
+        self.addSubview(rearView)
+        rearView.backgroundColor = UIColor.clear
+        rearView.layer.mask = rearMaskLayer
+        rearView.bmoVP.autoFit(self)
+        rearView.addSubview(rearLabel)
+        rearLabel.backgroundColor = UIColor.clear
+        rearLabel.bmoVP.autoFit(rearView)
+        
+        self.addSubview(foreView)
+        foreView.backgroundColor = UIColor.clear
+        foreView.layer.mask = foreMaskLayer
+        foreView.bmoVP.autoFit(self)
+        foreView.addSubview(foreLabel)
+        foreLabel.backgroundColor = UIColor.clear
+        foreLabel.bmoVP.autoFit(foreView)
+    }
+    func setRearBackgroundView(_ view: UIView) {
+        rearView.subviews.forEach { (view) in
+            if view is UILabel == false {
+                view.removeFromSuperview()
+            }
+        }
+        rearView.insertSubview(view, at: 0)
+        view.bmoVP.autoFit(rearView)
+    }
+    func setForeBackgroundView(_ view: UIView) {
+        foreView.subviews.forEach { (view) in
+            if view is UILabel == false {
+                view.removeFromSuperview()
+            }
+        }
+        foreView.insertSubview(view, at: 0)
+        view.bmoVP.autoFit(foreView)
     }
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        if maskProgress > 0 {
-            maskLayer.path = CGPath(rect: .init(origin: .zero,
-                                                size: .init(width: rect.width * maskProgress, height: rect.height)), transform: nil)
+        if maskProgress == 1.0 {
+            foreMaskLayer.path = CGPath(rect: rect, transform: nil)
+            rearMaskLayer.path = CGPath(rect: CGRect.zero, transform: nil)
+        } else if maskProgress > 0 {
+            foreMaskLayer.path = CGPath(rect: .init(origin: .zero,
+                                                    size: .init(width: rect.width * maskProgress, height: rect.height)),
+                                        transform: nil)
+            rearMaskLayer.path = CGPath(rect: .init(origin: .init(x: rect.width * abs(maskProgress), y: 0),
+                                                    size: .init(width: rect.width * 1 - abs(maskProgress), height: rect.height)),
+                                        transform: nil)
         } else if maskProgress < 0 {
-            maskLayer.path = CGPath(rect: .init(origin: .init(x: rect.width * abs(maskProgress), y: 0),
-                                                size: .init(width: rect.width * 1 - abs(maskProgress), height: rect.height)), transform: nil)
+            foreMaskLayer.path = CGPath(rect: .init(origin: .init(x: rect.width * abs(maskProgress), y: 0),
+                                                    size: .init(width: rect.width * 1 - abs(maskProgress), height: rect.height)),
+                                        transform: nil)
+            rearMaskLayer.path = CGPath(rect: .init(origin: .zero,
+                                                    size: .init(width: rect.width * abs(maskProgress), height: rect.height)),
+                                        transform: nil)
         } else {
-            maskLayer.path = CGPath(rect: CGRect.zero, transform: nil)
+            foreMaskLayer.path = CGPath(rect: CGRect.zero, transform: nil)
+            rearMaskLayer.path = CGPath(rect: rect, transform: nil)
         }
     }
 }

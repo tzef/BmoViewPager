@@ -23,7 +23,7 @@ class DemoFromXibViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.addSubview(webView)
-        webView.layout.autoFit(self.view)
+        webView.bmoVP.autoFit(self.view)
         
         webView.load(URLRequest.init(url: URL.init(string: "https://www.google.com")!))
     }

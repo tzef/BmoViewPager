@@ -16,6 +16,8 @@
 		C990D2A11E90BCAF009528A6 /* DemoFromStoryboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C990D2A01E90BCAF009528A6 /* DemoFromStoryboardViewController.swift */; };
 		C990D2A41E90BE9D009528A6 /* DemoFromXibViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C990D2A21E90BE9D009528A6 /* DemoFromXibViewController.swift */; };
 		C990D2A51E90BE9D009528A6 /* DemoFromXibViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C990D2A31E90BE9D009528A6 /* DemoFromXibViewController.xib */; };
+		C9C67DB71EE3DF5000B112A2 /* ViewControllerPage1.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C67DB61EE3DF5000B112A2 /* ViewControllerPage1.swift */; };
+		C9C67DB91EE3DF6100B112A2 /* ViewControllerPage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C67DB81EE3DF6100B112A2 /* ViewControllerPage2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,8 @@
 		C990D2A01E90BCAF009528A6 /* DemoFromStoryboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DemoFromStoryboardViewController.swift; path = DemoViewcontrollers/DemoFromStoryboardViewController.swift; sourceTree = "<group>"; };
 		C990D2A21E90BE9D009528A6 /* DemoFromXibViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DemoFromXibViewController.swift; path = DemoViewcontrollers/DemoFromXibViewController.swift; sourceTree = "<group>"; };
 		C990D2A31E90BE9D009528A6 /* DemoFromXibViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DemoFromXibViewController.xib; path = DemoViewcontrollers/DemoFromXibViewController.xib; sourceTree = "<group>"; };
+		C9C67DB61EE3DF5000B112A2 /* ViewControllerPage1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerPage1.swift; sourceTree = "<group>"; };
+		C9C67DB81EE3DF6100B112A2 /* ViewControllerPage2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerPage2.swift; sourceTree = "<group>"; };
 		E2DD128F077E599091DFBB7E /* Pods_BmoViewPager_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BmoViewPager_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -88,9 +92,12 @@
 		607FACD21AFB9204008FA782 /* Example for BmoViewPager */ = {
 			isa = PBXGroup;
 			children = (
+				C9C67DB51EE3DE4D00B112A2 /* CustomView */,
 				C990D29F1E8FF07B009528A6 /* DemoViewControllers */,
-				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
+				C9C67DB61EE3DF5000B112A2 /* ViewControllerPage1.swift */,
+				C9C67DB81EE3DF6100B112A2 /* ViewControllerPage2.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -152,6 +159,13 @@
 				C990D2A31E90BE9D009528A6 /* DemoFromXibViewController.xib */,
 			);
 			name = DemoViewControllers;
+			sourceTree = "<group>";
+		};
+		C9C67DB51EE3DE4D00B112A2 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CustomView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,10 +293,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9C67DB91EE3DF6100B112A2 /* ViewControllerPage2.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				C990D2A41E90BE9D009528A6 /* DemoFromXibViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				C990D2A11E90BCAF009528A6 /* DemoFromStoryboardViewController.swift in Sources */,
+				C9C67DB71EE3DF5000B112A2 /* ViewControllerPage1.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

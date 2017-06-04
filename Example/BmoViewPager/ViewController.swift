@@ -25,14 +25,13 @@ class ViewController: UIViewController, BmoViewPagerDataSource {
         super.viewDidLoad()
         viewPager.dataSource = self
         viewPager.presentedPageIndex = 2
-        viewPager.pageControlIsHidden = false
     }
     
     // MARK: - BmoViewPagerDataSource
-    func bmoViewPagerNumberOfPage(in viewPager: BmoViewPager) -> Int {
+    func bmoViewPagerDataSourceNumberOfPage(in viewPager: BmoViewPager) -> Int {
         return demoViewControllers.count
     }
-    func bmoViewPager(_ viewPager: BmoViewPager, viewControllerForPageAt page: Int) -> UIViewController {
+    func bmoViewPagerDataSource(_ viewPager: BmoViewPager, viewControllerForPageAt page: Int) -> UIViewController {
         switch demoViewControllers[page] {
         case .fromStoryboard:
             if let vc = storyboard?.instantiateViewController(withIdentifier: "DemoFromStoryboardViewController") as? DemoFromStoryboardViewController {
@@ -53,12 +52,12 @@ class ViewController: UIViewController, BmoViewPagerDataSource {
             indexLabel.text = "Created at \n\(Date())"
             vc.view.addSubview(indexLabel)
             vc.view.backgroundColor = .brown
-            indexLabel.layout.autoFit(vc.view)
+            indexLabel.bmoVP.autoFit(vc.view)
             return vc
         }
-        return UITableViewController()
+        return UIViewController()
     }
-    func bmoViewPager(_ viewPager: BmoViewPager, titleForPageListAt page: Int) -> String? {
+    func bmoViewPagerDataSourceTitle(_ viewPager: BmoViewPager, forPageListAt page: Int) -> String? {
         return demoTitles[page]
     }
 }

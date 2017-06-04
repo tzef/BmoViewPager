@@ -8,35 +8,23 @@
 
 import UIKit
 
-class BmoPageEmptyViewController: UIViewController {
-}
 class BmoPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
-    var scrollViewDelegate: UIScrollViewDelegate?
-    var pageViewControllers: [UIViewController]!
-    var bmoDataSource: BmoViewPagerDataSource? {
-        didSet {
-            self.setPageViewController()
-        }
-    }
-    var bmoViewPager: BmoViewPager!
-    var willPresentIndex = 0
-    var presentedIndex = 0 {
-        didSet {
-            bmoViewPager.presentedPageIndex = presentedIndex
-        }
-    }
-    var pageCount = 0
-    var pageControl: UIPageControl?
+    weak var scrollViewDelegate: UIScrollViewDelegate?
+    weak var bmoDataSource: BmoViewPagerDataSource?
+    weak var bmoViewPager: BmoViewPager!
     var pageScrollView: UIScrollView?
+    var infinitScroll: Bool = false
+    var pageCount = 0
     
-    init() {
-        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+    init(_ orientation: UIPageViewControllerNavigationOrientation) {
+        super.init(transitionStyle: .scroll, navigationOrientation: orientation, options: nil)
     }
-    convenience init(viewPager: BmoViewPager, scrollDelegate: UIScrollViewDelegate?) {
-        self.init()
+    convenience init(viewPager: BmoViewPager, scrollDelegate: UIScrollViewDelegate?,
+                     orientation: UIPageViewControllerNavigationOrientation = .horizontal) {
+        self.init(orientation)
         self.bmoViewPager = viewPager
-        self.scrollViewDelegate = scrollDelegate
         self.view.backgroundColor = .clear
+        self.scrollViewDelegate = scrollDelegate
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -46,105 +34,95 @@ class BmoPageViewController: UIPageViewController, UIPageViewControllerDataSourc
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        for subView in self.view.subviews {
-            if let scrollView = subView as? UIScrollView {
-                self.pageScrollView = scrollView
-                scrollView.frame = self.view.bounds
-                scrollView.delegate = scrollViewDelegate
-            }
-            if let pageControl = subView as? UIPageControl {
-                pageControl.addObserver(self, forKeyPath: "currentPage", options: [.new], context: nil)
-                self.pageControl = pageControl
-                if bmoViewPager.pageControlIsHidden {
-                    self.removePageControl()
-                }
-            }
-        }
+        self.findScrollViewIfNeed()
+        self.pageScrollView?.frame = self.view.bounds
     }
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "currentPage" {
-            if let change = change {
-                if let currentPage = (change[NSKeyValueChangeKey.newKey] as AnyObject).uintValue {
-                    willPresentIndex = Int(currentPage)
-                }
-            }
-        }
+    deinit {
+        print("BmoPageViewController deinit")
     }
     
     // MARK: - Private
+    func findScrollViewIfNeed() {
+        if self.pageScrollView != nil {
+            return
+        }
+        for subView in self.view.subviews {
+            if let scrollView = subView as? UIScrollView {
+                self.pageScrollView = scrollView
+                scrollView.delegate = scrollViewDelegate
+            }
+        }
+    }
     func setPageViewController() {
-        guard let count = bmoDataSource?.bmoViewPagerNumberOfPage(in: bmoViewPager), count > 0 else {
+        let count = bmoDataSource?.bmoViewPagerDataSourceNumberOfPage(in: bmoViewPager) ?? 1
+        if count == 0 {
             return
         }
         pageCount = count
-        self.pageViewControllers = Array(repeating: BmoPageEmptyViewController(), count: pageCount)
-        if let firstVC = bmoDataSource?.bmoViewPager(bmoViewPager, viewControllerForPageAt: presentedIndex) {
+        if let firstVC = bmoDataSource?.bmoViewPagerDataSource(bmoViewPager, viewControllerForPageAt: bmoViewPager.presentedPageIndex) {
             self.delegate = self
             self.dataSource = self
-            self.pageViewControllers[presentedIndex] = firstVC
+            firstVC.view.bmoVP.setOwner(firstVC)
+            firstVC.view.bmoVP.setIndex(bmoViewPager.presentedPageIndex)
             self.setViewControllers([firstVC], direction: .forward, animated: false, completion: nil)
+            bmoViewPager.delegate?.bmoViewPagerDelegate?(bmoViewPager, pageChanged: bmoViewPager.pageControlIndex)
+            bmoViewPager.delegate?.bmoViewPagerDelegate?(bmoViewPager, didAppear: firstVC, page: bmoViewPager.presentedPageIndex)
+        }
+        if pageCount == 1 {
+            self.dataSource = nil
         }
     }
     
     // MARK: - Public
-    func removePageControl() {
-        self.pageControl?.removeFromSuperview()
-    }
-    func addPageControl() {
-        if let pageControl = self.pageControl {
-            self.view.addSubview(pageControl)
-        }
+    func reloadData() {
+        self.setPageViewController()
     }
     func setViewPagerPage(_ page: Int) {
-        presentedIndex = page
-        if !(pageViewControllers[page] is BmoPageEmptyViewController) {
-            self.setViewControllers([pageViewControllers[page]], direction: .forward, animated: false, completion: nil)
-            return
+        if let vc = bmoDataSource?.bmoViewPagerDataSource(bmoViewPager, viewControllerForPageAt: page) {
+            self.setViewControllers([vc], direction: .forward, animated: false, completion: nil)
+            bmoViewPager.delegate?.bmoViewPagerDelegate?(bmoViewPager, didAppear: vc, page: page)
+            vc.view.bmoVP.setIndex(page)
+            vc.view.bmoVP.setOwner(vc)
         }
-        if let theVC = bmoDataSource?.bmoViewPager(bmoViewPager, viewControllerForPageAt: page) {
-            self.pageViewControllers[page] = theVC
-            self.setViewControllers([theVC], direction: .forward, animated: false, completion: nil)
-        }
+    }
+    func setViewPagerPage(withViewController vc: UIViewController, at page: Int) {
+        self.setViewControllers([vc], direction: .forward, animated: false, completion: nil)
+        bmoViewPager.delegate?.bmoViewPagerDelegate?(bmoViewPager, didAppear: vc, page: page)
+        vc.view.bmoVP.setIndex(page)
+        vc.view.bmoVP.setOwner(vc)
     }
     
     // MARK: - PageViewDelegate
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        let nextIndex = (pageViewControllers.index(of: viewController) ?? 0) - 1
+        var nextIndex = (viewController.view.bmoVP.index() ?? bmoViewPager.presentedPageIndex) - 1
         if nextIndex < 0 {
+            if self.infinitScroll {
+                nextIndex = pageCount - 1
+            } else {
+                return nil
+            }
+        }
+        guard let vc = bmoDataSource?.bmoViewPagerDataSource(bmoViewPager, viewControllerForPageAt: nextIndex) else {
             return nil
         }
-        guard let vc = bmoDataSource?.bmoViewPager(bmoViewPager, viewControllerForPageAt: nextIndex) else {
-            return nil
-        }
-        pageViewControllers[nextIndex] = vc
+        vc.view.bmoVP.setIndex(nextIndex)
+        vc.view.bmoVP.setOwner(vc)
         return vc
     }
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        let nextIndex = (pageViewControllers.index(of: viewController) ?? pageCount - 1) + 1
+        var nextIndex = (viewController.view.bmoVP.index() ?? bmoViewPager.presentedPageIndex) + 1
         if nextIndex > pageCount - 1 {
+            if self.infinitScroll {
+                nextIndex = 0
+            } else {
+                return nil
+            }
+        }
+        guard let vc = bmoDataSource?.bmoViewPagerDataSource(bmoViewPager, viewControllerForPageAt: nextIndex) else {
             return nil
         }
-        guard let vc = bmoDataSource?.bmoViewPager(bmoViewPager, viewControllerForPageAt: nextIndex) else {
-            return nil
-        }
-        pageViewControllers[nextIndex] = vc
+        vc.view.bmoVP.setIndex(nextIndex)
+        vc.view.bmoVP.setOwner(vc)
         return vc
-    }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        bmoViewPager.pageChanging = true
-    }
-    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        if completed {
-            presentedIndex = willPresentIndex
-            bmoViewPager.pageChanging = false
-        }
-    }
-    
-    func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return pageCount
-    }
-    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        return presentedIndex
     }
 }

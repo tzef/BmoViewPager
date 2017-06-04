@@ -7,29 +7,59 @@
 //
 
 import UIKit
+import BmoViewPager
 
+private let mainColor = UIColor(red: 1.0/255.0, green: 55.0/255.0, blue: 132.0/255.0, alpha: 1.0)
 class ViewControllerPage2: UIViewController {
-
+    @IBOutlet weak var viewPager: BmoViewPager!
     override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        super.viewDidLoad()        
+        viewPager.dataSource = self
+        viewPager.layer.borderWidth = 1.0
+        viewPager.layer.cornerRadius = 5.0
+        viewPager.layer.masksToBounds = true
+        viewPager.layer.borderColor = UIColor.white.cgColor
     }
+}
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+extension ViewControllerPage2: BmoViewPagerDataSource {
+    // Optional
+    func bmoViewPagerDataSourceAttributedTitle(_ viewPager: BmoViewPager, forPageListAt page: Int) -> [String : Any]? {
+        return [
+            NSFontAttributeName : UIFont.boldSystemFont(ofSize: 17.0),
+            NSForegroundColorAttributeName : UIColor.groupTableViewBackground
+        ]
+    }
+    func bmoViewPagerDataSourceHighlightedAttributedTitle(_ viewPager: BmoViewPager, forPageListAt page: Int) -> [String : Any]? {
+        return [
+            NSFontAttributeName : UIFont.boldSystemFont(ofSize: 17.0),
+            NSForegroundColorAttributeName : mainColor
+        ]
+    }
+    func bmoViewPagerDataSourceListItemHighlightedBackgroundView(_ viewPager: BmoViewPager, forPageListAt page: Int) -> UIView {
+        let view = UnderLineView()
+        view.marginX = 8.0
+        view.lineWidth = 5.0
+        view.strokeColor = mainColor
+        return view
+    }
+    func bmoViewPagerDataSourceTitle(_ viewPager: BmoViewPager, forPageListAt page: Int) -> String? {
+        return "Page \(page)"
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Required
+    func bmoViewPagerDataSourceNumberOfPage(in viewPager: BmoViewPager) -> Int {
+        return 5
     }
-    */
-
+    func bmoViewPagerDataSource(_ viewPager: BmoViewPager, viewControllerForPageAt page: Int) -> UIViewController {
+        switch page {
+        case 0:
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "DemoViewController1") as? DemoViewController1 {
+                return vc
+            }
+        default:
+            break
+        }
+        return UIViewController()
+    }
 }

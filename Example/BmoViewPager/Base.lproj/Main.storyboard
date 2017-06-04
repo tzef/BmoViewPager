@@ -8,43 +8,9 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="ufC-wZ-h7g">
-            <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="BmoViewPager_Example" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Imt-Nn-RCo" customClass="BmoViewPager" customModule="BmoViewPager">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Imt-Nn-RCo" secondAttribute="bottom" id="7DD-kD-TLl"/>
-                            <constraint firstItem="Imt-Nn-RCo" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="98G-Cj-rH2"/>
-                            <constraint firstAttribute="trailing" secondItem="Imt-Nn-RCo" secondAttribute="trailing" id="Aqj-7G-UMF"/>
-                            <constraint firstItem="Imt-Nn-RCo" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="wrI-cf-RZI"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="viewPager" destination="Imt-Nn-RCo" id="Wlh-6I-SgT"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="137" y="131"/>
-        </scene>
         <!--Main View Controller-->
         <scene sceneID="qqI-6r-ECs">
             <objects>
@@ -151,7 +117,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="ClF-Tu-gTs" firstAttribute="top" secondItem="V9k-Zo-tqO" secondAttribute="bottom" constant="8" id="0bp-cn-VjR"/>
                                             <constraint firstItem="4EK-93-CnK" firstAttribute="top" secondItem="loL-vQ-tjo" secondAttribute="bottom" constant="8" id="10P-EH-oAm"/>
@@ -225,73 +191,107 @@
                     <view key="view" contentMode="scaleToFill" id="zg7-MK-sl3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sZX-MF-QYS" customClass="BmoViewPager" customModule="BmoViewPager">
+                                <rect key="frame" x="16" y="36" width="343" height="567"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="sZX-MF-QYS" secondAttribute="trailing" constant="16" id="N4z-av-Th7"/>
+                            <constraint firstItem="lXo-Pa-VmN" firstAttribute="top" secondItem="sZX-MF-QYS" secondAttribute="bottom" constant="64" id="Qqz-8m-1hA"/>
+                            <constraint firstItem="sZX-MF-QYS" firstAttribute="leading" secondItem="zg7-MK-sl3" secondAttribute="leading" constant="16" id="Xhi-mB-nuq"/>
+                            <constraint firstItem="sZX-MF-QYS" firstAttribute="top" secondItem="vk6-Jd-NDn" secondAttribute="bottom" constant="16" id="yVG-ev-rJG"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="viewPager" destination="sZX-MF-QYS" id="ZIh-bm-QFR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yxo-rU-ahM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="945" y="2286"/>
         </scene>
-        <!--Demo From Storyboard View Controller-->
-        <scene sceneID="Qzu-MZ-NHM">
+        <!--Demo View Controller1-->
+        <scene sceneID="ubT-st-mKB">
             <objects>
-                <viewController storyboardIdentifier="DemoFromStoryboardViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aKJ-LH-9ls" customClass="DemoFromStoryboardViewController" customModule="BmoViewPager_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DemoViewController1" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6li-XI-vEb" customClass="DemoViewController1" customModule="BmoViewPager_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="p9f-sB-zlT"/>
-                        <viewControllerLayoutGuide type="bottom" id="nWY-k2-9ci"/>
+                        <viewControllerLayoutGuide type="top" id="FfA-Iv-pzU"/>
+                        <viewControllerLayoutGuide type="bottom" id="Vdy-MQ-3SG"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="a45-EU-5Je">
+                    <view key="view" contentMode="scaleToFill" id="GvR-bU-AIh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BmoViewPager DEMO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mPb-3f-SQL">
-                                <rect key="frame" x="24" y="28" width="327" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yU7-Ya-Uib">
-                                <rect key="frame" x="74.5" y="283" width="75" height="100"/>
-                                <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="06h-qd-ScP">
+                                <rect key="frame" x="8" y="28" width="359" height="631"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ViewPage ListTitle Demo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLf-f3-ovC">
+                                        <rect key="frame" x="8" y="8" width="211" height="23"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qtl-6L-Uaj">
+                                        <rect key="frame" x="16" y="47" width="49.5" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PD8-ae-1SS" customClass="BmoViewPager" customModule="BmoViewPager">
+                                        <rect key="frame" x="16" y="73" width="327" height="128"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="128" id="Q0E-u4-Ge2"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ng5-xi-h9M">
+                                        <rect key="frame" x="16" y="209" width="53.5" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HES-GA-0ki" customClass="BmoViewPager" customModule="BmoViewPager">
+                                        <rect key="frame" x="16" y="235" width="327" height="380"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="yU7-Ya-Uib" secondAttribute="height" multiplier="3:4" id="EF6-aU-8qS"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KRx-qp-hms">
-                                <rect key="frame" x="149.5" y="283.5" width="75" height="100"/>
-                                <color key="backgroundColor" red="0.1137254902" green="0.47450980390000003" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="KRx-qp-hms" secondAttribute="height" multiplier="3:4" id="eJn-Or-15d"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yds-Dk-qFk">
-                                <rect key="frame" x="224.5" y="283" width="75" height="100"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="Yds-Dk-qFk" secondAttribute="height" multiplier="3:4" id="sfy-DR-tXB"/>
+                                    <constraint firstItem="HES-GA-0ki" firstAttribute="leading" secondItem="06h-qd-ScP" secondAttribute="leading" constant="16" id="3q4-24-skj"/>
+                                    <constraint firstItem="qtl-6L-Uaj" firstAttribute="leading" secondItem="06h-qd-ScP" secondAttribute="leading" constant="16" id="4ov-4u-0xV"/>
+                                    <constraint firstItem="bLf-f3-ovC" firstAttribute="top" secondItem="06h-qd-ScP" secondAttribute="top" constant="8" id="65R-HD-RcZ"/>
+                                    <constraint firstItem="ng5-xi-h9M" firstAttribute="top" secondItem="PD8-ae-1SS" secondAttribute="bottom" constant="8" id="7OD-Ex-UKp"/>
+                                    <constraint firstItem="PD8-ae-1SS" firstAttribute="top" secondItem="qtl-6L-Uaj" secondAttribute="bottom" constant="8" id="Hwh-zz-ZQ1"/>
+                                    <constraint firstItem="bLf-f3-ovC" firstAttribute="leading" secondItem="06h-qd-ScP" secondAttribute="leading" constant="8" id="LMz-Kv-JjO"/>
+                                    <constraint firstAttribute="trailing" secondItem="HES-GA-0ki" secondAttribute="trailing" constant="16" id="Seg-xt-h8y"/>
+                                    <constraint firstAttribute="bottom" secondItem="HES-GA-0ki" secondAttribute="bottom" constant="16" id="Sok-1s-wJH"/>
+                                    <constraint firstItem="qtl-6L-Uaj" firstAttribute="top" secondItem="bLf-f3-ovC" secondAttribute="bottom" constant="16" id="Zxb-ea-te9"/>
+                                    <constraint firstItem="PD8-ae-1SS" firstAttribute="leading" secondItem="06h-qd-ScP" secondAttribute="leading" constant="16" id="aIJ-m4-aPm"/>
+                                    <constraint firstItem="ng5-xi-h9M" firstAttribute="leading" secondItem="qtl-6L-Uaj" secondAttribute="leading" id="hWg-YH-lwP"/>
+                                    <constraint firstAttribute="trailing" secondItem="PD8-ae-1SS" secondAttribute="trailing" constant="16" id="nCp-sy-Zts"/>
+                                    <constraint firstItem="HES-GA-0ki" firstAttribute="top" secondItem="ng5-xi-h9M" secondAttribute="bottom" constant="8" id="p60-o5-hcZ"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.39856603740000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="mPb-3f-SQL" firstAttribute="top" secondItem="p9f-sB-zlT" secondAttribute="bottom" constant="8" id="0hp-aB-e43"/>
-                            <constraint firstItem="Yds-Dk-qFk" firstAttribute="width" secondItem="KRx-qp-hms" secondAttribute="width" id="677-SO-c41"/>
-                            <constraint firstItem="KRx-qp-hms" firstAttribute="leading" secondItem="yU7-Ya-Uib" secondAttribute="trailing" id="91V-3p-Xn2"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="mPb-3f-SQL" secondAttribute="trailing" constant="8" id="Axt-UX-c5V"/>
-                            <constraint firstItem="Yds-Dk-qFk" firstAttribute="leading" secondItem="KRx-qp-hms" secondAttribute="trailing" id="DIN-Hd-Qdr"/>
-                            <constraint firstItem="KRx-qp-hms" firstAttribute="centerX" secondItem="a45-EU-5Je" secondAttribute="centerX" id="PEz-SP-BTx"/>
-                            <constraint firstItem="yU7-Ya-Uib" firstAttribute="width" secondItem="KRx-qp-hms" secondAttribute="width" id="QKw-mt-ZjO"/>
-                            <constraint firstItem="Yds-Dk-qFk" firstAttribute="centerY" secondItem="KRx-qp-hms" secondAttribute="centerY" id="Qdp-lK-2OW"/>
-                            <constraint firstItem="mPb-3f-SQL" firstAttribute="leading" secondItem="a45-EU-5Je" secondAttribute="leadingMargin" constant="8" id="ZG6-M3-NOv"/>
-                            <constraint firstItem="KRx-qp-hms" firstAttribute="width" secondItem="a45-EU-5Je" secondAttribute="width" multiplier="0.2" id="a6E-by-OoO"/>
-                            <constraint firstItem="KRx-qp-hms" firstAttribute="centerY" secondItem="a45-EU-5Je" secondAttribute="centerY" id="hWU-Vw-OVt"/>
-                            <constraint firstItem="yU7-Ya-Uib" firstAttribute="centerY" secondItem="KRx-qp-hms" secondAttribute="centerY" id="sax-zu-Vyg"/>
+                            <constraint firstItem="Vdy-MQ-3SG" firstAttribute="top" secondItem="06h-qd-ScP" secondAttribute="bottom" constant="8" id="Eom-iG-LbN"/>
+                            <constraint firstItem="06h-qd-ScP" firstAttribute="top" secondItem="FfA-Iv-pzU" secondAttribute="bottom" constant="8" id="VIo-bo-8zd"/>
+                            <constraint firstAttribute="trailing" secondItem="06h-qd-ScP" secondAttribute="trailing" constant="8" id="p7r-PB-0AT"/>
+                            <constraint firstItem="06h-qd-ScP" firstAttribute="leading" secondItem="GvR-bU-AIh" secondAttribute="leading" constant="8" id="u5D-Io-euJ"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="customViewPager" destination="HES-GA-0ki" id="jGj-3K-8aJ"/>
+                        <outlet property="defaultViewPager" destination="PD8-ae-1SS" id="H7e-gA-gNw"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bdV-Tx-BOp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ENb-bi-kKb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137" y="855"/>
+            <point key="canvasLocation" x="1761" y="2285"/>
         </scene>
     </scenes>
     <resources>

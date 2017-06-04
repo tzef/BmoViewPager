@@ -17,9 +17,9 @@ import UIKit
     @objc optional func bmoViewPagerDataSourceHighlightedAttributedTitle(_ viewPager: BmoViewPager,
                                                                          forPageListAt page: Int) -> [String : Any]?
     @objc optional func bmoViewPagerDataSourceListItemSize(_ viewPager: BmoViewPager, forPageListAt page: Int) -> CGSize
-    @objc optional func bmoViewPagerDataSourceListItemBackgroundView(_ viewPager: BmoViewPager, forPageListAt page: Int) -> UIView
+    @objc optional func bmoViewPagerDataSourceListItemBackgroundView(_ viewPager: BmoViewPager, forPageListAt page: Int) -> UIView?
     @objc optional func bmoViewPagerDataSourceListItemHighlightedBackgroundView(_ viewPager: BmoViewPager,
-                                                                                forPageListAt page: Int) -> UIView
+                                                                                forPageListAt page: Int) -> UIView?
 }
 @objc public protocol BmoViewPagerDelegate {
     @objc optional func bmoViewPagerDelegate(_ viewPager: BmoViewPager, pageChanged page: Int)

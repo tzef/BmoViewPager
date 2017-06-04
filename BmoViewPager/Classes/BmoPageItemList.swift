@@ -191,7 +191,7 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     
     // MARK: - BmoPageItemListLayoutDelegate
     func bmoPageItemListLayout(sizeForItemAt index: Int) -> CGSize {
-        if let size = bmoDataSource?.bmoViewPagerDataSourceListItemSize?(bmoViewPager, forPageListAt: index) {
+        if let size = bmoDataSource?.bmoViewPagerDataSourceListItemSize?(bmoViewPager, forPageListAt: index), size != .zero {
             return size
         }
         guard let title = bmoDataSource?.bmoViewPagerDataSourceTitle?(bmoViewPager, forPageListAt: index) else {

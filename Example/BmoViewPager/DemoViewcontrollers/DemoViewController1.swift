@@ -10,33 +10,38 @@ import UIKit
 import BmoViewPager
 
 class DemoViewController1: UIViewController {
+    @IBOutlet weak var defaultViewPagerNavigationBar: BmoViewPagerNavigationBar!
     @IBOutlet weak var defaultViewPager: BmoViewPager!
+    @IBOutlet weak var customViewPgareNavigationBar: BmoViewPagerNavigationBar!
     @IBOutlet weak var customViewPager: BmoViewPager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         customViewPager.dataSource = self
+        customViewPgareNavigationBar.viewPager = customViewPager
+        
         defaultViewPager.dataSource = self
+        defaultViewPagerNavigationBar.viewPager = defaultViewPager
     }
 }
 
 extension DemoViewController1: BmoViewPagerDataSource {
     // Optional
-    func bmoViewPagerDataSourceTitle(_ viewPager: BmoViewPager, forPageListAt page: Int) -> String? {
+    func bmoViewPagerDataSourceNaviagtionBarItemTitle(_ viewPager: BmoViewPager, forPageListAt page: Int) -> String? {
         if viewPager == customViewPager {
             return ""
         } else {
             return "Default \(page)"
         }
     }
-    func bmoViewPagerDataSourceListItemSize(_ viewPager: BmoViewPager, forPageListAt page: Int) -> CGSize {
+    func bmoViewPagerDataSourceNaviagtionBarItemSize(_ viewPager: BmoViewPager, forPageListAt page: Int) -> CGSize {
         if viewPager == customViewPager {
             return CGSize(width: viewPager.bounds.width / 3, height: 30.0)
         } else {
             return .zero
         }
     }
-    func bmoViewPagerDataSourceListItemBackgroundView(_ viewPager: BmoViewPager, forPageListAt page: Int) -> UIView? {
+    func bmoViewPagerDataSourceNaviagtionBarItemBackgroundView(_ viewPager: BmoViewPager, forPageListAt page: Int) -> UIView? {
         if viewPager == customViewPager {
             if let image = UIImage(named: "item\(page)_1.jpg") {
                 let imageView = UIImageView(image: image)
@@ -45,7 +50,7 @@ extension DemoViewController1: BmoViewPagerDataSource {
         }
         return nil
     }
-    func bmoViewPagerDataSourceListItemHighlightedBackgroundView(_ viewPager: BmoViewPager, forPageListAt page: Int) -> UIView? {
+    func bmoViewPagerDataSourceNaviagtionBarItemHighlightedBackgroundView(_ viewPager: BmoViewPager, forPageListAt page: Int) -> UIView? {
         if viewPager == customViewPager {
             if let image = UIImage(named: "item\(page)_2.jpg") {
                 let imageView = UIImageView(image: image)

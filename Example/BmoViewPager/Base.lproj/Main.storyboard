@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="JEZ-Q7-k93">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="JEZ-Q7-k93">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,7 +25,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wWC-QH-tbm" customClass="BmoViewPager" customModule="BmoViewPager">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </view>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="L00-0O-by9">
                                 <rect key="frame" x="176" y="614" width="23" height="37"/>
@@ -192,26 +192,115 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dp7-Pe-SB1" customClass="BmoViewPagerNavigationBar" customModule="BmoViewPager">
+                                <rect key="frame" x="16" y="16" width="343" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="vjD-nw-Fnh"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sZX-MF-QYS" customClass="BmoViewPager" customModule="BmoViewPager">
-                                <rect key="frame" x="16" y="36" width="343" height="567"/>
+                                <rect key="frame" x="16" y="68" width="343" height="535"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Dp7-Pe-SB1" firstAttribute="leading" secondItem="zg7-MK-sl3" secondAttribute="leading" constant="16" id="3Ey-mA-det"/>
+                            <constraint firstItem="Dp7-Pe-SB1" firstAttribute="top" secondItem="zg7-MK-sl3" secondAttribute="top" constant="16" id="AEq-mV-z5Z"/>
+                            <constraint firstItem="sZX-MF-QYS" firstAttribute="top" secondItem="Dp7-Pe-SB1" secondAttribute="bottom" constant="8" id="DVL-tD-kuH"/>
                             <constraint firstAttribute="trailing" secondItem="sZX-MF-QYS" secondAttribute="trailing" constant="16" id="N4z-av-Th7"/>
                             <constraint firstItem="lXo-Pa-VmN" firstAttribute="top" secondItem="sZX-MF-QYS" secondAttribute="bottom" constant="64" id="Qqz-8m-1hA"/>
+                            <constraint firstAttribute="trailing" secondItem="Dp7-Pe-SB1" secondAttribute="trailing" constant="16" id="UKc-Pb-2MZ"/>
                             <constraint firstItem="sZX-MF-QYS" firstAttribute="leading" secondItem="zg7-MK-sl3" secondAttribute="leading" constant="16" id="Xhi-mB-nuq"/>
-                            <constraint firstItem="sZX-MF-QYS" firstAttribute="top" secondItem="vk6-Jd-NDn" secondAttribute="bottom" constant="16" id="yVG-ev-rJG"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="viewPager" destination="sZX-MF-QYS" id="ZIh-bm-QFR"/>
+                        <outlet property="viewPagerNavigationBar" destination="Dp7-Pe-SB1" id="83u-tV-sfh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yxo-rU-ahM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="945" y="2286"/>
+        </scene>
+        <!--Demo View Controller0-->
+        <scene sceneID="kXV-DH-4pE">
+            <objects>
+                <viewController storyboardIdentifier="DemoViewController0" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5ox-li-ac2" customClass="DemoViewController0" customModule="BmoViewPager_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QnO-lE-tne"/>
+                        <viewControllerLayoutGuide type="bottom" id="Vlv-kv-0dY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="E9X-ci-7po">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jrC-rD-O2Y">
+                                <rect key="frame" x="8" y="28" width="359" height="631"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="With NavigationBar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xUa-gq-RIj">
+                                        <rect key="frame" x="8" y="8" width="163.5" height="23"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pic2.png" translatesAutoresizingMaskIntoConstraints="NO" id="zes-aQ-qcC">
+                                        <rect key="frame" x="8" y="39" width="343" height="286"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="zes-aQ-qcC" secondAttribute="height" multiplier="108:90" id="BQ2-70-KyH"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. Drag BmoViewPagerNavigatoinBar" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OCq-rv-Hwl">
+                                        <rect key="frame" x="8" y="333" width="343" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2. Assign the BmoViewPager" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cLL-YO-AbK">
+                                        <rect key="frame" x="8" y="359" width="343" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3. Implement delegate about navigation bar" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ki1-p8-VMc">
+                                        <rect key="frame" x="8" y="385" width="343" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="OCq-rv-Hwl" firstAttribute="top" secondItem="zes-aQ-qcC" secondAttribute="bottom" constant="8" id="8QM-Xh-9HE"/>
+                                    <constraint firstItem="xUa-gq-RIj" firstAttribute="leading" secondItem="jrC-rD-O2Y" secondAttribute="leading" constant="8" id="MA4-Bd-KBG"/>
+                                    <constraint firstAttribute="trailing" secondItem="zes-aQ-qcC" secondAttribute="trailing" constant="8" id="MXu-kg-xCv"/>
+                                    <constraint firstItem="cLL-YO-AbK" firstAttribute="leading" secondItem="jrC-rD-O2Y" secondAttribute="leading" constant="8" id="TPv-IY-abj"/>
+                                    <constraint firstItem="cLL-YO-AbK" firstAttribute="top" secondItem="OCq-rv-Hwl" secondAttribute="bottom" constant="8" id="Xjy-b8-8Cy"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ki1-p8-VMc" secondAttribute="trailing" constant="8" id="a5i-qP-L2Z"/>
+                                    <constraint firstAttribute="trailing" secondItem="cLL-YO-AbK" secondAttribute="trailing" constant="8" id="exS-X1-VSB"/>
+                                    <constraint firstItem="xUa-gq-RIj" firstAttribute="top" secondItem="jrC-rD-O2Y" secondAttribute="top" constant="8" id="hUk-RP-qDf"/>
+                                    <constraint firstItem="Ki1-p8-VMc" firstAttribute="leading" secondItem="jrC-rD-O2Y" secondAttribute="leading" constant="8" id="jAN-qf-iFV"/>
+                                    <constraint firstAttribute="trailing" secondItem="OCq-rv-Hwl" secondAttribute="trailing" constant="8" id="mOq-r5-p3N"/>
+                                    <constraint firstItem="OCq-rv-Hwl" firstAttribute="leading" secondItem="jrC-rD-O2Y" secondAttribute="leading" constant="8" id="meP-wZ-lUZ"/>
+                                    <constraint firstItem="zes-aQ-qcC" firstAttribute="top" secondItem="xUa-gq-RIj" secondAttribute="bottom" constant="8" id="oDv-xV-X2h"/>
+                                    <constraint firstItem="Ki1-p8-VMc" firstAttribute="top" secondItem="cLL-YO-AbK" secondAttribute="bottom" constant="8" id="pLA-hA-sRe"/>
+                                    <constraint firstItem="zes-aQ-qcC" firstAttribute="leading" secondItem="jrC-rD-O2Y" secondAttribute="leading" constant="8" id="xht-94-sD4"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="jrC-rD-O2Y" firstAttribute="top" secondItem="QnO-lE-tne" secondAttribute="bottom" constant="8" id="MVD-Qw-Qul"/>
+                            <constraint firstItem="jrC-rD-O2Y" firstAttribute="leading" secondItem="E9X-ci-7po" secondAttribute="leading" constant="8" id="g0y-we-tVp"/>
+                            <constraint firstAttribute="trailing" secondItem="jrC-rD-O2Y" secondAttribute="trailing" constant="8" id="rbj-vf-cC7"/>
+                            <constraint firstItem="Vlv-kv-0dY" firstAttribute="top" secondItem="jrC-rD-O2Y" secondAttribute="bottom" constant="8" id="uOl-Pj-TcE"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B2e-xC-rz3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1766" y="2285"/>
         </scene>
         <!--Demo View Controller1-->
         <scene sceneID="ubT-st-mKB">
@@ -228,8 +317,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="06h-qd-ScP">
                                 <rect key="frame" x="8" y="28" width="359" height="631"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ViewPage ListTitle Demo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLf-f3-ovC">
-                                        <rect key="frame" x="8" y="8" width="211" height="23"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ViewPage Navaigtion Bar Style" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLf-f3-ovC">
+                                        <rect key="frame" x="8" y="8" width="260" height="23"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -240,39 +329,59 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yZX-gQ-3yN" customClass="BmoViewPagerNavigationBar" customModule="BmoViewPager">
+                                        <rect key="frame" x="16" y="73" width="327" height="30"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="Ljo-Wp-9Z8"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PD8-ae-1SS" customClass="BmoViewPager" customModule="BmoViewPager">
-                                        <rect key="frame" x="16" y="73" width="327" height="128"/>
+                                        <rect key="frame" x="16" y="111" width="327" height="128"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="128" id="Q0E-u4-Ge2"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ng5-xi-h9M">
-                                        <rect key="frame" x="16" y="209" width="53.5" height="18"/>
+                                        <rect key="frame" x="16" y="247" width="53.5" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BLh-Qe-Mt2" customClass="BmoViewPagerNavigationBar" customModule="BmoViewPager">
+                                        <rect key="frame" x="16" y="273" width="327" height="44"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="wkw-MZ-dan"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HES-GA-0ki" customClass="BmoViewPager" customModule="BmoViewPager">
-                                        <rect key="frame" x="16" y="235" width="327" height="380"/>
+                                        <rect key="frame" x="16" y="317" width="327" height="298"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="HES-GA-0ki" firstAttribute="leading" secondItem="06h-qd-ScP" secondAttribute="leading" constant="16" id="3q4-24-skj"/>
+                                    <constraint firstItem="HES-GA-0ki" firstAttribute="top" secondItem="BLh-Qe-Mt2" secondAttribute="bottom" id="3ux-Mf-vqV"/>
                                     <constraint firstItem="qtl-6L-Uaj" firstAttribute="leading" secondItem="06h-qd-ScP" secondAttribute="leading" constant="16" id="4ov-4u-0xV"/>
                                     <constraint firstItem="bLf-f3-ovC" firstAttribute="top" secondItem="06h-qd-ScP" secondAttribute="top" constant="8" id="65R-HD-RcZ"/>
                                     <constraint firstItem="ng5-xi-h9M" firstAttribute="top" secondItem="PD8-ae-1SS" secondAttribute="bottom" constant="8" id="7OD-Ex-UKp"/>
-                                    <constraint firstItem="PD8-ae-1SS" firstAttribute="top" secondItem="qtl-6L-Uaj" secondAttribute="bottom" constant="8" id="Hwh-zz-ZQ1"/>
                                     <constraint firstItem="bLf-f3-ovC" firstAttribute="leading" secondItem="06h-qd-ScP" secondAttribute="leading" constant="8" id="LMz-Kv-JjO"/>
                                     <constraint firstAttribute="trailing" secondItem="HES-GA-0ki" secondAttribute="trailing" constant="16" id="Seg-xt-h8y"/>
                                     <constraint firstAttribute="bottom" secondItem="HES-GA-0ki" secondAttribute="bottom" constant="16" id="Sok-1s-wJH"/>
+                                    <constraint firstAttribute="trailing" secondItem="yZX-gQ-3yN" secondAttribute="trailing" constant="16" id="Y8l-ne-K7H"/>
                                     <constraint firstItem="qtl-6L-Uaj" firstAttribute="top" secondItem="bLf-f3-ovC" secondAttribute="bottom" constant="16" id="Zxb-ea-te9"/>
                                     <constraint firstItem="PD8-ae-1SS" firstAttribute="leading" secondItem="06h-qd-ScP" secondAttribute="leading" constant="16" id="aIJ-m4-aPm"/>
+                                    <constraint firstItem="BLh-Qe-Mt2" firstAttribute="top" secondItem="ng5-xi-h9M" secondAttribute="bottom" constant="8" id="cmG-hj-W0U"/>
                                     <constraint firstItem="ng5-xi-h9M" firstAttribute="leading" secondItem="qtl-6L-Uaj" secondAttribute="leading" id="hWg-YH-lwP"/>
+                                    <constraint firstItem="yZX-gQ-3yN" firstAttribute="top" secondItem="qtl-6L-Uaj" secondAttribute="bottom" constant="8" id="jBL-AC-1Db"/>
+                                    <constraint firstItem="BLh-Qe-Mt2" firstAttribute="leading" secondItem="06h-qd-ScP" secondAttribute="leading" constant="16" id="m11-k1-pTt"/>
                                     <constraint firstAttribute="trailing" secondItem="PD8-ae-1SS" secondAttribute="trailing" constant="16" id="nCp-sy-Zts"/>
-                                    <constraint firstItem="HES-GA-0ki" firstAttribute="top" secondItem="ng5-xi-h9M" secondAttribute="bottom" constant="8" id="p60-o5-hcZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="BLh-Qe-Mt2" secondAttribute="trailing" constant="16" id="q1k-lx-URn"/>
+                                    <constraint firstItem="yZX-gQ-3yN" firstAttribute="leading" secondItem="06h-qd-ScP" secondAttribute="leading" constant="16" id="qTz-lV-Qg6"/>
+                                    <constraint firstItem="PD8-ae-1SS" firstAttribute="top" secondItem="yZX-gQ-3yN" secondAttribute="bottom" constant="8" id="rsU-tG-PJg"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -286,12 +395,14 @@
                     </view>
                     <connections>
                         <outlet property="customViewPager" destination="HES-GA-0ki" id="jGj-3K-8aJ"/>
+                        <outlet property="customViewPgareNavigationBar" destination="BLh-Qe-Mt2" id="Lvf-16-EwI"/>
                         <outlet property="defaultViewPager" destination="PD8-ae-1SS" id="H7e-gA-gNw"/>
+                        <outlet property="defaultViewPagerNavigationBar" destination="yZX-gQ-3yN" id="LJF-LK-oCn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ENb-bi-kKb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1761" y="2285"/>
+            <point key="canvasLocation" x="1767" y="3003"/>
         </scene>
         <!--Demo View Controller2-->
         <scene sceneID="09o-j9-c1d">
@@ -308,35 +419,45 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uJC-wJ-fpL">
                                 <rect key="frame" x="8" y="28" width="359" height="631"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YGq-HG-5To" customClass="SegmentedView" customModule="BmoViewPager_Example" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MqH-2j-13t" customClass="BmoViewPagerNavigationBar" customModule="BmoViewPager">
                                         <rect key="frame" x="16" y="16" width="327" height="30"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YGq-HG-5To" customClass="SegmentedView" customModule="BmoViewPager_Example" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="327" height="30"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="segmentedCount">
+                                                        <integer key="value" value="4"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="strokeColor">
+                                                        <color key="value" red="0.0039215686274509803" green="0.1764705882352941" blue="0.3529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="CqR-hP-T0y"/>
+                                            <constraint firstAttribute="trailing" secondItem="YGq-HG-5To" secondAttribute="trailing" id="5oC-CY-n5f"/>
+                                            <constraint firstItem="YGq-HG-5To" firstAttribute="leading" secondItem="MqH-2j-13t" secondAttribute="leading" id="AD8-Xy-rL2"/>
+                                            <constraint firstAttribute="height" constant="30" id="HWT-3O-QzR"/>
+                                            <constraint firstAttribute="bottom" secondItem="YGq-HG-5To" secondAttribute="bottom" id="b8v-nv-0oM"/>
+                                            <constraint firstItem="YGq-HG-5To" firstAttribute="top" secondItem="MqH-2j-13t" secondAttribute="top" id="l1d-jC-cjG"/>
                                         </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="segmentedCount">
-                                                <integer key="value" value="4"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="strokeColor">
-                                                <color key="value" red="0.0039215686274509803" green="0.1764705882352941" blue="0.3529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom ViewPagerList" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="45N-ZC-ojM">
-                                        <rect key="frame" x="16" y="54" width="192" height="23"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Example like Segmented Control" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="45N-ZC-ojM">
+                                        <rect key="frame" x="16" y="54" width="275.5" height="23"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Assign container view to BmoViewPager" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QVl-C9-AIV">
-                                        <rect key="frame" x="16" y="85" width="327" height="18"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Input a segmented background" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QVl-C9-AIV">
+                                        <rect key="frame" x="16" y="85" width="238.5" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom position and layout" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2c7-W1-4U2">
-                                        <rect key="frame" x="16" y="111" width="327" height="18"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set viewPager's infinitScroll to true" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2c7-W1-4U2">
+                                        <rect key="frame" x="16" y="111" width="238.5" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -349,20 +470,19 @@
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="QVl-C9-AIV" firstAttribute="leading" secondItem="45N-ZC-ojM" secondAttribute="leading" id="Bp3-89-EfQ"/>
+                                    <constraint firstItem="45N-ZC-ojM" firstAttribute="top" secondItem="MqH-2j-13t" secondAttribute="bottom" constant="8" id="Fdj-xg-eCE"/>
                                     <constraint firstItem="2c7-W1-4U2" firstAttribute="trailing" secondItem="QVl-C9-AIV" secondAttribute="trailing" id="QhO-d6-uUL"/>
                                     <constraint firstItem="qHD-qI-jTY" firstAttribute="top" secondItem="2c7-W1-4U2" secondAttribute="bottom" constant="8" id="Ruk-HV-m7u"/>
-                                    <constraint firstItem="45N-ZC-ojM" firstAttribute="leading" secondItem="YGq-HG-5To" secondAttribute="leading" id="T2G-7z-nYD"/>
+                                    <constraint firstItem="MqH-2j-13t" firstAttribute="top" secondItem="uJC-wJ-fpL" secondAttribute="top" constant="16" id="UKW-jD-WO5"/>
                                     <constraint firstItem="qHD-qI-jTY" firstAttribute="leading" secondItem="uJC-wJ-fpL" secondAttribute="leading" constant="8" id="aJ3-3b-d61"/>
                                     <constraint firstItem="2c7-W1-4U2" firstAttribute="leading" secondItem="QVl-C9-AIV" secondAttribute="leading" id="atT-3s-RgI"/>
-                                    <constraint firstItem="45N-ZC-ojM" firstAttribute="top" secondItem="YGq-HG-5To" secondAttribute="bottom" constant="8" id="dyc-DB-e1f"/>
                                     <constraint firstAttribute="bottom" secondItem="qHD-qI-jTY" secondAttribute="bottom" constant="8" id="h5U-NQ-AFK"/>
-                                    <constraint firstAttribute="trailing" secondItem="YGq-HG-5To" secondAttribute="trailing" constant="16" id="hTD-qG-PeV"/>
                                     <constraint firstItem="QVl-C9-AIV" firstAttribute="top" secondItem="45N-ZC-ojM" secondAttribute="bottom" constant="8" id="j2u-Mx-Mud"/>
-                                    <constraint firstItem="QVl-C9-AIV" firstAttribute="trailing" secondItem="YGq-HG-5To" secondAttribute="trailing" id="loO-vo-Gsr"/>
                                     <constraint firstAttribute="trailing" secondItem="qHD-qI-jTY" secondAttribute="trailing" constant="8" id="n9b-kX-oM0"/>
-                                    <constraint firstItem="YGq-HG-5To" firstAttribute="top" secondItem="uJC-wJ-fpL" secondAttribute="top" constant="16" id="pLt-Aa-Pqo"/>
+                                    <constraint firstAttribute="trailing" secondItem="MqH-2j-13t" secondAttribute="trailing" constant="16" id="qAR-YL-rMx"/>
                                     <constraint firstItem="2c7-W1-4U2" firstAttribute="top" secondItem="QVl-C9-AIV" secondAttribute="bottom" constant="8" id="qdI-BK-AhE"/>
-                                    <constraint firstItem="YGq-HG-5To" firstAttribute="leading" secondItem="uJC-wJ-fpL" secondAttribute="leading" constant="16" id="vuY-xg-axW"/>
+                                    <constraint firstItem="MqH-2j-13t" firstAttribute="leading" secondItem="uJC-wJ-fpL" secondAttribute="leading" constant="16" id="quO-R2-Yxr"/>
+                                    <constraint firstItem="45N-ZC-ojM" firstAttribute="leading" secondItem="MqH-2j-13t" secondAttribute="leading" id="sE3-Nv-zOy"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -376,15 +496,71 @@
                     </view>
                     <connections>
                         <outlet property="viewPager" destination="qHD-qI-jTY" id="xSr-sw-Go9"/>
-                        <outlet property="viewPgerListView" destination="YGq-HG-5To" id="yLc-bJ-vw4"/>
+                        <outlet property="viewPagerNavigationBar" destination="MqH-2j-13t" id="g24-7J-Nys"/>
+                        <outlet property="viewPagerSegmentedView" destination="YGq-HG-5To" id="xSa-8y-NYP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rLZ-Ex-mQH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1760.8" y="2987.8560719640182"/>
+            <point key="canvasLocation" x="1767" y="3707"/>
+        </scene>
+        <!--Demo View Controller3-->
+        <scene sceneID="lUU-gS-nkG">
+            <objects>
+                <viewController storyboardIdentifier="DemoViewController3" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rnJ-fK-wid" customClass="DemoViewController3" customModule="BmoViewPager_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tZJ-WP-w34"/>
+                        <viewControllerLayoutGuide type="bottom" id="6s5-yF-Bi6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vdC-EJ-wBc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aUw-N6-3gP">
+                                <rect key="frame" x="8" y="28" width="359" height="631"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k42-E8-ZnC" customClass="BmoViewPagerNavigationBar" customModule="BmoViewPager">
+                                        <rect key="frame" x="8" y="8" width="44" height="615"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8WJ-Cu-U2a" customClass="BmoViewPager" customModule="BmoViewPager">
+                                        <rect key="frame" x="60" y="8" width="291" height="615"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="8WJ-Cu-U2a" firstAttribute="leading" secondItem="k42-E8-ZnC" secondAttribute="trailing" constant="8" id="2C2-Ix-ZHS"/>
+                                    <constraint firstItem="8WJ-Cu-U2a" firstAttribute="leading" secondItem="aUw-N6-3gP" secondAttribute="leading" constant="60" id="Am4-PI-WRc"/>
+                                    <constraint firstAttribute="bottom" secondItem="k42-E8-ZnC" secondAttribute="bottom" constant="8" id="BZ2-zv-NEe"/>
+                                    <constraint firstAttribute="bottom" secondItem="8WJ-Cu-U2a" secondAttribute="bottom" constant="8" id="Gdu-uh-39h"/>
+                                    <constraint firstItem="k42-E8-ZnC" firstAttribute="top" secondItem="aUw-N6-3gP" secondAttribute="top" constant="8" id="J5g-6Q-L83"/>
+                                    <constraint firstItem="8WJ-Cu-U2a" firstAttribute="top" secondItem="aUw-N6-3gP" secondAttribute="top" constant="8" id="fno-g5-a0a"/>
+                                    <constraint firstItem="k42-E8-ZnC" firstAttribute="leading" secondItem="aUw-N6-3gP" secondAttribute="leading" constant="8" id="ndf-NF-WsE"/>
+                                    <constraint firstAttribute="trailing" secondItem="8WJ-Cu-U2a" secondAttribute="trailing" constant="8" id="ta8-tV-eOx"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="aUw-N6-3gP" firstAttribute="leading" secondItem="vdC-EJ-wBc" secondAttribute="leading" constant="8" id="7rq-pL-qXN"/>
+                            <constraint firstItem="6s5-yF-Bi6" firstAttribute="top" secondItem="aUw-N6-3gP" secondAttribute="bottom" constant="8" id="M22-0I-mqF"/>
+                            <constraint firstAttribute="trailing" secondItem="aUw-N6-3gP" secondAttribute="trailing" constant="8" id="dhj-cJ-lIr"/>
+                            <constraint firstItem="aUw-N6-3gP" firstAttribute="top" secondItem="tZJ-WP-w34" secondAttribute="bottom" constant="8" id="ooS-0O-rJg"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="viewPager" destination="8WJ-Cu-U2a" id="fWP-br-TXs"/>
+                        <outlet property="viewPagerNavigationBar" destination="k42-E8-ZnC" id="n2Y-3i-rav"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6kS-HU-Gzq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1767" y="4415"/>
         </scene>
     </scenes>
     <resources>
         <image name="pic1.png" width="920" height="730"/>
+        <image name="pic2.png" width="1080" height="900"/>
     </resources>
 </document>

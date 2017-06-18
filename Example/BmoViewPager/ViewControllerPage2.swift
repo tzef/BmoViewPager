@@ -11,10 +11,13 @@ import BmoViewPager
 
 private let mainColor = UIColor(red: 1.0/255.0, green: 55.0/255.0, blue: 132.0/255.0, alpha: 1.0)
 class ViewControllerPage2: UIViewController {
+    @IBOutlet weak var viewPagerNavigationBar: BmoViewPagerNavigationBar!
     @IBOutlet weak var viewPager: BmoViewPager!
     override func viewDidLoad() {
         super.viewDidLoad()        
         viewPager.dataSource = self
+        viewPagerNavigationBar.autoFocus = false
+        viewPagerNavigationBar.viewPager = viewPager
         
         viewPager.layer.borderWidth = 1.0
         viewPager.layer.cornerRadius = 5.0
@@ -25,41 +28,49 @@ class ViewControllerPage2: UIViewController {
 
 extension ViewControllerPage2: BmoViewPagerDataSource {
     // Optional
-    func bmoViewPagerDataSourceAttributedTitle(_ viewPager: BmoViewPager, forPageListAt page: Int) -> [String : Any]? {
+    func bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed(_ viewPager: BmoViewPager, forPageListAt page: Int) -> [String : Any]? {
         return [
             NSFontAttributeName : UIFont.boldSystemFont(ofSize: 17.0),
             NSForegroundColorAttributeName : UIColor.groupTableViewBackground
         ]
     }
-    func bmoViewPagerDataSourceHighlightedAttributedTitle(_ viewPager: BmoViewPager, forPageListAt page: Int) -> [String : Any]? {
+    func bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed(_ viewPager: BmoViewPager, forPageListAt page: Int) -> [String : Any]? {
         return [
             NSFontAttributeName : UIFont.boldSystemFont(ofSize: 17.0),
             NSForegroundColorAttributeName : mainColor
         ]
     }
-    func bmoViewPagerDataSourceListItemHighlightedBackgroundView(_ viewPager: BmoViewPager, forPageListAt page: Int) -> UIView? {
+    func bmoViewPagerDataSourceNaviagtionBarItemHighlightedBackgroundView(_ viewPager: BmoViewPager, forPageListAt page: Int) -> UIView? {
         let view = UnderLineView()
         view.marginX = 8.0
         view.lineWidth = 5.0
         view.strokeColor = mainColor
         return view
     }
-    func bmoViewPagerDataSourceTitle(_ viewPager: BmoViewPager, forPageListAt page: Int) -> String? {
+    func bmoViewPagerDataSourceNaviagtionBarItemTitle(_ viewPager: BmoViewPager, forPageListAt page: Int) -> String? {
         return "Demo \(page)"
     }
     
     // Required
     func bmoViewPagerDataSourceNumberOfPage(in viewPager: BmoViewPager) -> Int {
-        return 3
+        return 4
     }
     func bmoViewPagerDataSource(_ viewPager: BmoViewPager, viewControllerForPageAt page: Int) -> UIViewController {
         switch page {
         case 0:
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "DemoViewController1") as? DemoViewController1 {
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "DemoViewController0") as? DemoViewController0 {
                 return vc
             }
         case 1:
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "DemoViewController1") as? DemoViewController1 {
+                return vc
+            }
+        case 2:
             if let vc = storyboard?.instantiateViewController(withIdentifier: "DemoViewController2") as? DemoViewController2 {
+                return vc
+            }
+        case 3:
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "DemoViewController3") as? DemoViewController3 {
                 return vc
             }
         default:

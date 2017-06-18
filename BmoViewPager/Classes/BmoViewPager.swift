@@ -12,14 +12,12 @@ import UIKit
     func bmoViewPagerDataSourceNumberOfPage(in viewPager: BmoViewPager) -> Int
     func bmoViewPagerDataSource(_ viewPager: BmoViewPager, viewControllerForPageAt page: Int) -> UIViewController
     
-    @objc optional func bmoViewPagerDataSourceTitle(_ viewPager: BmoViewPager, forPageListAt page: Int) -> String?
-    @objc optional func bmoViewPagerDataSourceAttributedTitle(_ viewPager: BmoViewPager, forPageListAt page: Int) -> [String : Any]?
-    @objc optional func bmoViewPagerDataSourceHighlightedAttributedTitle(_ viewPager: BmoViewPager,
-                                                                         forPageListAt page: Int) -> [String : Any]?
-    @objc optional func bmoViewPagerDataSourceListItemSize(_ viewPager: BmoViewPager, forPageListAt page: Int) -> CGSize
-    @objc optional func bmoViewPagerDataSourceListItemBackgroundView(_ viewPager: BmoViewPager, forPageListAt page: Int) -> UIView?
-    @objc optional func bmoViewPagerDataSourceListItemHighlightedBackgroundView(_ viewPager: BmoViewPager,
-                                                                                forPageListAt page: Int) -> UIView?
+    @objc optional func bmoViewPagerDataSourceNaviagtionBarItemTitle(_ viewPager: BmoViewPager, forPageListAt page: Int) -> String?
+    @objc optional func bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed(_ viewPager: BmoViewPager, forPageListAt page: Int) -> [String : Any]?
+    @objc optional func bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed(_ viewPager: BmoViewPager, forPageListAt page: Int) -> [String : Any]?
+    @objc optional func bmoViewPagerDataSourceNaviagtionBarItemSize(_ viewPager: BmoViewPager, forPageListAt page: Int) -> CGSize
+    @objc optional func bmoViewPagerDataSourceNaviagtionBarItemBackgroundView(_ viewPager: BmoViewPager, forPageListAt page: Int) -> UIView?
+    @objc optional func bmoViewPagerDataSourceNaviagtionBarItemHighlightedBackgroundView(_ viewPager: BmoViewPager, forPageListAt page: Int) -> UIView?
 }
 @objc public protocol BmoViewPagerDelegate {
     @objc optional func bmoViewPagerDelegate(_ viewPager: BmoViewPager, pageChanged page: Int)
@@ -29,19 +27,19 @@ import UIKit
 }
 
 @IBDesignable
-public class BmoViewPager: UIView, BmoPageItemListDelegate, UIScrollViewDelegate {
-    @IBInspectable var isHorizontal: Bool = true
-    
-    /// vierPager scroll orientataion
-    public var orientation: UIPageViewControllerNavigationOrientation {
-        get {
+public class BmoViewPager: UIView, UIScrollViewDelegate {
+    @IBInspectable var isHorizontal: Bool = true {
+        didSet {
             if isHorizontal {
-                return UIPageViewControllerNavigationOrientation.horizontal
+                orientation = UIPageViewControllerNavigationOrientation.horizontal
             } else {
-                return UIPageViewControllerNavigationOrientation.vertical
+                orientation = UIPageViewControllerNavigationOrientation.vertical
             }
         }
     }
+    
+    /// vierPager scroll orientataion
+    public var orientation: UIPageViewControllerNavigationOrientation = .horizontal
     
     /**
      if you need get parent view controller from viewPager's view controller, pass into the bmoViewPager's owner
@@ -49,6 +47,7 @@ public class BmoViewPager: UIView, BmoPageItemListDelegate, UIScrollViewDelegate
      */
     public weak var parentViewController: UIViewController? {
         didSet {
+            if !inited { return }
             if let vc = parentViewController {
                 vc.addChildViewController(pageViewController)
                 pageViewController.didMove(toParentViewController: vc)
@@ -56,35 +55,20 @@ public class BmoViewPager: UIView, BmoPageItemListDelegate, UIScrollViewDelegate
         }
     }
     
-    /// default is nil, if you want pageListBar in custom position, just input the container view
-    public weak var pageListContainerView: UIView? = nil
-    
-    /// enable auto focus, will find the nearest center position for next item
-    public var pageListAutoFocus: Bool = true {
-        didSet {
-            pageListView.autoFocus = pageListAutoFocus
-        }
-    }
-    
     /// enable infinit scroll setting, the page which next the last page will return the first page. 
     public var infinitScroll: Bool = false {
         didSet {
+            if !inited { return }
             pageViewController.infinitScroll = infinitScroll
         }
     }
     
-    public var pageControlIndex: Int = 0 {
-        didSet {
-            if oldValue != pageControlIndex {
-                self.delegate?.bmoViewPagerDelegate?(self, pageChanged: pageControlIndex)
-            }
-        }
-    }
     public var presentedPageIndex: Int = 0 {
         didSet {
+            if !inited { return }
             if oldValue != presentedPageIndex {
                 self.pageControlIndex = presentedPageIndex
-                self.pageListView.collectionView?.reloadData()
+                self.navigationBar?.reloadData()
                 
                 var reuseIt = false
                 if let view = pageViewController.pageScrollView?.subviews[safe: 1] {
@@ -99,21 +83,30 @@ public class BmoViewPager: UIView, BmoPageItemListDelegate, UIScrollViewDelegate
             }
         }
     }
+    public weak var navigationBar: BmoViewPagerNavigationBar? {
+        didSet {
+            if !inited { return }
+            navigationBar?.pageViewController = pageViewController
+        }
+    }
     public weak var dataSource: BmoViewPagerDataSource? {
         didSet {
+            if !inited { return }
             self.parentViewController = (dataSource as? UIViewController)
             pageViewController.bmoDataSource = dataSource
-            pageListView.bmoDataSource = dataSource
-            self.addPageListIfNeed()
+            navigationBar?.viewPager = self
         }
     }
     public weak var delegate: BmoViewPagerDelegate?
-    fileprivate var inited = false
-    lazy fileprivate var pageListView: BmoPageItemList = {
-        let listView = BmoPageItemList(viewPager: self, delegate: self)
-        listView.backgroundColor = UIColor.clear
-        return listView
-    }()
+    
+    var pageControlIndex: Int = 0 {
+        didSet {
+            if oldValue != pageControlIndex {
+                self.delegate?.bmoViewPagerDelegate?(self, pageChanged: pageControlIndex)
+            }
+        }
+    }
+    
     lazy fileprivate var pageViewController: BmoPageViewController = {
         let pageVC = BmoPageViewController(viewPager: self, scrollDelegate: self, orientation: self.orientation)
         self.addSubview(pageVC.view)
@@ -121,6 +114,7 @@ public class BmoViewPager: UIView, BmoPageItemListDelegate, UIScrollViewDelegate
         return pageVC
     }()
     fileprivate var lastContentOffSet: CGPoint? = nil
+    fileprivate var inited = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -137,55 +131,26 @@ public class BmoViewPager: UIView, BmoPageItemListDelegate, UIScrollViewDelegate
         super.didMoveToWindow()
         if inited == false {
             inited = true
-            pageListView.reloadData()
+            if let vc = self.parentViewController {
+                vc.addChildViewController(pageViewController)
+                pageViewController.didMove(toParentViewController: vc)
+            }
+            self.navigationBar?.pageViewController = pageViewController
+            self.parentViewController = (self.dataSource as? UIViewController)
+            pageViewController.infinitScroll = self.infinitScroll
+            pageViewController.bmoDataSource = self.dataSource
             pageViewController.reloadData()
         }
     }
-    /// if the viewpager position changed by navigation bar, need to reset contentInset to solve cell wrong position issue
+    /// if the viewpager position changed by navigation bar, cause the navigatoin position become weird, need to reset contentInset to solve cell wrong position issue
     public func navigationLayoutChanged() {
-        self.pageListView.collectionView?.contentInset = .zero
-    }
-    fileprivate func addPageListIfNeed() {
-        if dataSource?.bmoViewPagerDataSourceTitle != nil {
-            if let containerView = pageListContainerView {
-                if !containerView.subviews.contains(pageListView) {
-                    containerView.addSubview(pageListView)
-                    pageListView.bmoVP.autoFit(containerView)
-                }
-            } else {
-                if !self.subviews.contains(pageListView) {
-                    self.addSubview(pageListView)
-                    pageListView.bmoVP.autoFitTop(self, height: 44)
-                    let pageTopContraints
-                        = self.constraints.filter({$0.firstItem as! NSObject == pageViewController.view && $0.firstAttribute == .top})
-                    self.removeConstraints(pageTopContraints)
-                    self.addConstraint(NSLayoutConstraint(item: pageViewController.view, attribute: .top, relatedBy: .equal,
-                                                          toItem: pageListView, attribute: .bottom, multiplier: 1.0, constant: 0))
-                }
-            }
-        }
-    }
-    // MARK: - Public
-    public func reloadData() {
-        pageListView.reloadData()
-        pageViewController.reloadData()
+        self.navigationBar?.resetContentInset()
     }
     
-    // MARK: - BmoPageItemListDelegate
-    func bmoViewPageItemList(_ itemList: BmoPageItemList, didSelectItemAt index: Int) {
-        if delegate?.bmoViewPagerDelegate?(self, shouldSelect: index) == false {
-            return
-        }
-        var reuseIt = false
-        pageViewController.pageScrollView?.subviews.forEach({ (view) in
-            if view.subviews.first?.bmoVP.index() == index {
-                reuseIt = true
-                pageViewController.pageScrollView?.setContentOffset(view.frame.origin, animated: true)
-            }
-        })
-        if reuseIt == false {
-            presentedPageIndex = index
-        }
+    // MARK: - Public
+    public func reloadData() {
+        self.navigationBar?.reloadData()
+        pageViewController.reloadData()
     }
     
     // MARK: - UIScrollViewDelegate
@@ -229,7 +194,7 @@ public class BmoViewPager: UIView, BmoPageItemListDelegate, UIScrollViewDelegate
             }
         }
         delegate?.bmoViewPagerDelegate?(self, scrollProgress: progressFraction, index: pageControlIndex)
-        pageListView.updateFocusProgress(&progressFraction)
+        navigationBar?.updateFocusProgress(&progressFraction)
     }
     
     public override func draw(_ rect: CGRect) {

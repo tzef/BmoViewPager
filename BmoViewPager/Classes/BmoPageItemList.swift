@@ -14,7 +14,7 @@ protocol BmoPageItemListDelegate: class {
 }
 class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSource, BmoPageItemListLayoutDelegate {
     var collectionView: UICollectionView? = nil
-    let horizontalLayout = BmoPageItemListLayout()
+    let horizontalLayout = BmoPageItemListLayout.init(orientation: .horizontal)
     
     weak var bmoDelegate: BmoPageItemListDelegate!
     weak var bmoDataSource: BmoViewPagerDataSource?
@@ -167,18 +167,17 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? BmoPageItemCell else {
             return UICollectionViewCell()
         }
-        guard let title = bmoDataSource?.bmoViewPagerDataSourceTitle?(bmoViewPager, forPageListAt: indexPath.row) else {
+        guard let title = bmoDataSource?.bmoViewPagerDataSourceNaviagtionBarItemTitle?(bmoViewPager, forPageListAt: indexPath.row) else {
             return cell
         }
         var fraction: CGFloat = 0.0
         if indexPath.row == bmoViewPager.presentedPageIndex {
             fraction = 1.0
         }
-        let rearAttributed = bmoDataSource?.bmoViewPagerDataSourceAttributedTitle?(bmoViewPager, forPageListAt: indexPath.row)
-        let backgroundView = bmoDataSource?.bmoViewPagerDataSourceListItemBackgroundView?(bmoViewPager, forPageListAt: indexPath.row)
-        let foreAttributed = bmoDataSource?.bmoViewPagerDataSourceHighlightedAttributedTitle?(bmoViewPager, forPageListAt: indexPath.row)
-        let foreBackgroundView = bmoDataSource?.bmoViewPagerDataSourceListItemHighlightedBackgroundView?(bmoViewPager,
-                                                                                                         forPageListAt: indexPath.row)
+        let rearAttributed = bmoDataSource?.bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed?(bmoViewPager, forPageListAt: indexPath.row)
+        let backgroundView = bmoDataSource?.bmoViewPagerDataSourceNaviagtionBarItemBackgroundView?(bmoViewPager, forPageListAt: indexPath.row)
+        let foreAttributed = bmoDataSource?.bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed?(bmoViewPager, forPageListAt: indexPath.row)
+        let foreBackgroundView = bmoDataSource?.bmoViewPagerDataSourceNaviagtionBarItemHighlightedBackgroundView?(bmoViewPager, forPageListAt: indexPath.row)
         cell.configureCell(title: title, focusProgress: fraction,
                            rearAttributed: rearAttributed, foreAttributed: foreAttributed,
                            backgroundView: backgroundView, foreBackgroundView: foreBackgroundView)
@@ -188,10 +187,10 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     
     // MARK: - BmoPageItemListLayoutDelegate
     func bmoPageItemListLayout(sizeForItemAt index: Int) -> CGSize {
-        if let size = bmoDataSource?.bmoViewPagerDataSourceListItemSize?(bmoViewPager, forPageListAt: index), size != .zero {
+        if let size = bmoDataSource?.bmoViewPagerDataSourceNaviagtionBarItemSize?(bmoViewPager, forPageListAt: index), size != .zero {
             return size
         }
-        guard let title = bmoDataSource?.bmoViewPagerDataSourceTitle?(bmoViewPager, forPageListAt: index) else {
+        guard let title = bmoDataSource?.bmoViewPagerDataSourceNaviagtionBarItemTitle?(bmoViewPager, forPageListAt: index) else {
             return CGSize.zero
         }
         calculateSizeLabel.text = title

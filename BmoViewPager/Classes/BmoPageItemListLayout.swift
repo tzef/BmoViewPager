@@ -13,8 +13,20 @@ protocol BmoPageItemListLayoutDelegate: class {
 }
 class BmoPageItemListLayout: UICollectionViewLayout {
     weak var delegate: BmoPageItemListLayoutDelegate?
+    var orientation: UIPageViewControllerNavigationOrientation = .horizontal
     var attributesList = [UICollectionViewLayoutAttributes]()
     var totalWidth: CGFloat = 0.0
+    
+    override init() {
+        super.init()
+    }
+    convenience init(orientation: UIPageViewControllerNavigationOrientation) {
+        self.init()
+        self.orientation = orientation
+    }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: UICollectionViewLayout
     override var collectionViewContentSize: CGSize {
@@ -29,13 +41,15 @@ class BmoPageItemListLayout: UICollectionViewLayout {
         return CGSize(width: totalWidth, height: cv.bounds.height)
     }
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        return attributesList
+        return attributesList.filter { (layoutAttribute) -> Bool in
+            return rect.intersects(layoutAttribute.frame)
+        }
     }
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         return attributesList[indexPath.row]
     }
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-        return true
+        return !newBounds.size.equalTo(self.collectionView!.frame.size)
     }
     override func prepare() {
         super.prepare()

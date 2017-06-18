@@ -520,7 +520,14 @@
                                 <rect key="frame" x="8" y="28" width="359" height="631"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k42-E8-ZnC" customClass="BmoViewPagerNavigationBar" customModule="BmoViewPager">
-                                        <rect key="frame" x="8" y="8" width="44" height="615"/>
+                                        <rect key="frame" x="8" y="8" width="44" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="jlz-3e-NHL"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="loE-X0-VtJ" customClass="BmoViewPagerNavigationBar" customModule="BmoViewPager">
+                                        <rect key="frame" x="8" y="66" width="44" height="557"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8WJ-Cu-U2a" customClass="BmoViewPager" customModule="BmoViewPager">
@@ -531,11 +538,14 @@
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="8WJ-Cu-U2a" firstAttribute="leading" secondItem="k42-E8-ZnC" secondAttribute="trailing" constant="8" id="2C2-Ix-ZHS"/>
+                                    <constraint firstItem="loE-X0-VtJ" firstAttribute="leading" secondItem="aUw-N6-3gP" secondAttribute="leading" constant="8" id="85l-P1-q7v"/>
                                     <constraint firstItem="8WJ-Cu-U2a" firstAttribute="leading" secondItem="aUw-N6-3gP" secondAttribute="leading" constant="60" id="Am4-PI-WRc"/>
-                                    <constraint firstAttribute="bottom" secondItem="k42-E8-ZnC" secondAttribute="bottom" constant="8" id="BZ2-zv-NEe"/>
+                                    <constraint firstAttribute="bottom" secondItem="loE-X0-VtJ" secondAttribute="bottom" constant="8" id="EzY-u8-vZw"/>
                                     <constraint firstAttribute="bottom" secondItem="8WJ-Cu-U2a" secondAttribute="bottom" constant="8" id="Gdu-uh-39h"/>
                                     <constraint firstItem="k42-E8-ZnC" firstAttribute="top" secondItem="aUw-N6-3gP" secondAttribute="top" constant="8" id="J5g-6Q-L83"/>
+                                    <constraint firstItem="loE-X0-VtJ" firstAttribute="top" secondItem="k42-E8-ZnC" secondAttribute="bottom" constant="8" id="Vnj-D4-El4"/>
                                     <constraint firstItem="8WJ-Cu-U2a" firstAttribute="top" secondItem="aUw-N6-3gP" secondAttribute="top" constant="8" id="fno-g5-a0a"/>
+                                    <constraint firstItem="8WJ-Cu-U2a" firstAttribute="leading" secondItem="loE-X0-VtJ" secondAttribute="trailing" constant="8" id="kJr-eB-VHo"/>
                                     <constraint firstItem="k42-E8-ZnC" firstAttribute="leading" secondItem="aUw-N6-3gP" secondAttribute="leading" constant="8" id="ndf-NF-WsE"/>
                                     <constraint firstAttribute="trailing" secondItem="8WJ-Cu-U2a" secondAttribute="trailing" constant="8" id="ta8-tV-eOx"/>
                                 </constraints>
@@ -552,11 +562,12 @@
                     <connections>
                         <outlet property="viewPager" destination="8WJ-Cu-U2a" id="fWP-br-TXs"/>
                         <outlet property="viewPagerNavigationBar" destination="k42-E8-ZnC" id="n2Y-3i-rav"/>
+                        <outlet property="viewPagerNavigationBar2" destination="loE-X0-VtJ" id="57l-Ar-YfI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6kS-HU-Gzq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1767" y="4415"/>
+            <point key="canvasLocation" x="1765.5999999999999" y="4414.5427286356826"/>
         </scene>
     </scenes>
     <resources>

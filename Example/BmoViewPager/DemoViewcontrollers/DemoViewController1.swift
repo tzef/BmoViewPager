@@ -17,6 +17,7 @@ class DemoViewController1: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         customViewPager.dataSource = self
         customViewPgareNavigationBar.viewPager = customViewPager
         

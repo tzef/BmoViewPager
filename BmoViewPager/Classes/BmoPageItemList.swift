@@ -59,6 +59,11 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         
         self.addSubview(collectionView!)
         collectionView!.bmoVP.autoFit(self)
+        
+//        let index = bmoViewPager.presentedPageIndex
+//        if let attribute = horizontalLayout.attributesList[safe: index] {
+//            collectionView!.setContentOffset(CGPoint(x: attribute.center.x, y: collectionView!.contentOffset.y), animated: false)
+//        }
     }
     
     // MARK: - Public
@@ -181,7 +186,6 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         cell.configureCell(title: title, focusProgress: fraction,
                            rearAttributed: rearAttributed, foreAttributed: foreAttributed,
                            backgroundView: backgroundView, foreBackgroundView: foreBackgroundView)
-        
         return cell
     }
     

@@ -8,6 +8,13 @@
 
 import UIKit
 
+class WeakBmoVPbar<T: BmoViewPagerNavigationBar> {
+    weak var bar : T?
+    init (_ bar: T) {
+        self.bar = bar
+    }
+}
+
 @IBDesignable
 public class BmoViewPagerNavigationBar: UIView {
     public weak var viewPager: BmoViewPager? {
@@ -75,7 +82,17 @@ public class BmoViewPagerNavigationBar: UIView {
     }
     
     private func resetViewPager(_ viewPager: BmoViewPager) {
-        viewPager.navigationBar = self
+        var existBarIndex = -1
+        viewPager.navigationBars.enumerated().forEach { (offset: Int, element: WeakBmoVPbar<BmoViewPagerNavigationBar>) in
+            if element.bar == self {
+                existBarIndex = offset
+                element.bar?.removeFromSuperview()
+            }
+        }
+        if existBarIndex > 0 {
+            viewPager.navigationBars.remove(at: existBarIndex)
+        }
+        viewPager.navigationBars.append(WeakBmoVPbar(self))
         
         let itemList = BmoPageItemList(viewPager: viewPager, delegate: self)
         itemList.bmoDataSource = viewPager.dataSource
@@ -111,6 +128,12 @@ extension BmoViewPagerNavigationBar: BmoPageItemListDelegate {
             }
         })
         if reuseIt == false {
+            pageListView?.focusIndex = -1
+            viewPager.navigationBars.forEach { (weakBar: WeakBmoVPbar<BmoViewPagerNavigationBar>) in
+                if let bar = weakBar.bar {
+                    bar.reloadData()
+                }
+            }
             viewPager.presentedPageIndex = index
         }
     }

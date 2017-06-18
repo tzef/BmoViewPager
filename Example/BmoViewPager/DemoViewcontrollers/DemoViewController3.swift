@@ -12,12 +12,16 @@ import BmoViewPager
 class DemoViewController3: UIViewController {
     @IBOutlet weak var viewPager: BmoViewPager!
     @IBOutlet weak var viewPagerNavigationBar: BmoViewPagerNavigationBar!
-
+    @IBOutlet weak var viewPagerNavigationBar2: BmoViewPagerNavigationBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         viewPager.dataSource = self
         viewPager.orientation = .vertical
+        viewPager.presentedPageIndex = 2
         viewPagerNavigationBar.viewPager = viewPager
+        viewPagerNavigationBar2.viewPager = viewPager
     }
 }
 

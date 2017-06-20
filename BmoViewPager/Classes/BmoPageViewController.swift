@@ -14,6 +14,11 @@ class BmoPageViewController: UIPageViewController, UIPageViewControllerDataSourc
     weak var bmoViewPager: BmoViewPager!
     var pageScrollView: UIScrollView?
     var infinitScroll: Bool = false
+    var scrollable: Bool = true {
+        didSet {
+            pageScrollView?.isScrollEnabled = scrollable
+        }
+    }
     var pageCount = 0
     
     init(_ orientation: UIPageViewControllerNavigationOrientation) {
@@ -47,6 +52,7 @@ class BmoPageViewController: UIPageViewController, UIPageViewControllerDataSourc
             if let scrollView = subView as? UIScrollView {
                 self.pageScrollView = scrollView
                 scrollView.delegate = scrollViewDelegate
+                scrollView.isScrollEnabled = scrollable
             }
         }
     }

@@ -6,28 +6,10 @@
 //
 //
 
-public struct ArrayBmoVPProxy<Element> {
-    public var base: Array<Element>
-    public init(_ base: Array<Element>) {
-        self.base = base
-    }
-}
-public protocol ArrayBmoVPCompatible {
-    associatedtype CompatibleType
-    var bmoVP: CompatibleType { get }
-}
-
-extension Array: ArrayBmoVPCompatible {
-    public typealias CompatibleType = ArrayBmoVPProxy<Any>
-    public var bmoVP: CompatibleType {
-        return ArrayBmoVPProxy(self)
-    }
-}
-
-extension ArrayBmoVPProxy where Element: Equatable {
+extension Array where Element: Equatable {
     mutating func remove(object: Element) {
-        if let index = self.base.index(of: object) {
-            self.base.remove(at: index)
+        if let index = self.index(of: object) {
+            self.remove(at: index)
         }
     }
 }

@@ -42,7 +42,7 @@ extension DemoViewController1: BmoViewPagerDataSource {
             return .zero
         }
     }
-    func bmoViewPagerDataSourceNaviagtionBarItemBackgroundView(_ viewPager: BmoViewPager, forPageListAt page: Int) -> UIView? {
+    func bmoViewPagerDataSourceNaviagtionBarItemNormalBackgroundView(_ viewPager: BmoViewPager, forPageListAt page: Int) -> UIView? {
         if viewPager == customViewPager {
             if let image = UIImage(named: "item\(page)_1.jpg") {
                 let imageView = UIImageView(image: image)

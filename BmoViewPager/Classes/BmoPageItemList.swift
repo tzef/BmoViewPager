@@ -180,7 +180,7 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
             fraction = 1.0
         }
         let rearAttributed = bmoDataSource?.bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed?(bmoViewPager, forPageListAt: indexPath.row)
-        let backgroundView = bmoDataSource?.bmoViewPagerDataSourceNaviagtionBarItemBackgroundView?(bmoViewPager, forPageListAt: indexPath.row)
+        let backgroundView = bmoDataSource?.bmoViewPagerDataSourceNaviagtionBarItemNormalBackgroundView?(bmoViewPager, forPageListAt: indexPath.row)
         let foreAttributed = bmoDataSource?.bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed?(bmoViewPager, forPageListAt: indexPath.row)
         let foreBackgroundView = bmoDataSource?.bmoViewPagerDataSourceNaviagtionBarItemHighlightedBackgroundView?(bmoViewPager, forPageListAt: indexPath.row)
         cell.configureCell(title: title, focusProgress: fraction,

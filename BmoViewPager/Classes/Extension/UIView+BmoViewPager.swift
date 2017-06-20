@@ -24,24 +24,24 @@ extension UIView: ViewBmoVPCompatible {
         }
     }
     
-    private struct AssociatedKeys {
-        static var BMOviewPagerIndex = "bmo_viewPager_index"
-        static var BMOviewPagerOwner = "bmo_viewPager_owner"
+    private struct BmoViewPagerAssociatedKeys {
+        static var BmoViewPagerIndex = "bmo_viewPager_index"
+        static var BmoViewPagerOwner = "bmo_viewPager_owner"
     }
     fileprivate var bmo_viewpager_index: Int? {
         get {
-            return objc_getAssociatedObject(self, &AssociatedKeys.BMOviewPagerIndex) as? Int
+            return objc_getAssociatedObject(self, &BmoViewPagerAssociatedKeys.BmoViewPagerIndex) as? Int
         }
         set {
-            objc_setAssociatedObject(self, &AssociatedKeys.BMOviewPagerIndex, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &BmoViewPagerAssociatedKeys.BmoViewPagerIndex, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     weak fileprivate var bmo_viewpager_owner: UIViewController? {
         get {
-            return objc_getAssociatedObject(self, &AssociatedKeys.BMOviewPagerOwner) as? UIViewController
+            return objc_getAssociatedObject(self, &BmoViewPagerAssociatedKeys.BmoViewPagerOwner) as? UIViewController
         }
         set {
-            objc_setAssociatedObject(self, &AssociatedKeys.BMOviewPagerOwner, newValue, .OBJC_ASSOCIATION_ASSIGN)
+            objc_setAssociatedObject(self, &BmoViewPagerAssociatedKeys.BmoViewPagerOwner, newValue, .OBJC_ASSOCIATION_ASSIGN)
         }
     }
 

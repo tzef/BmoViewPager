@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol _StringType {
-    var stringValue: String { get }
+protocol BmoVPStringType {
+    var bmoVPStringValue: String { get }
 }
-extension String: _StringType {
-    var stringValue: String {
+extension String: BmoVPStringType {
+    var bmoVPStringValue: String {
         return String(self)
     }
 }
@@ -35,9 +35,9 @@ extension String: StringBmoVPCompatible {
     }
 }
 
-extension StringBmoVPProxy where Type: _StringType {
+extension StringBmoVPProxy where Type: BmoVPStringType {
     func size(attribute: [String : Any], size: CGSize) -> CGSize {
-        let attributedText = NSAttributedString(string: base.stringValue, attributes: attribute)
+        let attributedText = NSAttributedString(string: base.bmoVPStringValue, attributes: attribute)
         return attributedText.boundingRect(with: size, options: NSStringDrawingOptions.usesLineFragmentOrigin, context: nil).size
     }
 }

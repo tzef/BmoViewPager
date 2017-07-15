@@ -21,8 +21,8 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     weak var bmoDelegate: BmoPageItemListDelegate?
     weak var bmoDataSource: BmoViewPagerDataSource?
     weak var bmoViewPgaerNavigationBar: BmoViewPagerNavigationBar?
-    var bmoViewPagerCount = 0
     var focusCell, nextCell, previousCell: BmoPageItemCell?
+    var bmoViewPagerCount = 0
     
     // for calcualte string size
     var calculateSizeLabel = UILabel()
@@ -142,19 +142,32 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
             focusCell?.titleLabel.maskProgress = 1.0
             nextCell?.titleLabel.maskProgress = 0.0
         } else {
+            nextCell = collectionView.cellForItem(at: IndexPath(row: nextIndex, section: 0)) as? BmoPageItemCell
+            focusCell = collectionView.cellForItem(at: IndexPath(row: focusIndex, section: 0)) as? BmoPageItemCell
+            previousCell = collectionView.cellForItem(at: IndexPath(row: previousIndex, section: 0)) as? BmoPageItemCell
             if progress >= 1.0 || progress <= -1.0 {
                 progress = lastProgress
             }
             if progress > 0 {
                 if autoFocus {
                     var willSetOffSet = collectionOffSet + nextDistance * progress
-                    if willSetOffSet > collectionView.contentSize.width - collectionView.bounds.width {
-                        willSetOffSet = collectionView.contentSize.width - collectionView.bounds.width
+                    if navigationBar.orientation == .horizontal {
+                        if willSetOffSet > collectionView.contentSize.width - collectionView.bounds.width {
+                            willSetOffSet = collectionView.contentSize.width - collectionView.bounds.width
+                        }
+                    } else {
+                        if willSetOffSet > collectionView.contentSize.height - collectionView.bounds.height {
+                            willSetOffSet = collectionView.contentSize.height - collectionView.bounds.height
+                        }
                     }
                     if willSetOffSet < 0 {
                         willSetOffSet = 0
                     }
-                    collectionView.setContentOffset(CGPoint(x: willSetOffSet, y: collectionView.contentOffset.y), animated: false)
+                    if navigationBar.orientation == .horizontal {
+                        collectionView.setContentOffset(CGPoint(x: willSetOffSet, y: collectionView.contentOffset.y), animated: false)
+                    } else {
+                        collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: willSetOffSet), animated: false)
+                    }
                 }
                 previousCell?.titleLabel.maskProgress = 0.0
                 nextCell?.titleLabel.maskProgress = progress
@@ -162,21 +175,31 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
             } else if progress < 0 {
                 if autoFocus {
                     var willSetOffSet = collectionOffSet + previousDistance * progress
-                    if willSetOffSet > collectionView.contentSize.width - collectionView.bounds.width {
-                        willSetOffSet = collectionView.contentSize.width - collectionView.bounds.width
+                    if navigationBar.orientation == .horizontal {
+                        if willSetOffSet > collectionView.contentSize.width - collectionView.bounds.width {
+                            willSetOffSet = collectionView.contentSize.width - collectionView.bounds.width
+                        }
+                    } else {
+                        if willSetOffSet > collectionView.contentSize.height - collectionView.bounds.height {
+                            willSetOffSet = collectionView.contentSize.height - collectionView.bounds.height
+                        }
                     }
                     if willSetOffSet < 0 {
                         willSetOffSet = 0
                     }
-                    collectionView.setContentOffset(CGPoint(x: willSetOffSet, y: collectionView.contentOffset.y), animated: false)
+                    if navigationBar.orientation == .horizontal {
+                        collectionView.setContentOffset(CGPoint(x: willSetOffSet, y: collectionView.contentOffset.y), animated: false)
+                    } else {
+                        collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: willSetOffSet), animated: false)
+                    }
                 }
                 nextCell?.titleLabel.maskProgress = 0.0
-                focusCell?.titleLabel.maskProgress = 1 - abs(progress)
                 previousCell?.titleLabel.maskProgress = -1 * (1 - abs(progress))
+                focusCell?.titleLabel.maskProgress = 1 - abs(progress)
             } else {
                 nextCell?.titleLabel.maskProgress = 0.0
-                focusCell?.titleLabel.maskProgress = 1.0
                 previousCell?.titleLabel.maskProgress = 0.0
+                focusCell?.titleLabel.maskProgress = 1.0
             }
         }
         lastProgress = progress

@@ -25,10 +25,8 @@ class DemoViewController3: UIViewController {
         viewPager.orientation = .vertical
         viewPager.presentedPageIndex = 2
         viewPagerNavigationBar.viewPager = viewPager
-        viewPagerNavigationBar.orientation = .vertical
         viewPagerNavigationBar2.viewPager = viewPager
         viewPagerNavigationBar2.orientation = .vertical
-        
         
         targetHighlightedLine.segmentCount = 4
         targetHighlightedLine.lineColor = mainColor

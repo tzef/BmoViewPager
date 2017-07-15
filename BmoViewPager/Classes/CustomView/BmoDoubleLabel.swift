@@ -24,6 +24,7 @@ class BmoDoubleLabel: UILabel {
     var rearView = UIView()
     var foreView = UIView()
     
+    var orientation: UIPageViewControllerNavigationOrientation = .horizontal
     var maskProgress: CGFloat = 0.0 {
         didSet {
             self.setNeedsDisplay()
@@ -117,19 +118,37 @@ class BmoDoubleLabel: UILabel {
             foreMaskLayer.path = CGPath(rect: rect, transform: nil)
             rearMaskLayer.path = CGPath(rect: CGRect.zero, transform: nil)
         } else if maskProgress > 0 {
-            foreMaskLayer.path = CGPath(rect: .init(origin: .zero,
-                                                    size: .init(width: rect.width * maskProgress, height: rect.height)),
-                                        transform: nil)
-            rearMaskLayer.path = CGPath(rect: .init(origin: .init(x: rect.width * abs(maskProgress), y: 0),
-                                                    size: .init(width: rect.width * 1 - abs(maskProgress), height: rect.height)),
-                                        transform: nil)
+            if orientation == .horizontal {
+                foreMaskLayer.path = CGPath(rect: .init(origin: .zero,
+                                                        size: .init(width: rect.width * maskProgress, height: rect.height)),
+                                            transform: nil)
+                rearMaskLayer.path = CGPath(rect: .init(origin: .init(x: rect.width * abs(maskProgress), y: 0),
+                                                        size: .init(width: rect.width * 1 - abs(maskProgress), height: rect.height)),
+                                            transform: nil)
+            } else {
+                foreMaskLayer.path = CGPath(rect: .init(origin: .zero,
+                                                        size: .init(width: rect.width, height: rect.height * maskProgress)),
+                                            transform: nil)
+                rearMaskLayer.path = CGPath(rect: .init(origin: .init(x: 0, y: rect.height * abs(maskProgress)),
+                                                        size: .init(width: rect.width, height: rect.height * 1 - abs(maskProgress))),
+                                            transform: nil)
+            }
         } else if maskProgress < 0 {
-            foreMaskLayer.path = CGPath(rect: .init(origin: .init(x: rect.width * abs(maskProgress), y: 0),
-                                                    size: .init(width: rect.width * 1 - abs(maskProgress), height: rect.height)),
-                                        transform: nil)
-            rearMaskLayer.path = CGPath(rect: .init(origin: .zero,
-                                                    size: .init(width: rect.width * abs(maskProgress), height: rect.height)),
-                                        transform: nil)
+            if orientation == .horizontal {
+                foreMaskLayer.path = CGPath(rect: .init(origin: .init(x: rect.width * abs(maskProgress), y: 0),
+                                                        size: .init(width: rect.width * 1 - abs(maskProgress), height: rect.height)),
+                                            transform: nil)
+                rearMaskLayer.path = CGPath(rect: .init(origin: .zero,
+                                                        size: .init(width: rect.width * abs(maskProgress), height: rect.height)),
+                                            transform: nil)
+            } else {
+                foreMaskLayer.path = CGPath(rect: .init(origin: .init(x: 0, y: rect.height * abs(maskProgress)),
+                                                        size: .init(width: rect.width, height: rect.height * 1 - abs(maskProgress))),
+                                            transform: nil)
+                rearMaskLayer.path = CGPath(rect: .init(origin: .zero,
+                                                        size: .init(width: rect.width, height: rect.height * abs(maskProgress))),
+                                            transform: nil)
+            }
         } else {
             foreMaskLayer.path = CGPath(rect: CGRect.zero, transform: nil)
             rearMaskLayer.path = CGPath(rect: rect, transform: nil)

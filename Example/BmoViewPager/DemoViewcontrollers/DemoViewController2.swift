@@ -20,7 +20,7 @@ class DemoViewController2: UIViewController {
         viewPagerNavigationBar.viewPager = viewPager
         viewPagerNavigationBar.layer.masksToBounds = true
         viewPagerNavigationBar.layer.cornerRadius = viewPagerSegmentedView.layer.cornerRadius
-        viewPager.presentedPageIndex = 2
+        viewPager.presentedPageIndex = 1
         viewPager.infinitScroll = true
         viewPager.dataSource = self
     }
@@ -28,23 +28,23 @@ class DemoViewController2: UIViewController {
 
 extension DemoViewController2: BmoViewPagerDataSource {
     // Optional
-    func bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed(_ viewPager: BmoViewPager, forPageListAt page: Int) -> [String : Any]? {
+    func bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [String : Any]? {
         return [
             NSForegroundColorAttributeName : viewPagerSegmentedView.strokeColor
         ]
     }
-    func bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed(_ viewPager: BmoViewPager, forPageListAt page: Int) -> [String : Any]? {
+    func bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [String : Any]? {
         return [
             NSForegroundColorAttributeName : UIColor.white
         ]
     }
-    func bmoViewPagerDataSourceNaviagtionBarItemTitle(_ viewPager: BmoViewPager, forPageListAt page: Int) -> String? {
+    func bmoViewPagerDataSourceNaviagtionBarItemTitle(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> String? {
         return "Tab \(page)"
     }
-    func bmoViewPagerDataSourceNaviagtionBarItemSize(_ viewPager: BmoViewPager, forPageListAt page: Int) -> CGSize {
+    func bmoViewPagerDataSourceNaviagtionBarItemSize(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> CGSize {
         return CGSize(width: viewPagerNavigationBar.bounds.width / 4, height: viewPagerNavigationBar.bounds.height)
     }
-    func bmoViewPagerDataSourceNaviagtionBarItemHighlightedBackgroundView(_ viewPager: BmoViewPager, forPageListAt page: Int) -> UIView? {
+    func bmoViewPagerDataSourceNaviagtionBarItemHighlightedBackgroundView(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> UIView? {
         let view = UIView()
         view.backgroundColor = viewPagerSegmentedView.strokeColor
         return view

@@ -81,6 +81,7 @@ class BmoPageViewController: UIPageViewController, UIPageViewControllerDataSourc
         self.setPageViewController()
     }
     func setViewPagerPage(_ page: Int) {
+        if page >= pageCount { return }
         if let vc = bmoDataSource?.bmoViewPagerDataSource(bmoViewPager, viewControllerForPageAt: page) {
             self.setViewControllers([vc], direction: .forward, animated: false, completion: nil)
             bmoViewPager.delegate?.bmoViewPagerDelegate?(bmoViewPager, didAppear: vc, page: page)
@@ -89,6 +90,7 @@ class BmoPageViewController: UIPageViewController, UIPageViewControllerDataSourc
         }
     }
     func setViewPagerPage(withViewController vc: UIViewController, at page: Int) {
+        if page >= pageCount { return }
         self.setViewControllers([vc], direction: .forward, animated: false, completion: nil)
         bmoViewPager.delegate?.bmoViewPagerDelegate?(bmoViewPager, didAppear: vc, page: page)
         vc.view.bmoVP.setIndex(page)

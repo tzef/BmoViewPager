@@ -28,21 +28,21 @@ class DemoViewController1: UIViewController {
 
 extension DemoViewController1: BmoViewPagerDataSource {
     // Optional
-    func bmoViewPagerDataSourceNaviagtionBarItemTitle(_ viewPager: BmoViewPager, forPageListAt page: Int) -> String? {
+    func bmoViewPagerDataSourceNaviagtionBarItemTitle(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> String? {
         if viewPager == customViewPager {
             return ""
         } else {
             return "Default \(page)"
         }
     }
-    func bmoViewPagerDataSourceNaviagtionBarItemSize(_ viewPager: BmoViewPager, forPageListAt page: Int) -> CGSize {
+    func bmoViewPagerDataSourceNaviagtionBarItemSize(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> CGSize {
         if viewPager == customViewPager {
             return CGSize(width: viewPager.bounds.width / 3, height: 30.0)
         } else {
             return .zero
         }
     }
-    func bmoViewPagerDataSourceNaviagtionBarItemNormalBackgroundView(_ viewPager: BmoViewPager, forPageListAt page: Int) -> UIView? {
+    func bmoViewPagerDataSourceNaviagtionBarItemNormalBackgroundView(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> UIView? {
         if viewPager == customViewPager {
             if let image = UIImage(named: "item\(page)_1.jpg") {
                 let imageView = UIImageView(image: image)
@@ -51,7 +51,7 @@ extension DemoViewController1: BmoViewPagerDataSource {
         }
         return nil
     }
-    func bmoViewPagerDataSourceNaviagtionBarItemHighlightedBackgroundView(_ viewPager: BmoViewPager, forPageListAt page: Int) -> UIView? {
+    func bmoViewPagerDataSourceNaviagtionBarItemHighlightedBackgroundView(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> UIView? {
         if viewPager == customViewPager {
             if let image = UIImage(named: "item\(page)_2.jpg") {
                 let imageView = UIImageView(image: image)

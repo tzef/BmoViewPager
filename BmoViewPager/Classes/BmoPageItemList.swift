@@ -14,11 +14,13 @@ protocol BmoPageItemListDelegate: class {
 }
 class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSource, BmoPageItemListLayoutDelegate {
     var collectionView: UICollectionView? = nil
-    let horizontalLayout = BmoPageItemListLayout.init(orientation: .horizontal)
+    let horizontalLayout = BmoPageItemListLayout(orientation: .horizontal)
+    let verticalLayout = BmoPageItemListLayout(orientation: .vertical)
     
-    weak var bmoDelegate: BmoPageItemListDelegate!
+    weak var bmoViewPager: BmoViewPager?
+    weak var bmoDelegate: BmoPageItemListDelegate?
     weak var bmoDataSource: BmoViewPagerDataSource?
-    weak var bmoViewPager: BmoViewPager!
+    weak var bmoViewPgaerNavigationBar: BmoViewPagerNavigationBar?
     var bmoViewPagerCount = 0
     var focusCell, nextCell, previousCell: BmoPageItemCell?
     
@@ -41,33 +43,41 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    convenience init(viewPager: BmoViewPager, delegate: BmoPageItemListDelegate) {
+    convenience init(viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, delegate: BmoPageItemListDelegate) {
         self.init()
         self.bmoDelegate = delegate
         self.bmoViewPager = viewPager
+        self.bmoViewPgaerNavigationBar = navigationBar
         self.backgroundColor = .white
     }
     func setCollectionView() {
-        bmoViewPagerCount = bmoDataSource?.bmoViewPagerDataSourceNumberOfPage(in: bmoViewPager) ?? 0
+        guard let bmoViewPager = bmoViewPager else {
+            return
+        }
+        verticalLayout.delegate = self
         horizontalLayout.delegate = self
-        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: horizontalLayout)
+        bmoViewPagerCount = bmoDataSource?.bmoViewPagerDataSourceNumberOfPage(in: bmoViewPager) ?? 0
+        if bmoViewPgaerNavigationBar?.orientation == .vertical {
+            collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: verticalLayout)
+        } else {
+            collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: horizontalLayout)
+        }
         collectionView!.register(BmoPageItemCell.classForCoder(), forCellWithReuseIdentifier: reuseIdentifier)
         collectionView!.showsHorizontalScrollIndicator = false
+        collectionView!.showsVerticalScrollIndicator = false
         collectionView!.backgroundColor = .clear
         collectionView!.dataSource = self
         collectionView!.delegate = self
         
         self.addSubview(collectionView!)
         collectionView!.bmoVP.autoFit(self)
-        
-//        let index = bmoViewPager.presentedPageIndex
-//        if let attribute = horizontalLayout.attributesList[safe: index] {
-//            collectionView!.setContentOffset(CGPoint(x: attribute.center.x, y: collectionView!.contentOffset.y), animated: false)
-//        }
     }
     
     // MARK: - Public
     func reloadData() {
+        guard let bmoViewPager = bmoViewPager else {
+            return
+        }
         if collectionView == nil {
             self.setCollectionView()
         }
@@ -75,22 +85,27 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         collectionView?.reloadData()
     }
     func updateFocusProgress(_ progress: inout CGFloat) {
-        guard let collectionView = collectionView else {
+        guard let collectionView = collectionView, let viewPager = bmoViewPager, let navigationBar = bmoViewPgaerNavigationBar else {
             return
         }
-        if horizontalLayout.attributesList.count == 0 {
+        let layout = (navigationBar.orientation == .horizontal ? horizontalLayout : verticalLayout)
+        if layout.attributesList.count == 0 {
             return
         }
-        let index = bmoViewPager.presentedPageIndex
+        let index = viewPager.presentedPageIndex
         if focusIndex != index {
             focusIndex = index
-            collectionOffSet = collectionView.contentOffset.x
+            if navigationBar.orientation == .horizontal {
+                collectionOffSet = collectionView.contentOffset.x
+            } else {
+                collectionOffSet = collectionView.contentOffset.y
+            }
             focusCell = collectionView.cellForItem(at: IndexPath(row: index, section: 0)) as? BmoPageItemCell
             if index < bmoViewPagerCount - 1 {
                 nextIndex = index + 1
                 nextCell = collectionView.cellForItem(at: IndexPath(row: nextIndex, section: 0)) as? BmoPageItemCell
             } else {
-                if bmoViewPager.infinitScroll {
+                if viewPager.infinitScroll {
                     nextIndex = 0
                     nextCell = collectionView.cellForItem(at: IndexPath(row: nextIndex, section: 0)) as? BmoPageItemCell
                 } else {
@@ -101,7 +116,7 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
                 previousIndex = index - 1
                 previousCell = collectionView.cellForItem(at: IndexPath(row: previousIndex, section: 0)) as? BmoPageItemCell
             } else {
-                if bmoViewPager.infinitScroll {
+                if viewPager.infinitScroll {
                     previousIndex = bmoViewPagerCount - 1
                     previousCell = collectionView.cellForItem(at: IndexPath(row: previousIndex, section: 0)) as? BmoPageItemCell
                 } else {
@@ -109,11 +124,19 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
                 }
             }
             
-            if let nextAttribute = horizontalLayout.attributesList[safe: nextIndex] {
-                nextDistance = nextAttribute.center.x - collectionView.center.x - collectionOffSet
+            if let nextAttribute = layout.attributesList[safe: nextIndex] {
+                if navigationBar.orientation == .horizontal {
+                    nextDistance = nextAttribute.center.x - collectionView.center.x - collectionOffSet
+                } else {
+                    nextDistance = nextAttribute.center.y - collectionView.center.y - collectionOffSet
+                }
             }
-            if let previousAttribute = horizontalLayout.attributesList[safe: previousIndex] {
-                previousDistance = collectionView.center.x + collectionOffSet - previousAttribute.center.x
+            if let previousAttribute = layout.attributesList[safe: previousIndex] {
+                if navigationBar.orientation == .horizontal {
+                    previousDistance = collectionView.center.x + collectionOffSet - previousAttribute.center.x
+                } else {
+                    previousDistance = collectionView.center.y + collectionOffSet - previousAttribute.center.y
+                }
             }
             previousCell?.titleLabel.maskProgress = 0.0
             focusCell?.titleLabel.maskProgress = 1.0
@@ -169,38 +192,71 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         return bmoViewPagerCount
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? BmoPageItemCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? BmoPageItemCell, let viewPager = bmoViewPager, let navigationBar = bmoViewPgaerNavigationBar else {
             return UICollectionViewCell()
         }
-        guard let title = bmoDataSource?.bmoViewPagerDataSourceNaviagtionBarItemTitle?(bmoViewPager, forPageListAt: indexPath.row) else {
-            return cell
-        }
+        let title = bmoDataSource?.bmoViewPagerDataSourceNaviagtionBarItemTitle?(viewPager, navigationBar: navigationBar, forPageListAt: indexPath.row) ?? ""
         var fraction: CGFloat = 0.0
-        if indexPath.row == bmoViewPager.presentedPageIndex {
+        
+        if indexPath.row == viewPager.presentedPageIndex - 1 {
+            if previousCell == nil {
+                previousCell = cell
+            }
+        }
+        if indexPath.row == viewPager.presentedPageIndex {
             fraction = 1.0
         }
-        let rearAttributed = bmoDataSource?.bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed?(bmoViewPager, forPageListAt: indexPath.row)
-        let backgroundView = bmoDataSource?.bmoViewPagerDataSourceNaviagtionBarItemNormalBackgroundView?(bmoViewPager, forPageListAt: indexPath.row)
-        let foreAttributed = bmoDataSource?.bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed?(bmoViewPager, forPageListAt: indexPath.row)
-        let foreBackgroundView = bmoDataSource?.bmoViewPagerDataSourceNaviagtionBarItemHighlightedBackgroundView?(bmoViewPager, forPageListAt: indexPath.row)
+        if indexPath.row == viewPager.presentedPageIndex + 1 {
+            if nextCell == nil {
+                nextCell = cell
+            }
+        }
+        let rearAttributed = bmoDataSource?.bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed?(viewPager, navigationBar: navigationBar, forPageListAt: indexPath.row)
+        let backgroundView = bmoDataSource?.bmoViewPagerDataSourceNaviagtionBarItemNormalBackgroundView?(viewPager, navigationBar: navigationBar, forPageListAt: indexPath.row)
+        let foreAttributed = bmoDataSource?.bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed?(viewPager, navigationBar: navigationBar, forPageListAt: indexPath.row)
+        let foreBackgroundView = bmoDataSource?.bmoViewPagerDataSourceNaviagtionBarItemHighlightedBackgroundView?(viewPager, navigationBar: navigationBar, forPageListAt: indexPath.row)
         cell.configureCell(title: title, focusProgress: fraction,
+                           orientation: navigationBar.orientation,
                            rearAttributed: rearAttributed, foreAttributed: foreAttributed,
                            backgroundView: backgroundView, foreBackgroundView: foreBackgroundView)
         return cell
     }
     
     // MARK: - BmoPageItemListLayoutDelegate
+    func bmoPageItemListLayoutAttributesChanged(_ attributes: [UICollectionViewLayoutAttributes]) {
+        guard let collectionView = collectionView, let viewPager = bmoViewPager, let navigationBar = bmoViewPgaerNavigationBar else {
+            return
+        }
+        let index = viewPager.presentedPageIndex
+        let layout = (navigationBar.orientation == .horizontal ? horizontalLayout : verticalLayout)
+        if let attribute = layout.attributesList[safe: index] {
+            if navigationBar.orientation == .horizontal {
+                let distance = attribute.center.x - collectionView.center.x - collectionView.contentOffset.x
+                collectionView.setContentOffset(CGPoint(x: distance, y: collectionView.contentOffset.y), animated: false)
+            } else {
+                let distance = attribute.center.y - collectionView.center.y - collectionView.contentOffset.y
+                collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: distance), animated: false)
+            }
+        }
+    }
     func bmoPageItemListLayout(sizeForItemAt index: Int) -> CGSize {
-        if let size = bmoDataSource?.bmoViewPagerDataSourceNaviagtionBarItemSize?(bmoViewPager, forPageListAt: index), size != .zero {
+        guard let collectionView = collectionView, let bmoViewPager = bmoViewPager, let navigationBar = bmoViewPgaerNavigationBar else {
+            return CGSize.zero
+        }
+        if let size = bmoDataSource?.bmoViewPagerDataSourceNaviagtionBarItemSize?(bmoViewPager, navigationBar: navigationBar, forPageListAt: index), size != .zero {
             return size
         }
-        guard let title = bmoDataSource?.bmoViewPagerDataSourceNaviagtionBarItemTitle?(bmoViewPager, forPageListAt: index) else {
+        guard let title = bmoDataSource?.bmoViewPagerDataSourceNaviagtionBarItemTitle?(bmoViewPager, navigationBar: navigationBar, forPageListAt: index) else {
             return CGSize.zero
         }
         calculateSizeLabel.text = title
         calculateSizeLabel.sizeToFit()
         let size = calculateSizeLabel.bounds.size
-        return CGSize(width: size.width + 32, height: size.height)
+        if navigationBar.orientation == .horizontal {
+            return CGSize(width: size.width + 32, height: collectionView.bounds.size.height)
+        } else {
+            return CGSize(width: collectionView.bounds.size.width, height: size.height + 32)
+        }
     }
 }
 
@@ -219,10 +275,11 @@ class BmoPageItemCell: UICollectionViewCell {
         self.contentView.addSubview(titleLabel)
         titleLabel.bmoVP.autoFit(self.contentView)
     }
-    func configureCell(title: String, focusProgress: CGFloat,
+    func configureCell(title: String, focusProgress: CGFloat, orientation: UIPageViewControllerNavigationOrientation,
                        rearAttributed: [String : Any]?, foreAttributed: [String : Any]?,
                        backgroundView: UIView?, foreBackgroundView: UIView?) {
         titleLabel.text = title
+        titleLabel.orientation = orientation
         if let view = backgroundView {
             titleLabel.setRearBackgroundView(view)
         }

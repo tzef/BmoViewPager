@@ -14,7 +14,7 @@ class ViewControllerPage2: UIViewController {
     @IBOutlet weak var viewPagerNavigationBar: BmoViewPagerNavigationBar!
     @IBOutlet weak var viewPager: BmoViewPager!
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
         viewPager.dataSource = self
         viewPagerNavigationBar.autoFocus = false
         viewPagerNavigationBar.viewPager = viewPager
@@ -28,26 +28,26 @@ class ViewControllerPage2: UIViewController {
 
 extension ViewControllerPage2: BmoViewPagerDataSource {
     // Optional
-    func bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed(_ viewPager: BmoViewPager, forPageListAt page: Int) -> [String : Any]? {
+    func bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [String : Any]? {
         return [
             NSFontAttributeName : UIFont.boldSystemFont(ofSize: 17.0),
             NSForegroundColorAttributeName : UIColor.groupTableViewBackground
         ]
     }
-    func bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed(_ viewPager: BmoViewPager, forPageListAt page: Int) -> [String : Any]? {
+    func bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [String : Any]? {
         return [
             NSFontAttributeName : UIFont.boldSystemFont(ofSize: 17.0),
             NSForegroundColorAttributeName : mainColor
         ]
     }
-    func bmoViewPagerDataSourceNaviagtionBarItemHighlightedBackgroundView(_ viewPager: BmoViewPager, forPageListAt page: Int) -> UIView? {
+    func bmoViewPagerDataSourceNaviagtionBarItemHighlightedBackgroundView(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> UIView? {
         let view = UnderLineView()
         view.marginX = 8.0
         view.lineWidth = 5.0
         view.strokeColor = mainColor
         return view
     }
-    func bmoViewPagerDataSourceNaviagtionBarItemTitle(_ viewPager: BmoViewPager, forPageListAt page: Int) -> String? {
+    func bmoViewPagerDataSourceNaviagtionBarItemTitle(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> String? {
         return "Demo \(page)"
     }
     

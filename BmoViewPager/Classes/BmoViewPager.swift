@@ -12,12 +12,12 @@ import UIKit
     func bmoViewPagerDataSourceNumberOfPage(in viewPager: BmoViewPager) -> Int
     func bmoViewPagerDataSource(_ viewPager: BmoViewPager, viewControllerForPageAt page: Int) -> UIViewController
     
-    @objc optional func bmoViewPagerDataSourceNaviagtionBarItemTitle(_ viewPager: BmoViewPager, forPageListAt page: Int) -> String?
-    @objc optional func bmoViewPagerDataSourceNaviagtionBarItemSize(_ viewPager: BmoViewPager, forPageListAt page: Int) -> CGSize
-    @objc optional func bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed(_ viewPager: BmoViewPager, forPageListAt page: Int) -> [String : Any]?
-    @objc optional func bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed(_ viewPager: BmoViewPager, forPageListAt page: Int) -> [String : Any]?
-    @objc optional func bmoViewPagerDataSourceNaviagtionBarItemNormalBackgroundView(_ viewPager: BmoViewPager, forPageListAt page: Int) -> UIView?
-    @objc optional func bmoViewPagerDataSourceNaviagtionBarItemHighlightedBackgroundView(_ viewPager: BmoViewPager, forPageListAt page: Int) -> UIView?
+    @objc optional func bmoViewPagerDataSourceNaviagtionBarItemTitle(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> String?
+    @objc optional func bmoViewPagerDataSourceNaviagtionBarItemSize(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> CGSize
+    @objc optional func bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [String : Any]?
+    @objc optional func bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [String : Any]?
+    @objc optional func bmoViewPagerDataSourceNaviagtionBarItemNormalBackgroundView(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> UIView?
+    @objc optional func bmoViewPagerDataSourceNaviagtionBarItemHighlightedBackgroundView(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> UIView?
 }
 @objc public protocol BmoViewPagerDelegate {
     @objc optional func bmoViewPagerDelegate(_ viewPager: BmoViewPager, pageChanged page: Int)
@@ -50,6 +50,7 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
             if !inited { return }
             if let vc = parentViewController {
                 vc.addChildViewController(pageViewController)
+                vc.automaticallyAdjustsScrollViewInsets = false
                 pageViewController.didMove(toParentViewController: vc)
             }
         }
@@ -94,16 +95,16 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
             }
         }
     }
-    var navigationBars = [WeakBmoVPbar]() {
+    
+    public var pageControlIndex: Int = 0 {
         didSet {
             if !inited { return }
-            navigationBars.forEach { (weakBar: WeakBmoVPbar<BmoViewPagerNavigationBar>) in
-                if let bar = weakBar.bar {
-                    bar.pageViewController = pageViewController
-                }
+            if oldValue != pageControlIndex {
+                self.delegate?.bmoViewPagerDelegate?(self, pageChanged: pageControlIndex)
             }
         }
     }
+    
     public weak var dataSource: BmoViewPagerDataSource? {
         didSet {
             if !inited { return }
@@ -118,10 +119,13 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
     }
     public weak var delegate: BmoViewPagerDelegate?
     
-    var pageControlIndex: Int = 0 {
+    var navigationBars = [WeakBmoVPbar]() {
         didSet {
-            if oldValue != pageControlIndex {
-                self.delegate?.bmoViewPagerDelegate?(self, pageChanged: pageControlIndex)
+            if !inited { return }
+            navigationBars.forEach { (weakBar: WeakBmoVPbar<BmoViewPagerNavigationBar>) in
+                if let bar = weakBar.bar {
+                    bar.pageViewController = pageViewController
+                }
             }
         }
     }
@@ -132,9 +136,19 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
         pageVC.view.bmoVP.autoFit(self)
         return pageVC
     }()
+    
     fileprivate var lastContentOffSet: CGPoint? = nil
+    fileprivate var boundChanged: Bool = false
     fileprivate var inited = false
     
+    public override var bounds: CGRect {
+        didSet {
+            boundChanged = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.boundChanged = false
+            }
+        }
+    }
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -149,6 +163,8 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
     public override func didMoveToWindow() {
         super.didMoveToWindow()
         if inited == false {
+            pageControlIndex = presentedPageIndex
+            
             inited = true
             if let vc = self.parentViewController {
                 vc.addChildViewController(pageViewController)
@@ -186,26 +202,27 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
     
     // MARK: - UIScrollViewDelegate
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if boundChanged { return }
         let offSet = lastContentOffSet ?? scrollView.contentOffset
         if self.orientation == .horizontal {
+            if abs(offSet.x - scrollView.contentOffset.x) > scrollView.bounds.width * 0.7 {
+                self.presentedPageIndex = self.pageControlIndex
+            }
             if scrollView.contentOffset.x == scrollView.bounds.width {
                 if let index = scrollView.subviews[safe: 1]?.subviews.first?.bmoVP.index() {
                     pageControlIndex = index
                 }
                 return
             }
-            if abs(offSet.x - scrollView.contentOffset.x) > scrollView.bounds.width * 0.7 {
+        } else {
+            if abs(offSet.y - scrollView.contentOffset.y) > scrollView.bounds.height * 0.7 {
                 self.presentedPageIndex = self.pageControlIndex
             }
-        } else {
             if scrollView.contentOffset.y == scrollView.bounds.height {
                 if let index = scrollView.subviews[safe: 1]?.subviews.first?.bmoVP.index() {
                     pageControlIndex = index
                 }
                 return
-            }
-            if abs(offSet.y - scrollView.contentOffset.y) > scrollView.bounds.height * 0.7 {
-                self.presentedPageIndex = self.pageControlIndex
             }
         }
         lastContentOffSet = scrollView.contentOffset
@@ -233,6 +250,11 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
                 bar.updateFocusProgress(&progressFraction)
             }
         }
+    }
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        self.pageViewController.view.setNeedsLayout()
     }
     
     public override func draw(_ rect: CGRect) {

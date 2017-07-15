@@ -32,6 +32,9 @@ public class BmoViewPagerNavigationBar: UIView {
         }
     }
     
+    /// vierPager's navigation bar scroll orientataion
+    public var orientation: UIPageViewControllerNavigationOrientation = .horizontal
+    
     weak var pageViewController: BmoPageViewController?
     fileprivate weak var pageListView: BmoPageItemList?
     fileprivate var inited = false
@@ -94,7 +97,7 @@ public class BmoViewPagerNavigationBar: UIView {
         }
         viewPager.navigationBars.append(WeakBmoVPbar(self))
         
-        let itemList = BmoPageItemList(viewPager: viewPager, delegate: self)
+        let itemList = BmoPageItemList(viewPager: viewPager, navigationBar: self, delegate: self)
         itemList.bmoDataSource = viewPager.dataSource
         itemList.backgroundColor = UIColor.clear
         itemList.autoFocus = autoFocus

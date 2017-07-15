@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -530,6 +531,10 @@
                                         <rect key="frame" x="8" y="66" width="44" height="557"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DIb-Su-EsQ" customClass="TargetLineHightlighedView" customModule="BmoViewPager_Example" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="135.5" width="44" height="418"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8WJ-Cu-U2a" customClass="BmoViewPager" customModule="BmoViewPager">
                                         <rect key="frame" x="60" y="8" width="291" height="615"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -538,12 +543,16 @@
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="8WJ-Cu-U2a" firstAttribute="leading" secondItem="k42-E8-ZnC" secondAttribute="trailing" constant="8" id="2C2-Ix-ZHS"/>
+                                    <constraint firstItem="DIb-Su-EsQ" firstAttribute="leading" secondItem="loE-X0-VtJ" secondAttribute="leading" id="4fm-W1-du6"/>
                                     <constraint firstItem="loE-X0-VtJ" firstAttribute="leading" secondItem="aUw-N6-3gP" secondAttribute="leading" constant="8" id="85l-P1-q7v"/>
                                     <constraint firstItem="8WJ-Cu-U2a" firstAttribute="leading" secondItem="aUw-N6-3gP" secondAttribute="leading" constant="60" id="Am4-PI-WRc"/>
                                     <constraint firstAttribute="bottom" secondItem="loE-X0-VtJ" secondAttribute="bottom" constant="8" id="EzY-u8-vZw"/>
                                     <constraint firstAttribute="bottom" secondItem="8WJ-Cu-U2a" secondAttribute="bottom" constant="8" id="Gdu-uh-39h"/>
+                                    <constraint firstItem="DIb-Su-EsQ" firstAttribute="height" secondItem="loE-X0-VtJ" secondAttribute="height" multiplier="0.75" id="IDz-di-U0Y"/>
                                     <constraint firstItem="k42-E8-ZnC" firstAttribute="top" secondItem="aUw-N6-3gP" secondAttribute="top" constant="8" id="J5g-6Q-L83"/>
                                     <constraint firstItem="loE-X0-VtJ" firstAttribute="top" secondItem="k42-E8-ZnC" secondAttribute="bottom" constant="8" id="Vnj-D4-El4"/>
+                                    <constraint firstItem="DIb-Su-EsQ" firstAttribute="centerY" secondItem="loE-X0-VtJ" secondAttribute="centerY" id="bCr-8U-pnh"/>
+                                    <constraint firstItem="DIb-Su-EsQ" firstAttribute="trailing" secondItem="loE-X0-VtJ" secondAttribute="trailing" id="faL-cL-RUU"/>
                                     <constraint firstItem="8WJ-Cu-U2a" firstAttribute="top" secondItem="aUw-N6-3gP" secondAttribute="top" constant="8" id="fno-g5-a0a"/>
                                     <constraint firstItem="8WJ-Cu-U2a" firstAttribute="leading" secondItem="loE-X0-VtJ" secondAttribute="trailing" constant="8" id="kJr-eB-VHo"/>
                                     <constraint firstItem="k42-E8-ZnC" firstAttribute="leading" secondItem="aUw-N6-3gP" secondAttribute="leading" constant="8" id="ndf-NF-WsE"/>
@@ -560,6 +569,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="targetHighlightedLine" destination="DIb-Su-EsQ" id="q6j-GO-9A4"/>
                         <outlet property="viewPager" destination="8WJ-Cu-U2a" id="fWP-br-TXs"/>
                         <outlet property="viewPagerNavigationBar" destination="k42-E8-ZnC" id="n2Y-3i-rav"/>
                         <outlet property="viewPagerNavigationBar2" destination="loE-X0-VtJ" id="57l-Ar-YfI"/>

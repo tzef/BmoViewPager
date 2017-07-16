@@ -56,13 +56,20 @@ if you don't want use default style, you can custom your own background view and
 #### BmoViewPager presentedPageIndex can programmatically assign the present page
 #### Custom NavigationBar animation, you can get scroll progress from BmoViewPagerDelegate
 
-InfiniteScroll
-
+<table>
+  <tr>
+    <th>InfiniteScroll</th>
+    <th>Custom NavigationBar animation</th>
+  </tr>
+  <tr>
+    <td>
 <img src="https://user-images.githubusercontent.com/3096210/28248792-0c8caf64-6a7d-11e7-9e99-9558967efe4b.gif" width="300">
-
-Custom NavigationBar animation
-
+    </td>
+    <td>
 <img src="https://user-images.githubusercontent.com/3096210/28248795-12809df4-6a7d-11e7-98f9-4c7d9f397ef1.gif" width="300">
+    </td>
+  </tr>
+</table>
 
 ## PageControl Optimized
 native pageController have a default pageControl if you implement the 
@@ -70,11 +77,20 @@ native pageController have a default pageControl if you implement the
 `func presentationIndex(for pageViewController: UIPageViewController) -> Int`
 but sometimes the index have a little bug, if you feel the way too, hope it help you
 
-Native PageController continuously scroll
+<table>
+  <tr>
+    <th>Native PageController continuously scroll</th>
+    <th>continuously scroll using bmoViewPager</th>
+  </tr>
+  <tr>
+    <td>
 <img src="https://user-images.githubusercontent.com/3096210/28248798-16b09960-6a7d-11e7-971c-e2dc8f670735.gif" width="300">
-
-continuously scroll using bmoViewPager
+    </td>
+    <td>
 <img src="https://user-images.githubusercontent.com/3096210/28248799-1b0b9050-6a7d-11e7-9dfd-160c09477c82.gif" width="300">
+    </td>
+  </tr>
+</table>
 
 ## Example
 

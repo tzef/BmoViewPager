@@ -2,7 +2,7 @@
 
 A ViewPager with NavigationBar component based on UIPageViewController and UICollectionView
 
-[![CI Status](http://img.shields.io/travis/LEE ZHE YU/BmoViewPager.svg?style=flat)](https://travis-ci.org/LEE ZHE YU/BmoViewPager)
+[![CI Status](http://img.shields.io/travis/LEE%20ZHE%20YU/BmoViewPager.svg?style=flat)](https://travis-ci.org/LEE ZHE YU/BmoViewPager)
 [![Version](https://img.shields.io/cocoapods/v/BmoViewPager.svg?style=flat)](http://cocoapods.org/pods/BmoViewPager)
 [![License](https://img.shields.io/cocoapods/l/BmoViewPager.svg?style=flat)](http://cocoapods.org/pods/BmoViewPager)
 [![Platform](https://img.shields.io/cocoapods/p/BmoViewPager.svg?style=flat)](http://cocoapods.org/pods/BmoViewPager)

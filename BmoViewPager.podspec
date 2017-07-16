@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
                        DESC
 
   s.homepage         = 'https://github.com/tzef/BmoViewPager'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  # s.screenshots     = 'https://user-images.githubusercontent.com/3096210/28247883-87625632-6a6c-11e7-8179-5c5ae6769a8a.PNG', 'https://user-images.githubusercontent.com/3096210/28247886-8e348296-6a6c-11e7-8b45-037a5fa4a4df.PNG', 'https://user-images.githubusercontent.com/3096210/28247887-90d1edea-6a6c-11e7-8fb8-0e2b549cbb01.PNG', 'https://user-images.githubusercontent.com/3096210/28247888-924777a8-6a6c-11e7-93ae-4d2b0039b111.PNG'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'LEE ZHE YU' => 'tzef8220@gmail.com' }
   s.source           = { :git => 'https://github.com/tzef/BmoViewPager.git', :tag => s.version.to_s }

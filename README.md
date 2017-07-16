@@ -1,5 +1,10 @@
 # BmoViewPager
 
+[![CI Status](http://img.shields.io/travis/LEE%20ZHE%20YU/BmoViewPager.svg?style=flat)](https://travis-ci.org/LEE%20ZHE%20YU/BmoViewPager)
+[![Version](https://img.shields.io/cocoapods/v/BmoViewPager.svg?style=flat)](http://cocoapods.org/pods/BmoViewPager)
+[![License](https://img.shields.io/cocoapods/l/BmoViewPager.svg?style=flat)](http://cocoapods.org/pods/BmoViewPager)
+[![Platform](https://img.shields.io/cocoapods/p/BmoViewPager.svg?style=flat)](http://cocoapods.org/pods/BmoViewPager)
+
 A ViewPager with NavigationBar component based on UIPageViewController and UICollectionView, which is a convenience way to supply and manager each viewController.
 
 I want to make UIPageViewController more intuitive for using it, like UITableView, and supply a navigationBar quickly and simply.
@@ -14,11 +19,6 @@ There are some standard dataSource and delegate implemented for generating each 
     <td><img src="https://user-images.githubusercontent.com/3096210/28247886-8e348296-6a6c-11e7-8b45-037a5fa4a4df.PNG"></td> 
   </tr>
 </table>
-
-[![CI Status](http://img.shields.io/travis/LEE%20ZHE%20YU/BmoViewPager.svg?style=flat)](https://travis-ci.org/LEE%20ZHE%20YU/BmoViewPager)
-[![Version](https://img.shields.io/cocoapods/v/BmoViewPager.svg?style=flat)](http://cocoapods.org/pods/BmoViewPager)
-[![License](https://img.shields.io/cocoapods/l/BmoViewPager.svg?style=flat)](http://cocoapods.org/pods/BmoViewPager)
-[![Platform](https://img.shields.io/cocoapods/p/BmoViewPager.svg?style=flat)](http://cocoapods.org/pods/BmoViewPager)
 
 ## Simple Usage
 #### Create a UIView extend BmoViewPager
@@ -42,11 +42,18 @@ func bmoViewPagerDataSourceNaviagtionBarItemTitle(_ viewPager: BmoViewPager, nav
     return YourPageTitleString
 }
 ```
-<img src="https://user-images.githubusercontent.com/3096210/28248786-fe5020a2-6a7c-11e7-9688-d43a6a0a77f2.gif" width="300">
-
 if you don't want use default style, you can custom your own background view and highlighted background view
 
+<table>
+  <tr>
+    <td>
+<img src="https://user-images.githubusercontent.com/3096210/28248786-fe5020a2-6a7c-11e7-9688-d43a6a0a77f2.gif" width="300">
+    </td>
+    <td>
 <img src="https://user-images.githubusercontent.com/3096210/28248788-06deb0c6-6a7d-11e7-8d7f-27840040aaf3.gif" width="300">
+    </td> 
+  </tr>
+</table>
 
 ## Advanced Usage
 #### Support Vertical and Horizontal direction scroll

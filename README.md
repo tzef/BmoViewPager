@@ -1,17 +1,90 @@
 # BmoViewPager
 
-A ViewPager with NavigationBar component based on UIPageViewController and UICollectionView
+A ViewPager with NavigationBar component based on UIPageViewController and UICollectionView, which is a convenience way to supply and manager each viewController.
 
-[![CI Status](http://img.shields.io/travis/LEE%20ZHE%20YU/BmoViewPager.svg?style=flat)](https://travis-ci.org/LEE ZHE YU/BmoViewPager)
+I want to make UIPageViewController more intuitive for using it, like UITableView, and supply a navigationBar quickly and simply.
+
+More importantly, when UIPageViewController scroll continuously, pageControl sometimes will get wrong index, this viewPager can help you solve it.
+
+There are some standard dataSource and delegate implemented for generating each page and navigationBar, each of these classes  have simple sample code showing in the Pod Example for BmoViewPager.
+
+<table>
+  <tr>
+    <td><img src="https://user-images.githubusercontent.com/3096210/28247883-87625632-6a6c-11e7-8179-5c5ae6769a8a.PNG"></td>
+    <td><img src="https://user-images.githubusercontent.com/3096210/28247886-8e348296-6a6c-11e7-8b45-037a5fa4a4df.PNG"></td> 
+  </tr>
+</table>
+
+[![CI Status](http://img.shields.io/travis/LEE%20ZHE%20YU/BmoViewPager.svg?style=flat)](https://travis-ci.org/LEE%20ZHE%20YU/BmoViewPager)
 [![Version](https://img.shields.io/cocoapods/v/BmoViewPager.svg?style=flat)](http://cocoapods.org/pods/BmoViewPager)
 [![License](https://img.shields.io/cocoapods/l/BmoViewPager.svg?style=flat)](http://cocoapods.org/pods/BmoViewPager)
 [![Platform](https://img.shields.io/cocoapods/p/BmoViewPager.svg?style=flat)](http://cocoapods.org/pods/BmoViewPager)
+
+## Simple Usage
+#### Create a UIView extend BmoViewPager
+#### Implement BmoViewPagerDataSource
+give page count and each page controller, just like using tableView
+```swift
+func bmoViewPagerDataSourceNumberOfPage(in viewPager: BmoViewPager) -> Int {
+    return YourPageCount
+}
+func bmoViewPagerDataSource(_ viewPager: BmoViewPager, viewControllerForPageAt page: Int) -> UIViewController {
+    return YourPageViewController
+}
+```
+
+## With a NavigationBar
+#### Create a UIView extend BmoViewPagerNavigationBar
+#### Assign a BmoViewPager to the BmoViewPagerNavigationBar
+using default styla, only need to give the each page title
+```swift
+func bmoViewPagerDataSourceNaviagtionBarItemTitle(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> String? {
+    return YourPageTitleString
+}
+```
+<img src="https://user-images.githubusercontent.com/3096210/28248786-fe5020a2-6a7c-11e7-9688-d43a6a0a77f2.gif" width="300">
+
+if you don't want use default style, you can custom your own background view and highlighted background view
+
+<img src="https://user-images.githubusercontent.com/3096210/28248788-06deb0c6-6a7d-11e7-8d7f-27840040aaf3.gif" width="300">
+
+## Advanced Usage
+#### Support Vertical and Horizontal direction scroll
+#### BmoNavigationBar Auto Focus (Default is true)
+#### BmoNavigationBar Title can set normal and highlighted attributed style
+#### BmoViewPager infinitScroll (Default is false)
+#### BmoViewPager presentedPageIndex can programmatically assign the present page
+#### Custom NavigationBar animation, you can get scroll progress from BmoViewPagerDelegate
+
+InfiniteScroll
+
+<img src="https://user-images.githubusercontent.com/3096210/28248792-0c8caf64-6a7d-11e7-9e99-9558967efe4b.gif" width="300">
+
+Custom NavigationBar animation
+
+<img src="https://user-images.githubusercontent.com/3096210/28248795-12809df4-6a7d-11e7-98f9-4c7d9f397ef1.gif" width="300">
+
+## PageControl Optimized
+native pageController have a default pageControl if you implement the 
+`func presentationCount(for pageViewController: UIPageViewController) -> Int` and 
+`func presentationIndex(for pageViewController: UIPageViewController) -> Int`
+but sometimes the index have a little bug, if you feel the way too, hope it help you
+
+Native PageController continuously scroll
+<img src="https://user-images.githubusercontent.com/3096210/28248798-16b09960-6a7d-11e7-971c-e2dc8f670735.gif" width="300">
+
+continuously scroll using bmoViewPager
+<img src="https://user-images.githubusercontent.com/3096210/28248799-1b0b9050-6a7d-11e7-9dfd-160c09477c82.gif" width="300">
 
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Requirements
+
+iOS 8.0+ 
+Xcode 8.0+
+Swift 3.0+
 
 ## Installation
 

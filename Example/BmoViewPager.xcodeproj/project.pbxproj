@@ -15,6 +15,10 @@
 		C93E26F11F0017B7005D39C4 /* TargetLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93E26F01F0017B7005D39C4 /* TargetLineView.swift */; };
 		C940E1F01EF64A2600F73BD7 /* DemoViewController0.swift in Sources */ = {isa = PBXBuildFile; fileRef = C940E1EF1EF64A2600F73BD7 /* DemoViewController0.swift */; };
 		C940E1F21EF64AD700F73BD7 /* pic2.png in Resources */ = {isa = PBXBuildFile; fileRef = C940E1F11EF64AD700F73BD7 /* pic2.png */; };
+		C998549D1F1B67740066C1FD /* VerticalDemoViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = C998549C1F1B67740066C1FD /* VerticalDemoViewController1.swift */; };
+		C998549F1F1B67800066C1FD /* VerticalDemoViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C998549E1F1B67800066C1FD /* VerticalDemoViewController2.swift */; };
+		C99854A11F1B67880066C1FD /* VerticalDemoViewController3.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99854A01F1B67880066C1FD /* VerticalDemoViewController3.swift */; };
+		C99854A31F1B679F0066C1FD /* VerticalDemoViewController4.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99854A21F1B679F0066C1FD /* VerticalDemoViewController4.swift */; };
 		C9B061841F13E21B008532E2 /* TargetLineHightlighedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B061831F13E21B008532E2 /* TargetLineHightlighedView.swift */; };
 		C9C67DB71EE3DF5000B112A2 /* ViewControllerPage1.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C67DB61EE3DF5000B112A2 /* ViewControllerPage1.swift */; };
 		C9C67DB91EE3DF6100B112A2 /* ViewControllerPage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C67DB81EE3DF6100B112A2 /* ViewControllerPage2.swift */; };
@@ -64,6 +68,10 @@
 		C93E26F01F0017B7005D39C4 /* TargetLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TargetLineView.swift; path = CustomView/TargetLineView.swift; sourceTree = "<group>"; };
 		C940E1EF1EF64A2600F73BD7 /* DemoViewController0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DemoViewController0.swift; path = DemoViewControllers/DemoViewController0.swift; sourceTree = "<group>"; };
 		C940E1F11EF64AD700F73BD7 /* pic2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pic2.png; path = Screenshot/pic2.png; sourceTree = "<group>"; };
+		C998549C1F1B67740066C1FD /* VerticalDemoViewController1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerticalDemoViewController1.swift; path = VerticalDemoViewControllers/VerticalDemoViewController1.swift; sourceTree = "<group>"; };
+		C998549E1F1B67800066C1FD /* VerticalDemoViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerticalDemoViewController2.swift; path = VerticalDemoViewControllers/VerticalDemoViewController2.swift; sourceTree = "<group>"; };
+		C99854A01F1B67880066C1FD /* VerticalDemoViewController3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerticalDemoViewController3.swift; path = VerticalDemoViewControllers/VerticalDemoViewController3.swift; sourceTree = "<group>"; };
+		C99854A21F1B679F0066C1FD /* VerticalDemoViewController4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerticalDemoViewController4.swift; path = VerticalDemoViewControllers/VerticalDemoViewController4.swift; sourceTree = "<group>"; };
 		C9B061831F13E21B008532E2 /* TargetLineHightlighedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TargetLineHightlighedView.swift; path = CustomView/TargetLineHightlighedView.swift; sourceTree = "<group>"; };
 		C9C67DB61EE3DF5000B112A2 /* ViewControllerPage1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerPage1.swift; sourceTree = "<group>"; };
 		C9C67DB81EE3DF6100B112A2 /* ViewControllerPage2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerPage2.swift; sourceTree = "<group>"; };
@@ -143,6 +151,7 @@
 				C9C67DC11EE3EC8500B112A2 /* Extension */,
 				C9C67DBC1EE3E1F900B112A2 /* Screenshot */,
 				C9C67DB51EE3DE4D00B112A2 /* CustomView */,
+				C998549B1F1B67430066C1FD /* VerticalDemoViewControllers */,
 				C9C67DCC1EE4017400B112A2 /* SingleViewControllers */,
 				C990D29F1E8FF07B009528A6 /* DemoViewControllers */,
 				C9C67DB61EE3DF5000B112A2 /* ViewControllerPage1.swift */,
@@ -211,6 +220,17 @@
 				C9C67E011EE5968C00B112A2 /* DemoViewController3.swift */,
 			);
 			name = DemoViewControllers;
+			sourceTree = "<group>";
+		};
+		C998549B1F1B67430066C1FD /* VerticalDemoViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				C998549C1F1B67740066C1FD /* VerticalDemoViewController1.swift */,
+				C998549E1F1B67800066C1FD /* VerticalDemoViewController2.swift */,
+				C99854A01F1B67880066C1FD /* VerticalDemoViewController3.swift */,
+				C99854A21F1B679F0066C1FD /* VerticalDemoViewController4.swift */,
+			);
+			name = VerticalDemoViewControllers;
 			sourceTree = "<group>";
 		};
 		C9C67DB51EE3DE4D00B112A2 /* CustomView */ = {
@@ -405,6 +425,8 @@
 				C9C67E021EE5968C00B112A2 /* DemoViewController3.swift in Sources */,
 				C9C67DBB1EE3E02D00B112A2 /* MainViewController.swift in Sources */,
 				C9C67DC51EE3ED3800B112A2 /* Color+Image.swift in Sources */,
+				C99854A31F1B679F0066C1FD /* VerticalDemoViewController4.swift in Sources */,
+				C998549F1F1B67800066C1FD /* VerticalDemoViewController2.swift in Sources */,
 				C9C67DC31EE3ECA700B112A2 /* String+Size.swift in Sources */,
 				C9C67DB91EE3DF6100B112A2 /* ViewControllerPage2.swift in Sources */,
 				C9C67E001EE4335000B112A2 /* DemoViewController2.swift in Sources */,
@@ -417,7 +439,9 @@
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				C9C67DB71EE3DF5000B112A2 /* ViewControllerPage1.swift in Sources */,
 				C9E1988D1F08CE21005AA17B /* Array+Safe.swift in Sources */,
+				C99854A11F1B67880066C1FD /* VerticalDemoViewController3.swift in Sources */,
 				C9C67DF71EE4273F00B112A2 /* ImageViewController.swift in Sources */,
+				C998549D1F1B67740066C1FD /* VerticalDemoViewController1.swift in Sources */,
 				C9C67DCF1EE4018C00B112A2 /* NumberViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

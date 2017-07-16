@@ -23,7 +23,6 @@ class DemoViewController3: UIViewController {
         viewPager.delegate = self
         viewPager.dataSource = self
         viewPager.orientation = .vertical
-        viewPager.presentedPageIndex = 2
         viewPagerNavigationBar.viewPager = viewPager
         viewPagerNavigationBar2.viewPager = viewPager
         viewPagerNavigationBar2.orientation = .vertical
@@ -126,6 +125,26 @@ extension DemoViewController3: BmoViewPagerDataSource {
         return 4
     }
     func bmoViewPagerDataSource(_ viewPager: BmoViewPager, viewControllerForPageAt page: Int) -> UIViewController {
-        return NumberViewController(number: page)
+        switch page {
+        case 0:
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "VerticalDemoViewController1") as? VerticalDemoViewController1 {
+                return vc
+            }
+        case 1:
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "VerticalDemoViewController2") as? VerticalDemoViewController2 {
+                return vc
+            }
+        case 2:
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "VerticalDemoViewController3") as? VerticalDemoViewController3 {
+                return vc
+            }
+        case 3:
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "VerticalDemoViewController4") as? VerticalDemoViewController4 {
+                return vc
+            }
+        default:
+            return NumberViewController(number: page)
+        }
+        return UIViewController()
     }
 }

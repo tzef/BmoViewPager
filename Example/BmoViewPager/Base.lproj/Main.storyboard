@@ -579,6 +579,139 @@
             </objects>
             <point key="canvasLocation" x="1765.5999999999999" y="4414.5427286356826"/>
         </scene>
+        <!--Vertical Demo View Controller1-->
+        <scene sceneID="2SC-oV-S7j">
+            <objects>
+                <viewController storyboardIdentifier="VerticalDemoViewController1" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Sog-gD-vJQ" customClass="VerticalDemoViewController1" customModule="BmoViewPager_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gjg-ij-xeh"/>
+                        <viewControllerLayoutGuide type="bottom" id="6zM-p4-t3P"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UuW-Tc-VuA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom NavigationBar's Animation" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P3U-qY-I9y">
+                                <rect key="frame" x="24" y="322" width="327" height="23"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="P3U-qY-I9y" firstAttribute="leading" secondItem="UuW-Tc-VuA" secondAttribute="leadingMargin" constant="8" id="4L9-dr-TRu"/>
+                            <constraint firstItem="P3U-qY-I9y" firstAttribute="centerY" secondItem="UuW-Tc-VuA" secondAttribute="centerY" id="Ohz-Ng-nHz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="P3U-qY-I9y" secondAttribute="trailing" constant="8" id="h7L-kX-jQF"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sVi-Hv-mf7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2609" y="4415"/>
+        </scene>
+        <!--Vertical Demo View Controller2-->
+        <scene sceneID="g5P-1I-a3E">
+            <objects>
+                <viewController storyboardIdentifier="VerticalDemoViewController2" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qz2-jg-8Nb" customClass="VerticalDemoViewController2" customModule="BmoViewPager_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rOu-fC-gkq"/>
+                        <viewControllerLayoutGuide type="bottom" id="70u-3k-XBr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="i2z-ee-LcJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="One BmoViewPager can bind more than one BmoNavigationBar" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZeV-dM-262">
+                                <rect key="frame" x="8" y="311" width="359" height="45.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ZeV-dM-262" secondAttribute="trailing" constant="8" id="s06-1m-h3z"/>
+                            <constraint firstItem="ZeV-dM-262" firstAttribute="centerY" secondItem="i2z-ee-LcJ" secondAttribute="centerY" id="xuc-Xn-D43"/>
+                            <constraint firstItem="ZeV-dM-262" firstAttribute="leading" secondItem="i2z-ee-LcJ" secondAttribute="leading" constant="8" id="zPY-lk-jn1"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Sd-Xs-YgR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3465" y="4415"/>
+        </scene>
+        <!--Vertical Demo View Controller3-->
+        <scene sceneID="0Hg-cH-NWH">
+            <objects>
+                <viewController storyboardIdentifier="VerticalDemoViewController3" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rvw-F7-ihS" customClass="VerticalDemoViewController3" customModule="BmoViewPager_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zCk-I7-GFK"/>
+                        <viewControllerLayoutGuide type="bottom" id="bQF-Ar-0Fe"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="D7B-a5-j7q">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="bmoViewPagerDelegate(_ viewPager: BmoViewPager, scrollProgress fraction: CGFloat, index: Int)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G33-AK-73g">
+                                <rect key="frame" x="8" y="279.5" width="359" height="68.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Can get the viewPager page moving progress" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="COf-tp-i4o">
+                                <rect key="frame" x="8" y="356" width="359" height="45.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="COf-tp-i4o" firstAttribute="top" secondItem="G33-AK-73g" secondAttribute="bottom" constant="8" id="1QH-Qt-y4O"/>
+                            <constraint firstItem="G33-AK-73g" firstAttribute="leading" secondItem="D7B-a5-j7q" secondAttribute="leading" constant="8" id="AHE-kN-uvk"/>
+                            <constraint firstAttribute="trailing" secondItem="COf-tp-i4o" secondAttribute="trailing" constant="8" id="K5V-MT-Mq2"/>
+                            <constraint firstAttribute="trailing" secondItem="G33-AK-73g" secondAttribute="trailing" constant="8" id="NKZ-WR-9ng"/>
+                            <constraint firstItem="G33-AK-73g" firstAttribute="centerY" secondItem="D7B-a5-j7q" secondAttribute="centerY" constant="-20" id="Oat-65-0Ln"/>
+                            <constraint firstItem="COf-tp-i4o" firstAttribute="leading" secondItem="D7B-a5-j7q" secondAttribute="leading" constant="8" id="tS2-jW-yeb"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="acz-WQ-edU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4350" y="4415"/>
+        </scene>
+        <!--Vertical Demo View Controller4-->
+        <scene sceneID="we0-Ek-LZS">
+            <objects>
+                <viewController storyboardIdentifier="VerticalDemoViewController4" useStoryboardIdentifierAsRestorationIdentifier="YES" id="A4x-PZ-Q3L" customClass="VerticalDemoViewController4" customModule="BmoViewPager_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Eu7-92-1ng"/>
+                        <viewControllerLayoutGuide type="bottom" id="lZC-0W-ubb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YIs-rg-47c">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom own navigation animation" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xUE-Bc-e85">
+                                <rect key="frame" x="8" y="321.5" width="359" height="23"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xUE-Bc-e85" firstAttribute="leading" secondItem="YIs-rg-47c" secondAttribute="leading" constant="8" id="JUZ-W9-oRF"/>
+                            <constraint firstItem="xUE-Bc-e85" firstAttribute="centerY" secondItem="YIs-rg-47c" secondAttribute="centerY" id="WjM-iy-82X"/>
+                            <constraint firstAttribute="trailing" secondItem="xUE-Bc-e85" secondAttribute="trailing" constant="8" id="fFU-rT-0Ro"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yk1-Yu-XWb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5244" y="4415"/>
+        </scene>
     </scenes>
     <resources>
         <image name="pic1.png" width="920" height="730"/>

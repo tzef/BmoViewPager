@@ -1,0 +1,6 @@
+framework module BmoViewPager {
+  umbrella header "BmoViewPager-umbrella.h"
+
+  export *
+  module * { export * }
+}

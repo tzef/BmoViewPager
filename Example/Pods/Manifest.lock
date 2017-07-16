@@ -1,0 +1,16 @@
+PODS:
+  - BmoViewPager (0.1.0)
+
+DEPENDENCIES:
+  - BmoViewPager (from `../`)
+
+EXTERNAL SOURCES:
+  BmoViewPager:
+    :path: ../
+
+SPEC CHECKSUMS:
+  BmoViewPager: a930117308fbbaecb07b00a367d327cc0c07ffaa
+
+PODFILE CHECKSUM: 8e5b9eb37f0d6f7eae3dd8d9c502336285763266
+
+COCOAPODS: 1.2.0

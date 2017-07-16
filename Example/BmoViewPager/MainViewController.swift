@@ -25,7 +25,7 @@ class MainViewController: UIViewController {
 
 extension MainViewController: BmoViewPagerDataSource {
     func bmoViewPagerDataSourceNumberOfPage(in viewPager: BmoViewPager) -> Int {
-        return 2
+        return 3
     }
     func bmoViewPagerDataSource(_ viewPager: BmoViewPager, viewControllerForPageAt page: Int) -> UIViewController {
         switch page {
@@ -35,6 +35,10 @@ extension MainViewController: BmoViewPagerDataSource {
             }
         case 1:
             if let vc = storyboard?.instantiateViewController(withIdentifier: "ViewControllerPage2") as? ViewControllerPage2 {
+                return vc
+            }
+        case 2:
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "ViewControllerPage3") as? ViewControllerPage3 {
                 return vc
             }
         default:

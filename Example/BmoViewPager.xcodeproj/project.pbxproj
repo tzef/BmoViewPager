@@ -15,6 +15,8 @@
 		C93E26F11F0017B7005D39C4 /* TargetLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93E26F01F0017B7005D39C4 /* TargetLineView.swift */; };
 		C940E1F01EF64A2600F73BD7 /* DemoViewController0.swift in Sources */ = {isa = PBXBuildFile; fileRef = C940E1EF1EF64A2600F73BD7 /* DemoViewController0.swift */; };
 		C940E1F21EF64AD700F73BD7 /* pic2.png in Resources */ = {isa = PBXBuildFile; fileRef = C940E1F11EF64AD700F73BD7 /* pic2.png */; };
+		C95C10651F1B8E06006B0AB8 /* ViewControllerPage3.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95C10641F1B8E06006B0AB8 /* ViewControllerPage3.swift */; };
+		C95C10681F1B9240006B0AB8 /* DemoPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95C10671F1B9240006B0AB8 /* DemoPageViewController.swift */; };
 		C998549D1F1B67740066C1FD /* VerticalDemoViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = C998549C1F1B67740066C1FD /* VerticalDemoViewController1.swift */; };
 		C998549F1F1B67800066C1FD /* VerticalDemoViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C998549E1F1B67800066C1FD /* VerticalDemoViewController2.swift */; };
 		C99854A11F1B67880066C1FD /* VerticalDemoViewController3.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99854A01F1B67880066C1FD /* VerticalDemoViewController3.swift */; };
@@ -68,6 +70,8 @@
 		C93E26F01F0017B7005D39C4 /* TargetLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TargetLineView.swift; path = CustomView/TargetLineView.swift; sourceTree = "<group>"; };
 		C940E1EF1EF64A2600F73BD7 /* DemoViewController0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DemoViewController0.swift; path = DemoViewControllers/DemoViewController0.swift; sourceTree = "<group>"; };
 		C940E1F11EF64AD700F73BD7 /* pic2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pic2.png; path = Screenshot/pic2.png; sourceTree = "<group>"; };
+		C95C10641F1B8E06006B0AB8 /* ViewControllerPage3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerPage3.swift; sourceTree = "<group>"; };
+		C95C10671F1B9240006B0AB8 /* DemoPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DemoPageViewController.swift; path = PageControlDemo/DemoPageViewController.swift; sourceTree = "<group>"; };
 		C998549C1F1B67740066C1FD /* VerticalDemoViewController1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerticalDemoViewController1.swift; path = VerticalDemoViewControllers/VerticalDemoViewController1.swift; sourceTree = "<group>"; };
 		C998549E1F1B67800066C1FD /* VerticalDemoViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerticalDemoViewController2.swift; path = VerticalDemoViewControllers/VerticalDemoViewController2.swift; sourceTree = "<group>"; };
 		C99854A01F1B67880066C1FD /* VerticalDemoViewController3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerticalDemoViewController3.swift; path = VerticalDemoViewControllers/VerticalDemoViewController3.swift; sourceTree = "<group>"; };
@@ -154,8 +158,10 @@
 				C998549B1F1B67430066C1FD /* VerticalDemoViewControllers */,
 				C9C67DCC1EE4017400B112A2 /* SingleViewControllers */,
 				C990D29F1E8FF07B009528A6 /* DemoViewControllers */,
+				C95C10661F1B9228006B0AB8 /* PageControlDemo */,
 				C9C67DB61EE3DF5000B112A2 /* ViewControllerPage1.swift */,
 				C9C67DB81EE3DF6100B112A2 /* ViewControllerPage2.swift */,
+				C95C10641F1B8E06006B0AB8 /* ViewControllerPage3.swift */,
 				C9C67DBA1EE3E02D00B112A2 /* MainViewController.swift */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
@@ -209,6 +215,14 @@
 				E2DD128F077E599091DFBB7E /* Pods_BmoViewPager_Tests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C95C10661F1B9228006B0AB8 /* PageControlDemo */ = {
+			isa = PBXGroup;
+			children = (
+				C95C10671F1B9240006B0AB8 /* DemoPageViewController.swift */,
+			);
+			name = PageControlDemo;
 			sourceTree = "<group>";
 		};
 		C990D29F1E8FF07B009528A6 /* DemoViewControllers */ = {
@@ -437,9 +451,11 @@
 				C9C67DC01EE3EC4900B112A2 /* DemoButton.swift in Sources */,
 				C9C67DCB1EE4016C00B112A2 /* DemoViewController1.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				C95C10681F1B9240006B0AB8 /* DemoPageViewController.swift in Sources */,
 				C9C67DB71EE3DF5000B112A2 /* ViewControllerPage1.swift in Sources */,
 				C9E1988D1F08CE21005AA17B /* Array+Safe.swift in Sources */,
 				C99854A11F1B67880066C1FD /* VerticalDemoViewController3.swift in Sources */,
+				C95C10651F1B8E06006B0AB8 /* ViewControllerPage3.swift in Sources */,
 				C9C67DF71EE4273F00B112A2 /* ImageViewController.swift in Sources */,
 				C998549D1F1B67740066C1FD /* VerticalDemoViewController1.swift in Sources */,
 				C9C67DCF1EE4018C00B112A2 /* NumberViewController.swift in Sources */,

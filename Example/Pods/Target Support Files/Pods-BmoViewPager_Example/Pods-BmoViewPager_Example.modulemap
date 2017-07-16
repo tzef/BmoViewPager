@@ -1,0 +1,6 @@
+framework module Pods_BmoViewPager_Example {
+  umbrella header "Pods-BmoViewPager_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "BmoViewPager",
+  "version": "0.1.0",
+  "summary": "A short description of BmoViewPager.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/LEE ZHE YU/BmoViewPager",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "LEE ZHE YU": "tzef8220@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/LEE ZHE YU/BmoViewPager.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "BmoViewPager/Classes/**/*"
+}

@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'BmoViewPager_Example' do
+  pod 'BmoViewPager', :path => '../'
+
+  target 'BmoViewPager_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

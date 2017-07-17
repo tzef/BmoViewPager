@@ -36,12 +36,31 @@ func bmoViewPagerDataSource(_ viewPager: BmoViewPager, viewControllerForPageAt p
 ## With a NavigationBar
 #### Create a UIView extend BmoViewPagerNavigationBar
 #### Assign a BmoViewPager to the BmoViewPagerNavigationBar
-using default styla, only need to give the each page title
+using default style, only need to give the each page title
 ```swift
 func bmoViewPagerDataSourceNaviagtionBarItemTitle(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> String? {
     return YourPageTitleString
 }
 ```
+
+navigation item title can custom attributed
+```swift
+func bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [String : Any]? {
+    return [
+        NSForegroundColorAttributeName : UIColor.lightGray,
+        NSFontAttributeName : UIFont.systemFont(ofSize: 14.0)
+    ]
+}
+```
+```swift
+func bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [String : Any]? {
+    return [
+        NSForegroundColorAttributeName : UIColor.red,
+        NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14.0)
+    ]
+}
+```
+
 if you don't want use default style, you can custom your own background view and highlighted background view
 
 <table>

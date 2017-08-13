@@ -192,12 +192,17 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
     
     // MARK: - Public
     public func reloadData() {
+        inited = false
+        if dataSource?.bmoViewPagerDataSourceNumberOfPage(in: self) ?? 0 <= presentedPageIndex {
+            presentedPageIndex = 0
+        }
         navigationBars.forEach { (weakBar: WeakBmoVPbar<BmoViewPagerNavigationBar>) in
             if let bar = weakBar.bar {
                 bar.reloadData()
             }
         }
         pageViewController.reloadData()
+        inited = true
     }
     
     // MARK: - UIScrollViewDelegate

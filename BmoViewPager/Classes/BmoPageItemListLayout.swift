@@ -66,10 +66,12 @@ class BmoPageItemListLayout: UICollectionViewLayout {
     }
     override func prepare() {
         super.prepare()
-        if attributesList.count == 0 {
-            guard let cv = collectionView, cv.numberOfItems(inSection: 0) > 0 else {
-                return
-            }
+        guard let cv = collectionView, cv.numberOfItems(inSection: 0) > 0 else {
+            attributesList.removeAll()
+            totalLength = 0.0
+            return
+        }
+        if attributesList.count != cv.numberOfItems(inSection: 0) {
             attributesList = (0..<cv.numberOfItems(inSection: 0)).map { (i) -> UICollectionViewLayoutAttributes in
                 var beforeDistance: CGFloat = 0
                 for j in 0..<i {

@@ -1,4 +1,4 @@
-# BmoViewPager
+![BMO ViewPager](https://user-images.githubusercontent.com/3096210/29925792-1515c356-8e94-11e7-8a10-a166029ca9ad.png)
 
 [![CI Status](http://img.shields.io/travis/LEE%20ZHE%20YU/BmoViewPager.svg?style=flat)](https://travis-ci.org/LEE%20ZHE%20YU/BmoViewPager)
 [![Version](https://img.shields.io/cocoapods/v/BmoViewPager.svg?style=flat)](http://cocoapods.org/pods/BmoViewPager)

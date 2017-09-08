@@ -74,9 +74,9 @@ extension DemoViewController3: BmoViewPagerDataSource {
     }
     func bmoViewPagerDataSourceNaviagtionBarItemSize(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> CGSize {
         if navigationBar == viewPagerNavigationBar {
-            return CGSize(width: 80, height: viewPagerNavigationBar.bounds.size.height)
+            return CGSize(width: 80, height: navigationBar.bounds.size.height)
         } else {
-            return CGSize(width: viewPagerNavigationBar2.bounds.size.width, height: viewPagerNavigationBar2.bounds.size.height / 4)
+            return CGSize(width: navigationBar.bounds.size.width, height: viewPagerNavigationBar2.bounds.size.height / 4)
         }
     }
     func bmoViewPagerDataSourceNaviagtionBarItemNormalBackgroundView(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> UIView? {

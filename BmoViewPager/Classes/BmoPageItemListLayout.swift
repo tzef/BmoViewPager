@@ -14,6 +14,7 @@ protocol BmoPageItemListLayoutDelegate: class {
 }
 class BmoPageItemListLayout: UICollectionViewLayout {
     weak var delegate: BmoPageItemListLayoutDelegate?
+    
     var orientation: UIPageViewControllerNavigationOrientation = .horizontal
     var attributesList = [UICollectionViewLayoutAttributes]() {
         didSet {
@@ -21,6 +22,8 @@ class BmoPageItemListLayout: UICollectionViewLayout {
         }
     }
     var totalLength: CGFloat = 0.0
+    var contentSize = CGSize.zero
+    var layoutChanged = false
     
     override init() {
         super.init()
@@ -35,23 +38,7 @@ class BmoPageItemListLayout: UICollectionViewLayout {
     
     // MARK: UICollectionViewLayout
     override var collectionViewContentSize: CGSize {
-        guard let cv = collectionView else {
-            return CGSize.zero
-        }
-        if totalLength == 0 {
-            for i in 0..<cv.numberOfItems(inSection: 0) {
-                if orientation == .horizontal {
-                    totalLength += delegate?.bmoPageItemListLayout(sizeForItemAt: i).width ?? 0
-                } else {
-                    totalLength += delegate?.bmoPageItemListLayout(sizeForItemAt: i).height ?? 0
-                }
-            }
-        }
-        if orientation == .horizontal {
-            return CGSize(width: totalLength, height: cv.bounds.height)
-        } else {
-            return CGSize(width: cv.bounds.width, height: totalLength)
-        }
+        return contentSize
     }
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         return attributesList.filter { (layoutAttribute) -> Bool in
@@ -66,31 +53,32 @@ class BmoPageItemListLayout: UICollectionViewLayout {
     }
     override func prepare() {
         super.prepare()
+        totalLength = 0.0
         guard let cv = collectionView, cv.numberOfItems(inSection: 0) > 0 else {
             attributesList.removeAll()
-            totalLength = 0.0
             return
         }
-        if attributesList.count != cv.numberOfItems(inSection: 0) {
+        if attributesList.count != cv.numberOfItems(inSection: 0) || layoutChanged {
+            layoutChanged = false
             attributesList = (0..<cv.numberOfItems(inSection: 0)).map { (i) -> UICollectionViewLayoutAttributes in
-                var beforeDistance: CGFloat = 0
-                for j in 0..<i {
-                    if orientation == .horizontal {
-                        beforeDistance += delegate?.bmoPageItemListLayout(sizeForItemAt: j).width ?? 0
-                    } else {
-                        beforeDistance += delegate?.bmoPageItemListLayout(sizeForItemAt: j).height ?? 0
-                    }
-                }
                 let size = delegate?.bmoPageItemListLayout(sizeForItemAt: i) ?? CGSize.zero
                 let attributes = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: i, section: 0))
                 if orientation == .horizontal {
-                    attributes.frame = CGRect(origin: CGPoint(x: cv.bounds.minX - cv.contentOffset.x + beforeDistance, y: 0),
-                                              size: CGSize(width: size.width, height: cv.bounds.height))
+                    attributes.frame = CGRect(origin: CGPoint(x: cv.bounds.minX - cv.contentOffset.x + totalLength, y: 0), size: size)
                 } else {
-                    attributes.frame = CGRect(origin: CGPoint(x: 0, y: cv.bounds.minY - cv.contentOffset.y + beforeDistance),
-                                              size: CGSize(width: cv.bounds.width, height: size.height))
+                    attributes.frame = CGRect(origin: CGPoint(x: 0, y: cv.bounds.minY - cv.contentOffset.y + totalLength), size: size)
+                }
+                if orientation == .horizontal {
+                    totalLength += size.width
+                } else {
+                    totalLength += size.height
                 }
                 return attributes
+            }
+            if orientation == .horizontal {
+                contentSize = .init(width: totalLength, height: cv.bounds.height)
+            } else {
+                contentSize = .init(width: cv.bounds.width, height: totalLength)
             }
         }
     }

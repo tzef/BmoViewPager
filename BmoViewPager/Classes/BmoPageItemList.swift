@@ -14,8 +14,7 @@ protocol BmoPageItemListDelegate: class {
 }
 class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSource, BmoPageItemListLayoutDelegate {
     var collectionView: UICollectionView? = nil
-    let horizontalLayout = BmoPageItemListLayout(orientation: .horizontal)
-    let verticalLayout = BmoPageItemListLayout(orientation: .vertical)
+    let collectionLayout = BmoPageItemListLayout(orientation: .horizontal)
     
     weak var bmoViewPager: BmoViewPager?
     weak var bmoDelegate: BmoPageItemListDelegate?
@@ -50,18 +49,17 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         self.bmoViewPgaerNavigationBar = navigationBar
         self.backgroundColor = .white
     }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        collectionLayout.layoutChanged = true
+        self.reloadData()
+    }
     func setCollectionView() {
-        guard let bmoViewPager = bmoViewPager else {
-            return
-        }
-        verticalLayout.delegate = self
-        horizontalLayout.delegate = self
-        bmoViewPagerCount = bmoDataSource?.bmoViewPagerDataSourceNumberOfPage(in: bmoViewPager) ?? 0
+        collectionLayout.delegate = self
         if bmoViewPgaerNavigationBar?.orientation == .vertical {
-            collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: verticalLayout)
-        } else {
-            collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: horizontalLayout)
+            collectionLayout.orientation = .vertical
         }
+        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: collectionLayout)
         collectionView!.register(BmoPageItemCell.classForCoder(), forCellWithReuseIdentifier: reuseIdentifier)
         collectionView!.showsHorizontalScrollIndicator = false
         collectionView!.showsVerticalScrollIndicator = false
@@ -76,20 +74,20 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     // MARK: - Public
     func reloadData() {
         guard let bmoViewPager = bmoViewPager else {
+            bmoViewPagerCount = 0
             return
         }
+        bmoViewPagerCount = bmoDataSource?.bmoViewPagerDataSourceNumberOfPage(in: bmoViewPager) ?? 0
         if collectionView == nil {
             self.setCollectionView()
         }
-        bmoViewPagerCount = bmoDataSource?.bmoViewPagerDataSourceNumberOfPage(in: bmoViewPager) ?? 0
         collectionView?.reloadData()
     }
     func updateFocusProgress(_ progress: inout CGFloat) {
         guard let collectionView = collectionView, let viewPager = bmoViewPager, let navigationBar = bmoViewPgaerNavigationBar else {
             return
         }
-        let layout = (navigationBar.orientation == .horizontal ? horizontalLayout : verticalLayout)
-        if layout.attributesList.count == 0 {
+        if collectionLayout.attributesList.count == 0 {
             return
         }
         let index = viewPager.presentedPageIndex
@@ -124,14 +122,14 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
                 }
             }
             
-            if let nextAttribute = layout.attributesList[safe: nextIndex] {
+            if let nextAttribute = collectionLayout.attributesList[safe: nextIndex] {
                 if navigationBar.orientation == .horizontal {
                     nextDistance = nextAttribute.center.x - collectionView.center.x - collectionOffSet
                 } else {
                     nextDistance = nextAttribute.center.y - collectionView.center.y - collectionOffSet
                 }
             }
-            if let previousAttribute = layout.attributesList[safe: previousIndex] {
+            if let previousAttribute = collectionLayout.attributesList[safe: previousIndex] {
                 if navigationBar.orientation == .horizontal {
                     previousDistance = collectionView.center.x + collectionOffSet - previousAttribute.center.x
                 } else {
@@ -251,8 +249,7 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
             return
         }
         let index = viewPager.presentedPageIndex
-        let layout = (navigationBar.orientation == .horizontal ? horizontalLayout : verticalLayout)
-        if let attribute = layout.attributesList[safe: index] {
+        if let attribute = collectionLayout.attributesList[safe: index] {
             if navigationBar.orientation == .horizontal {
                 let distance = attribute.center.x - collectionView.center.x - collectionView.contentOffset.x
                 collectionView.setContentOffset(CGPoint(x: distance, y: collectionView.contentOffset.y), animated: false)

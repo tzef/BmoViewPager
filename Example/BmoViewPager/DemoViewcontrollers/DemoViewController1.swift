@@ -37,7 +37,7 @@ extension DemoViewController1: BmoViewPagerDataSource {
     }
     func bmoViewPagerDataSourceNaviagtionBarItemSize(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> CGSize {
         if viewPager == customViewPager {
-            return CGSize(width: viewPager.bounds.width / 3, height: 30.0)
+            return CGSize(width: navigationBar.bounds.width / 3, height: navigationBar.bounds.height)
         } else {
             return .zero
         }

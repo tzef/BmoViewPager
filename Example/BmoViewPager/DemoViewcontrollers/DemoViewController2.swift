@@ -42,7 +42,7 @@ extension DemoViewController2: BmoViewPagerDataSource {
         return "Tab \(page)"
     }
     func bmoViewPagerDataSourceNaviagtionBarItemSize(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> CGSize {
-        return CGSize(width: viewPagerNavigationBar.bounds.width / 4, height: viewPagerNavigationBar.bounds.height)
+        return CGSize(width: navigationBar.bounds.width / 4, height: navigationBar.bounds.height)
     }
     func bmoViewPagerDataSourceNaviagtionBarItemHighlightedBackgroundView(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> UIView? {
         let view = UIView()

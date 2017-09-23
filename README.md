@@ -5,6 +5,9 @@
 [![License](https://img.shields.io/cocoapods/l/BmoViewPager.svg?style=flat)](http://cocoapods.org/pods/BmoViewPager)
 [![Platform](https://img.shields.io/cocoapods/p/BmoViewPager.svg?style=flat)](http://cocoapods.org/pods/BmoViewPager)
 
+#### ⚠️ **The latest version for Swift 3.2 is 3.2.0** ⚠️ 
+#### ⚠️ **The latest version for Swift 4.0 is 4.0.0** ⚠️ 
+
 A ViewPager with NavigationBar component based on UIPageViewController and UICollectionView, which is a convenience way to supply and manager each viewController.
 
 I want to make UIPageViewController more intuitive for using it, like UITableView, and supply a navigationBar quickly and simply.
@@ -45,18 +48,18 @@ func bmoViewPagerDataSourceNaviagtionBarItemTitle(_ viewPager: BmoViewPager, nav
 
 navigation item title can custom attributed
 ```swift
-func bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [String : Any]? {
+func bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [NSAttributedStringKey : Any]? {
     return [
-        NSForegroundColorAttributeName : UIColor.lightGray,
-        NSFontAttributeName : UIFont.systemFont(ofSize: 14.0)
+        NSAttributedStringKey.foregroundColor : UIColor.lightGray,
+        NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14.0)
     ]
 }
 ```
 ```swift
-func bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [String : Any]? {
+func bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [NSAttributedStringKey : Any]? {
     return [
-        NSForegroundColorAttributeName : UIColor.red,
-        NSFontAttributeName : UIFont.boldSystemFont(ofSize: 14.0)
+        NSAttributedStringKey.foregroundColor : UIColor.red,
+        NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 14.0)
     ]
 }
 ```
@@ -81,6 +84,7 @@ if you don't want use default style, you can custom your own background view and
 #### BmoViewPager infinitScroll (Default is false)
 #### BmoViewPager presentedPageIndex can programmatically assign the present page
 #### Custom NavigationBar animation, you can get scroll progress from BmoViewPagerDelegate
+#### Navigation bar interporation animation when change viewPager page by tap navigationItem
 
 <table>
   <tr>
@@ -124,18 +128,40 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
-iOS 8.0+ 
-Xcode 8.0+
-Swift 3.0+
+- iOS 8.0+ 
+- Xcode 8.0+
+- Swift 3.0+
 
 ## Installation
 
-BmoViewPager is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+### CocoaPods
+
+[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
+
+```bash
+$ gem install cocoapods
+```
+> CocoaPods 1.1.0+ is required to build BmoViewPager 4.0.0+.
+
+To integrate BmoViewPager into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
-pod "BmoViewPager"
+use_frameworks!
+
+target '<Your Target Name>' do
+    pod 'BmoViewPager', '~> 4.0.0'
+end
 ```
+
+Then, run the following command:
+
+```bash
+$ pod install
+```
+
+### Manually
+
+If you prefer not to use the dependency managers, you can integrate BmoViewPager into your project manually, just copy the BmoViewPager folder into your project.
 
 ## Author
 

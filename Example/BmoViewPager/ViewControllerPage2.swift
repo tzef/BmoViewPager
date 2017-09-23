@@ -28,16 +28,16 @@ class ViewControllerPage2: UIViewController {
 
 extension ViewControllerPage2: BmoViewPagerDataSource {
     // Optional
-    func bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [String : Any]? {
+    func bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [NSAttributedStringKey : Any]? {
         return [
-            NSFontAttributeName : UIFont.boldSystemFont(ofSize: 17.0),
-            NSForegroundColorAttributeName : UIColor.groupTableViewBackground
+            NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 17.0),
+            NSAttributedStringKey.foregroundColor : UIColor.groupTableViewBackground
         ]
     }
-    func bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [String : Any]? {
+    func bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [NSAttributedStringKey : Any]? {
         return [
-            NSFontAttributeName : UIFont.boldSystemFont(ofSize: 17.0),
-            NSForegroundColorAttributeName : mainColor
+            NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 17.0),
+            NSAttributedStringKey.foregroundColor : mainColor
         ]
     }
     func bmoViewPagerDataSourceNaviagtionBarItemHighlightedBackgroundView(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> UIView? {

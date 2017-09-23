@@ -58,12 +58,12 @@ public class BmoViewPagerNavigationBar: UIView {
         let str1 = "BMO ViewPager NavigationBar"
         let str2 = "Need to assign a BmoViewPager"
         let mainAttributed = [
-            NSForegroundColorAttributeName  : UIColor.black,
-            NSFontAttributeName             : UIFont.boldSystemFont(ofSize: 24.0),
+            NSAttributedStringKey.foregroundColor  : UIColor.black,
+            NSAttributedStringKey.font             : UIFont.boldSystemFont(ofSize: 24.0),
             ]
         let subAttributed = [
-            NSForegroundColorAttributeName  : UIColor.lightGray,
-            NSFontAttributeName             : UIFont.boldSystemFont(ofSize: 17.0),
+            NSAttributedStringKey.foregroundColor  : UIColor.lightGray,
+            NSAttributedStringKey.font             : UIFont.boldSystemFont(ofSize: 17.0),
             ]
         let str1Size = str1.bmoVP.size(attribute: mainAttributed, size: .zero)
         let str2Size = str2.bmoVP.size(attribute: subAttributed, size: .zero)

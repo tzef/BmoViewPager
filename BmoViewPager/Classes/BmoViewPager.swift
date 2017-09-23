@@ -14,8 +14,8 @@ import UIKit
     
     @objc optional func bmoViewPagerDataSourceNaviagtionBarItemTitle(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> String?
     @objc optional func bmoViewPagerDataSourceNaviagtionBarItemSize(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> CGSize
-    @objc optional func bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [String : Any]?
-    @objc optional func bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [String : Any]?
+    @objc optional func bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [NSAttributedStringKey : Any]?
+    @objc optional func bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [NSAttributedStringKey : Any]?
     @objc optional func bmoViewPagerDataSourceNaviagtionBarItemNormalBackgroundView(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> UIView?
     @objc optional func bmoViewPagerDataSourceNaviagtionBarItemHighlightedBackgroundView(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> UIView?
 }
@@ -275,12 +275,12 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
         let str3 = "BmoViewPagerDataSource"
         let str4 = "And assign to the BmoViewPager"
         let mainAttributed = [
-            NSForegroundColorAttributeName  : UIColor.black,
-            NSFontAttributeName             : UIFont.boldSystemFont(ofSize: 24.0),
+            NSAttributedStringKey.foregroundColor  : UIColor.black,
+            NSAttributedStringKey.font             : UIFont.boldSystemFont(ofSize: 24.0),
         ]
         let subAttributed = [
-            NSForegroundColorAttributeName  : UIColor.lightGray,
-            NSFontAttributeName             : UIFont.boldSystemFont(ofSize: 17.0),
+            NSAttributedStringKey.foregroundColor  : UIColor.lightGray,
+            NSAttributedStringKey.font             : UIFont.boldSystemFont(ofSize: 17.0),
             ]
         let str1Size = str1.bmoVP.size(attribute: mainAttributed, size: .zero)
         let str2Size = str2.bmoVP.size(attribute: subAttributed, size: .zero)

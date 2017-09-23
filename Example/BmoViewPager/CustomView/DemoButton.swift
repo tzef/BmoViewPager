@@ -30,7 +30,7 @@ class DemoButton: UIButton {
     }
     
     override var intrinsicContentSize: CGSize {
-        if let size = self.titleLabel?.text?.size(attribute: [NSFontAttributeName : UIFont.systemFont(ofSize: 17.0)],
+        if let size = self.titleLabel?.text?.size(attribute: [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 17.0)],
                                                   size: .zero) {
             return CGSize(width: size.width + 16, height: 44.0)
         }

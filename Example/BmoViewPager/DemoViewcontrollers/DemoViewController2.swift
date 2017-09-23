@@ -28,14 +28,14 @@ class DemoViewController2: UIViewController {
 
 extension DemoViewController2: BmoViewPagerDataSource {
     // Optional
-    func bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [String : Any]? {
+    func bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [NSAttributedStringKey : Any]? {
         return [
-            NSForegroundColorAttributeName : viewPagerSegmentedView.strokeColor
+            NSAttributedStringKey.foregroundColor : viewPagerSegmentedView.strokeColor
         ]
     }
-    func bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [String : Any]? {
+    func bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [NSAttributedStringKey : Any]? {
         return [
-            NSForegroundColorAttributeName : UIColor.white
+            NSAttributedStringKey.foregroundColor : UIColor.white
         ]
     }
     func bmoViewPagerDataSourceNaviagtionBarItemTitle(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> String? {

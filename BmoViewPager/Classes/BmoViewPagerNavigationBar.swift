@@ -35,6 +35,9 @@ public class BmoViewPagerNavigationBar: UIView {
     /// vierPager's navigation bar scroll orientataion
     public var orientation: UIPageViewControllerNavigationOrientation = .horizontal
     
+    /// if you not allow user change viewPager page by tap navigation bar item, disable it
+    public var isEnabledTapEvent: Bool = true
+    
     weak var pageViewController: BmoPageViewController?
     fileprivate weak var pageListView: BmoPageItemList?
     fileprivate var inited = false
@@ -76,12 +79,22 @@ public class BmoViewPagerNavigationBar: UIView {
         self.pageListView?.collectionView?.contentInset = .zero
     }
     
-    public func reloadData() {
-        self.pageListView?.reloadData()
+    public func reloadData(animation: Bool) {
+        guard let viewPager = viewPager else {
+            return
+        }
+        if animation {
+            self.pageListView?.focusFrom(index: viewPager.lastPresentedPageIndex)
+        } else {
+            self.pageListView?.reloadData()
+        }
     }
     
     func updateFocusProgress(_ progress: inout CGFloat) {
-        self.pageListView?.updateFocusProgress(&progress)
+        guard let viewPager = viewPager else {
+            return
+        }
+        self.pageListView?.updateFocusProgress(&progress, index: viewPager.presentedPageIndex)
     }
     
     private func resetViewPager(_ viewPager: BmoViewPager) {
@@ -117,6 +130,9 @@ public class BmoViewPagerNavigationBar: UIView {
 
 extension BmoViewPagerNavigationBar: BmoPageItemListDelegate {
     func bmoViewPageItemList(_ itemList: BmoPageItemList, didSelectItemAt index: Int) {
+        if isEnabledTapEvent == false {
+            return
+        }
         guard let viewPager = viewPager else {
             return
         }
@@ -132,11 +148,6 @@ extension BmoViewPagerNavigationBar: BmoPageItemListDelegate {
         })
         if reuseIt == false {
             pageListView?.focusIndex = -1
-            viewPager.navigationBars.forEach { (weakBar: WeakBmoVPbar<BmoViewPagerNavigationBar>) in
-                if let bar = weakBar.bar {
-                    bar.reloadData()
-                }
-            }
             viewPager.presentedPageIndex = index
         }
     }

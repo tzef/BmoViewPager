@@ -19,6 +19,7 @@ class DemoViewController1: UIViewController {
         super.viewDidLoad()
         
         customViewPager.dataSource = self
+        customViewPager.isInterporationAnimated = false
         customViewPgareNavigationBar.viewPager = customViewPager
         
         defaultViewPager.dataSource = self

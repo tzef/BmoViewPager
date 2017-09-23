@@ -36,6 +36,9 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     var focusIndex = -1
     var nextIndex = -1
     
+    // for interpolation
+    let percentageLayer = PercentageLayer()
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -48,6 +51,7 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         self.bmoViewPager = viewPager
         self.bmoViewPgaerNavigationBar = navigationBar
         self.backgroundColor = .white
+        self.layer.addSublayer(percentageLayer)
     }
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -83,14 +87,41 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         }
         collectionView?.reloadData()
     }
-    func updateFocusProgress(_ progress: inout CGFloat) {
+    func focusFrom(index: Int) {
+        guard let viewPager = bmoViewPager else {
+            return
+        }
+        var progress: CGFloat = 0.0
+        percentageLayer.percentage = 0.0
+        percentageLayer.displayDo = { [weak self] (percentage) in
+            let interporation = Int(percentage)
+            progress = percentage - CGFloat(interporation)
+            self?.updateFocusProgress(&progress, index: index + interporation, enabledAutoFocusIfNeed: false)
+            if index < viewPager.presentedPageIndex {
+                if percentage == 1.0 * CGFloat(viewPager.presentedPageIndex - index) {
+                    self?.percentageLayer.displayDo = nil
+                }
+            }
+            if index > viewPager.presentedPageIndex {
+                if percentage == -1.0 * CGFloat(index - viewPager.presentedPageIndex) {
+                    self?.percentageLayer.displayDo = nil
+                }
+            }
+        }
+        if viewPager.presentedPageIndex > index {
+            percentageLayer.percentage = 1.0 * CGFloat(viewPager.presentedPageIndex - index)
+        }
+        if viewPager.presentedPageIndex < index {
+            percentageLayer.percentage = -1.0 * CGFloat(index - viewPager.presentedPageIndex)
+        }
+    }
+    func updateFocusProgress(_ progress: inout CGFloat, index: Int, enabledAutoFocusIfNeed: Bool = true) {
         guard let collectionView = collectionView, let viewPager = bmoViewPager, let navigationBar = bmoViewPgaerNavigationBar else {
             return
         }
         if collectionLayout.attributesList.count == 0 {
             return
         }
-        let index = viewPager.presentedPageIndex
         if focusIndex != index {
             focusIndex = index
             if navigationBar.orientation == .horizontal {
@@ -147,7 +178,7 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
                 progress = lastProgress
             }
             if progress > 0 {
-                if autoFocus {
+                if autoFocus && enabledAutoFocusIfNeed {
                     var willSetOffSet = collectionOffSet + nextDistance * progress
                     if navigationBar.orientation == .horizontal {
                         if willSetOffSet > collectionView.contentSize.width - collectionView.bounds.width {
@@ -171,7 +202,7 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
                 nextCell?.titleLabel.maskProgress = progress
                 focusCell?.titleLabel.maskProgress = -1 * progress
             } else if progress < 0 {
-                if autoFocus {
+                if autoFocus && enabledAutoFocusIfNeed {
                     var willSetOffSet = collectionOffSet + previousDistance * progress
                     if navigationBar.orientation == .horizontal {
                         if willSetOffSet > collectionView.contentSize.width - collectionView.bounds.width {
@@ -306,6 +337,7 @@ class BmoPageItemCell: UICollectionViewCell {
         if let view = foreBackgroundView {
             titleLabel.setForeBackgroundView(view)
         }
+        
         if let attributed = rearAttributed {
             let mutableAttributedText = NSMutableAttributedString(attributedString: titleLabel.rearLabel.attributedText ?? NSAttributedString())
             mutableAttributedText.addAttributes(attributed, range: NSRange(location: 0, length: title.characters.count))
@@ -321,5 +353,56 @@ class BmoPageItemCell: UICollectionViewCell {
             titleLabel.foreColor = UIColor.black
         }
         titleLabel.maskProgress = focusProgress
+    }
+}
+
+class PercentageLayer: CALayer {
+    var displayDo: ((_ percentage: CGFloat) -> Void)?
+    @NSManaged var percentage: CGFloat
+    
+    override init() {
+        super.init()
+    }
+    override init(layer: Any) {
+        super.init(layer: layer)
+        if let layer = layer as? PercentageLayer {
+            percentage = layer.percentage
+        } else {
+            percentage = 0.0
+        }
+    }
+    required init?(coder decoder: NSCoder) {
+        super.init(coder: decoder)
+    }
+    
+    override class func needsDisplay(forKey key: String) -> Bool {
+        var needsDisplay = super.needsDisplay(forKey: key)
+        if key == "percentage" {
+            needsDisplay = true
+        }
+        return needsDisplay
+    }
+    
+    override func action(forKey key: String) -> CAAction? {
+        if displayDo == nil {
+            return super.action(forKey: key)
+        }
+        guard let presentationLayer = presentation() else {
+            return super.action(forKey: key)
+        }
+        if key == "percentage" {
+            let animation = CABasicAnimation(keyPath: key)
+            animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            animation.fromValue = presentationLayer.percentage
+            animation.duration = 0.33
+            return animation
+        }
+        
+        return super.action(forKey: key)
+    }
+    
+    override func display() {
+        guard let presentationLayer = presentation() else { return }
+        displayDo?(presentationLayer.percentage)
     }
 }

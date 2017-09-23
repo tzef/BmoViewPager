@@ -21,7 +21,6 @@ class BmoPageItemListLayout: UICollectionViewLayout {
             delegate?.bmoPageItemListLayoutAttributesChanged(attributesList)
         }
     }
-    var totalLength: CGFloat = 0.0
     var contentSize = CGSize.zero
     var layoutChanged = false
     
@@ -53,13 +52,14 @@ class BmoPageItemListLayout: UICollectionViewLayout {
     }
     override func prepare() {
         super.prepare()
-        totalLength = 0.0
         guard let cv = collectionView, cv.numberOfItems(inSection: 0) > 0 else {
             attributesList.removeAll()
+            contentSize = .zero
             return
         }
         if attributesList.count != cv.numberOfItems(inSection: 0) || layoutChanged {
             layoutChanged = false
+            var totalLength: CGFloat = 0.0
             attributesList = (0..<cv.numberOfItems(inSection: 0)).map { (i) -> UICollectionViewLayoutAttributes in
                 let size = delegate?.bmoPageItemListLayout(sizeForItemAt: i) ?? CGSize.zero
                 let attributes = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: i, section: 0))

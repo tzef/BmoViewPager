@@ -53,10 +53,13 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         self.backgroundColor = .white
         self.layer.addSublayer(percentageLayer)
     }
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        collectionLayout.layoutChanged = true
-        self.reloadData()
+    override var bounds: CGRect {
+        didSet {
+            if oldValue != bounds {
+                collectionLayout.layoutChanged = true
+                self.reloadData()
+            }
+        }
     }
     func setCollectionView() {
         collectionLayout.delegate = self
@@ -236,7 +239,9 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     
     // MAKR: - UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        bmoDelegate?.bmoViewPageItemList(self, didSelectItemAt: indexPath.row)
+        if percentageLayer.animation(forKey: "percentage") == nil {
+            bmoDelegate?.bmoViewPageItemList(self, didSelectItemAt: indexPath.row)
+        }
     }
     
     // MARK: - UICollectionViewDataSource

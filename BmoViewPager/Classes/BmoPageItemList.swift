@@ -103,11 +103,13 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
             if index < viewPager.presentedPageIndex {
                 if percentage == 1.0 * CGFloat(viewPager.presentedPageIndex - index) {
                     self?.percentageLayer.displayDo = nil
+                    self?.reloadData()
                 }
             }
             if index > viewPager.presentedPageIndex {
                 if percentage == -1.0 * CGFloat(index - viewPager.presentedPageIndex) {
                     self?.percentageLayer.displayDo = nil
+                    self?.reloadData()
                 }
             }
         }

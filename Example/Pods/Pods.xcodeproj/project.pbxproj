@@ -219,9 +219,9 @@
 				C990D29A1E8F96BA009528A6 /* Extension */,
 				C990D2961E8F8340009528A6 /* BmoViewPager.swift */,
 				C990D2981E8F858D009528A6 /* BmoPageViewController.swift */,
-				C940E1ED1EF537C400F73BD7 /* BmoViewPagerNavigationBar.swift */,
 				C990D2A61E90D2AD009528A6 /* BmoPageItemList.swift */,
 				C9C67DAD1EE2F8AA00B112A2 /* BmoPageItemListLayout.swift */,
+				C940E1ED1EF537C400F73BD7 /* BmoViewPagerNavigationBar.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";

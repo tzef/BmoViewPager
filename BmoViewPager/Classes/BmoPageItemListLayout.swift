@@ -10,7 +10,7 @@ import UIKit
 
 protocol BmoPageItemListLayoutDelegate: class {
     func bmoPageItemListLayout(sizeForItemAt index: Int) -> CGSize
-    func bmoPageItemListLayoutAttributesChanged(_ attributes: [UICollectionViewLayoutAttributes])
+    func bmoPageItemListLayoutAttributesChanged(_ attributes: [UICollectionViewLayoutAttributes], animated: Bool)
 }
 class BmoPageItemListLayout: UICollectionViewLayout {
     weak var delegate: BmoPageItemListLayoutDelegate?
@@ -18,7 +18,7 @@ class BmoPageItemListLayout: UICollectionViewLayout {
     var orientation: UIPageViewControllerNavigationOrientation = .horizontal
     var attributesList = [UICollectionViewLayoutAttributes]() {
         didSet {
-            delegate?.bmoPageItemListLayoutAttributesChanged(attributesList)
+            delegate?.bmoPageItemListLayoutAttributesChanged(attributesList, animated: false)
         }
     }
     var contentSize = CGSize.zero

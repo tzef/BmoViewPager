@@ -286,14 +286,39 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         guard let collectionView = collectionView, let viewPager = bmoViewPager, let navigationBar = bmoViewPgaerNavigationBar else {
             return
         }
-        let index = viewPager.presentedPageIndex
-        if let attribute = collectionLayout.attributesList[safe: index] {
-            if navigationBar.orientation == .horizontal {
-                let distance = attribute.center.x - collectionView.center.x - collectionView.contentOffset.x
+        guard let attribute = collectionLayout.attributesList[safe: viewPager.presentedPageIndex] else {
+            return
+        }
+        switch navigationBar.orientation {
+        case .horizontal:
+            if collectionView.contentSize.width < collectionView.bounds.width {
+                return
+            }
+            let distance = attribute.center.x - collectionView.center.x
+            switch distance {
+            case ...0:
+                collectionView.setContentOffset(CGPoint(x: 0, y: collectionView.contentOffset.y), animated: false)
+            case 0..<collectionView.contentSize.width - collectionView.bounds.width:
                 collectionView.setContentOffset(CGPoint(x: distance, y: collectionView.contentOffset.y), animated: false)
-            } else {
-                let distance = attribute.center.y - collectionView.center.y - collectionView.contentOffset.y
+            case (collectionView.contentSize.width - collectionView.bounds.width)...:
+                collectionView.setContentOffset(CGPoint(x: collectionView.contentSize.width - collectionView.bounds.width, y: collectionView.contentOffset.y), animated: false)
+            default:
+                break
+            }
+        case .vertical:
+            if collectionView.contentSize.height < collectionView.bounds.height {
+                return
+            }
+            let distance = attribute.center.y - collectionView.center.y
+            switch distance {
+            case ...0:
+                collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: 0), animated: false)
+            case 0..<collectionView.contentSize.height - collectionView.bounds.height:
                 collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: distance), animated: false)
+            case (collectionView.contentSize.height - collectionView.bounds.height)...:
+                collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: collectionView.contentSize.height - collectionView.bounds.height), animated: false)
+            default:
+                break
             }
         }
     }

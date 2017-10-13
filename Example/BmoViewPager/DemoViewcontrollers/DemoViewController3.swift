@@ -23,9 +23,11 @@ class DemoViewController3: UIViewController {
         viewPager.delegate = self
         viewPager.dataSource = self
         viewPager.orientation = .vertical
-        viewPager.isInterporationAnimated = false
+        
         viewPagerNavigationBar.viewPager = viewPager
         viewPagerNavigationBar.isEnabledTapEvent = false
+        viewPagerNavigationBar.isInterporationAnimated = false
+        
         viewPagerNavigationBar2.viewPager = viewPager
         viewPagerNavigationBar2.orientation = .vertical
         viewPagerNavigationBar2.isUserInteractionEnabled = false

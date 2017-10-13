@@ -90,6 +90,9 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         }
         collectionView?.reloadData()
     }
+    func focusToTargetItem() {
+        self.bmoPageItemListLayoutAttributesChanged(collectionLayout.attributesList, animated: true)
+    }
     func focusFrom(index: Int) {
         guard let viewPager = bmoViewPager else {
             return
@@ -115,9 +118,10 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         }
         if viewPager.presentedPageIndex > index {
             percentageLayer.percentage = 1.0 * CGFloat(viewPager.presentedPageIndex - index)
-        }
-        if viewPager.presentedPageIndex < index {
+        } else if viewPager.presentedPageIndex < index {
             percentageLayer.percentage = -1.0 * CGFloat(index - viewPager.presentedPageIndex)
+        } else {
+            self.reloadData()
         }
     }
     func updateFocusProgress(_ progress: inout CGFloat, index: Int, enabledAutoFocusIfNeed: Bool = true) {
@@ -282,7 +286,7 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     // MARK: - BmoPageItemListLayoutDelegate
-    func bmoPageItemListLayoutAttributesChanged(_ attributes: [UICollectionViewLayoutAttributes]) {
+    func bmoPageItemListLayoutAttributesChanged(_ attributes: [UICollectionViewLayoutAttributes], animated: Bool) {
         guard let collectionView = collectionView, let viewPager = bmoViewPager, let navigationBar = bmoViewPgaerNavigationBar else {
             return
         }
@@ -297,11 +301,11 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
             let distance = attribute.center.x - collectionView.center.x
             switch distance {
             case ...0:
-                collectionView.setContentOffset(CGPoint(x: 0, y: collectionView.contentOffset.y), animated: false)
+                collectionView.setContentOffset(CGPoint(x: 0, y: collectionView.contentOffset.y), animated: animated)
             case 0..<collectionView.contentSize.width - collectionView.bounds.width:
-                collectionView.setContentOffset(CGPoint(x: distance, y: collectionView.contentOffset.y), animated: false)
+                collectionView.setContentOffset(CGPoint(x: distance, y: collectionView.contentOffset.y), animated: animated)
             case (collectionView.contentSize.width - collectionView.bounds.width)...:
-                collectionView.setContentOffset(CGPoint(x: collectionView.contentSize.width - collectionView.bounds.width, y: collectionView.contentOffset.y), animated: false)
+                collectionView.setContentOffset(CGPoint(x: collectionView.contentSize.width - collectionView.bounds.width, y: collectionView.contentOffset.y), animated: animated)
             default:
                 break
             }
@@ -312,11 +316,11 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
             let distance = attribute.center.y - collectionView.center.y
             switch distance {
             case ...0:
-                collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: 0), animated: false)
+                collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: 0), animated: animated)
             case 0..<collectionView.contentSize.height - collectionView.bounds.height:
-                collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: distance), animated: false)
+                collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: distance), animated: animated)
             case (collectionView.contentSize.height - collectionView.bounds.height)...:
-                collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: collectionView.contentSize.height - collectionView.bounds.height), animated: false)
+                collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: collectionView.contentSize.height - collectionView.bounds.height), animated: animated)
             default:
                 break
             }

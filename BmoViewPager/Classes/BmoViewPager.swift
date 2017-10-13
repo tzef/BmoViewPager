@@ -69,9 +69,6 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
             pageViewController.scrollable = scrollable
         }
     }
-    
-    /// enable navigation bar animation when change viewPager page by tap navigationItem
-    public var isInterporationAnimated: Bool = true
 
     public var lastPresentedPageIndex: Int = 0
     public var presentedPageIndex: Int = 0 {
@@ -82,7 +79,10 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
                 if self.presentedPageIndex != self.pageControlIndex {
                     navigationBars.forEach { (weakBar: WeakBmoVPbar<BmoViewPagerNavigationBar>) in
                         if let bar = weakBar.bar {
-                            bar.reloadData(animation: isInterporationAnimated)
+                            bar.reloadData()
+                            if bar.autoFocus {
+                                bar.focusToTargetItem()
+                            }
                         }
                     }
                 }
@@ -203,7 +203,7 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
         }
         navigationBars.forEach { (weakBar: WeakBmoVPbar<BmoViewPagerNavigationBar>) in
             if let bar = weakBar.bar {
-                bar.reloadData(animation: false)
+                bar.reloadData()
             }
         }
         pageViewController.reloadData()

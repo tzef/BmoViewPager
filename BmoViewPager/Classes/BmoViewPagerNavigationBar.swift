@@ -38,6 +38,9 @@ public class BmoViewPagerNavigationBar: UIView {
     /// if you not allow user change viewPager page by tap navigation bar item, disable it
     public var isEnabledTapEvent: Bool = true
     
+    /// enable navigation bar animation when change viewPager page by tap navigationItem
+    public var isInterporationAnimated: Bool = true
+    
     weak var pageViewController: BmoPageViewController?
     fileprivate weak var pageListView: BmoPageItemList?
     fileprivate var inited = false
@@ -79,17 +82,21 @@ public class BmoViewPagerNavigationBar: UIView {
         self.pageListView?.collectionView?.contentInset = .zero
     }
     
-    public func reloadData(animation: Bool) {
+    public func reloadData() {
         guard let viewPager = viewPager else {
             return
         }
-        if animation {
+        if isInterporationAnimated {
             self.pageListView?.focusFrom(index: viewPager.lastPresentedPageIndex)
         } else {
             self.pageListView?.reloadData()
         }
     }
     
+    public func focusToTargetItem() {
+        self.pageListView?.focusToTargetItem()
+    }
+
     func updateFocusProgress(_ progress: inout CGFloat) {
         guard let viewPager = viewPager else {
             return

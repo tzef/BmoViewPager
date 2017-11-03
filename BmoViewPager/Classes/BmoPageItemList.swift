@@ -57,7 +57,6 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         didSet {
             if oldValue != bounds {
                 collectionLayout.layoutChanged = true
-                self.reloadData()
             }
         }
     }
@@ -377,7 +376,7 @@ class BmoPageItemCell: UICollectionViewCell {
         if let attributed = rearAttributed {
             let mutableAttributedText = NSMutableAttributedString(attributedString: titleLabel.rearLabel.attributedText ?? NSAttributedString())
             mutableAttributedText.addAttributes(attributed, range: NSRange(location: 0, length: title.characters.count))
-            titleLabel.attributedText = mutableAttributedText
+            titleLabel.rearAttributedText = mutableAttributedText
         } else {
             titleLabel.textColor = UIColor.lightGray
         }

@@ -115,6 +115,7 @@ public class BmoViewPagerNavigationBar: UIView {
         if existBarIndex > 0 {
             viewPager.navigationBars.remove(at: existBarIndex)
         }
+        self.pageViewController = viewPager.pageViewController
         viewPager.navigationBars.append(WeakBmoVPbar(self))
         
         let itemList = BmoPageItemList(viewPager: viewPager, navigationBar: self, delegate: self)

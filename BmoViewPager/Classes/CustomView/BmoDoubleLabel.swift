@@ -56,12 +56,9 @@ class BmoDoubleLabel: UILabel {
             rearLabel.textAlignment = textAlignment
         }
     }
-    override var attributedText: NSAttributedString? {
+    var rearAttributedText: NSAttributedString? {
         didSet {
-            if attributedText != nil {
-                rearLabel.attributedText = attributedText
-                self.attributedText = nil
-            }
+            rearLabel.attributedText = rearAttributedText
         }
     }
     var foreAttributedText: NSAttributedString? {

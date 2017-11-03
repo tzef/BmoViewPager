@@ -39,7 +39,26 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
     }
     
     /// vierPager scroll orientataion
-    public var orientation: UIPageViewControllerNavigationOrientation = .horizontal
+    public var orientation: UIPageViewControllerNavigationOrientation = .horizontal {
+        didSet {
+            if orientation != pageViewController.navigationOrientation {
+                pageViewController.view.removeFromSuperview()
+                pageViewController.removeFromParentViewController()
+                pageViewController = BmoPageViewController(viewPager: self, scrollDelegate: self, orientation: self.orientation)
+                
+                self.addSubview(pageViewController.view)
+                pageViewController.view.bmoVP.autoFit(self)
+                if let vc = parentViewController {
+                    vc.addChildViewController(pageViewController)
+                    pageViewController.didMove(toParentViewController: vc)
+                }
+                pageViewController.infinitScroll = infinitScroll
+                pageViewController.bmoDataSource = dataSource
+                pageViewController.scrollable = scrollable
+                pageViewController.reloadData()
+            }
+        }
+    }
     
     /**
      if you need get parent view controller from viewPager's view controller, pass into the bmoViewPager's owner
@@ -47,7 +66,6 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
      */
     public weak var parentViewController: UIViewController? {
         didSet {
-            if !inited { return }
             if let vc = parentViewController {
                 vc.addChildViewController(pageViewController)
                 vc.automaticallyAdjustsScrollViewInsets = false
@@ -66,6 +84,7 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
     
     public var scrollable: Bool = true {
         didSet {
+            if !inited { return }
             pageViewController.scrollable = scrollable
         }
     }
@@ -112,30 +131,15 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
     
     public weak var dataSource: BmoViewPagerDataSource? {
         didSet {
-            if !inited { return }
-            self.parentViewController = (dataSource as? UIViewController)
             pageViewController.bmoDataSource = dataSource
-            navigationBars.forEach { (weakBar: WeakBmoVPbar<BmoViewPagerNavigationBar>) in
-                if let bar = weakBar.bar {
-                    bar.viewPager = self
-                }
-            }
+            self.parentViewController = (dataSource as? UIViewController)
         }
     }
     public weak var delegate: BmoViewPagerDelegate?
     
-    var navigationBars = [WeakBmoVPbar]() {
-        didSet {
-            if !inited { return }
-            navigationBars.forEach { (weakBar: WeakBmoVPbar<BmoViewPagerNavigationBar>) in
-                if let bar = weakBar.bar {
-                    bar.pageViewController = pageViewController
-                }
-            }
-        }
-    }
+    var navigationBars = [WeakBmoVPbar]()
     
-    lazy fileprivate var pageViewController: BmoPageViewController = {
+    lazy var pageViewController: BmoPageViewController = {
         let pageVC = BmoPageViewController(viewPager: self, scrollDelegate: self, orientation: self.orientation)
         self.addSubview(pageVC.view)
         pageVC.view.bmoVP.autoFit(self)
@@ -169,20 +173,13 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
         super.didMoveToWindow()
         if inited == false {
             pageControlIndex = presentedPageIndex
-            
             inited = true
             if let vc = self.parentViewController {
                 vc.addChildViewController(pageViewController)
                 pageViewController.didMove(toParentViewController: vc)
             }
-            navigationBars.forEach { (weakBar: WeakBmoVPbar<BmoViewPagerNavigationBar>) in
-                if let bar = weakBar.bar {
-                    bar.pageViewController = pageViewController
-                }
-            }
-            self.parentViewController = (self.dataSource as? UIViewController)
             pageViewController.infinitScroll = self.infinitScroll
-            pageViewController.bmoDataSource = self.dataSource
+            pageViewController.scrollable = self.scrollable
             pageViewController.reloadData()
         }
     }

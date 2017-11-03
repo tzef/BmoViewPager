@@ -12,7 +12,7 @@ class BmoPageViewController: UIPageViewController, UIPageViewControllerDataSourc
     weak var scrollViewDelegate: UIScrollViewDelegate?
     weak var bmoDataSource: BmoViewPagerDataSource?
     weak var bmoViewPager: BmoViewPager!
-    var pageScrollView: UIScrollView?
+    weak var pageScrollView: UIScrollView?
     var infinitScroll: Bool = false
     var scrollable: Bool = true {
         didSet {
@@ -31,6 +31,7 @@ class BmoPageViewController: UIPageViewController, UIPageViewControllerDataSourc
         self.view.backgroundColor = .clear
         self.scrollViewDelegate = scrollDelegate
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

@@ -88,6 +88,11 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
             self.setCollectionView()
         }
         collectionView?.reloadData()
+        if autoFocus {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.focusToTargetItem()
+            }
+        }
     }
     func focusToTargetItem() {
         self.bmoPageItemListLayoutAttributesChanged(collectionLayout.attributesList, animated: true)
@@ -375,14 +380,14 @@ class BmoPageItemCell: UICollectionViewCell {
         
         if let attributed = rearAttributed {
             let mutableAttributedText = NSMutableAttributedString(attributedString: titleLabel.rearLabel.attributedText ?? NSAttributedString())
-            mutableAttributedText.addAttributes(attributed, range: NSRange(location: 0, length: title.characters.count))
+            mutableAttributedText.addAttributes(attributed, range: NSRange(location: 0, length: title.count))
             titleLabel.rearAttributedText = mutableAttributedText
         } else {
             titleLabel.textColor = UIColor.lightGray
         }
         if let attributed = foreAttributed {
             let mutableAttributedText = NSMutableAttributedString(attributedString: titleLabel.foreLabel.attributedText ?? NSAttributedString())
-            mutableAttributedText.addAttributes(attributed, range: NSRange(location: 0, length: title.characters.count))
+            mutableAttributedText.addAttributes(attributed, range: NSRange(location: 0, length: title.count))
             titleLabel.foreAttributedText = mutableAttributedText
         } else {
             titleLabel.foreColor = UIColor.black

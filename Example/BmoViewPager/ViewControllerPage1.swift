@@ -19,6 +19,6 @@ class ViewControllerPage1: UIViewController {
     }
 
     @IBAction func moreDemoAction(_ sender: Any) {
-        (self.parent?.parent as? MainViewController)?.viewPager.presentedPageIndex = 1
+        (self.parent?.parent as? DemoViewController)?.viewPager.presentedPageIndex = 1
     }
 }

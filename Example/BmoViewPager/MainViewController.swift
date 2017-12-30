@@ -11,45 +11,57 @@ import BmoViewPager
 
 class MainViewController: UIViewController {
     @IBOutlet weak var viewPager: BmoViewPager!
-    @IBOutlet weak var pageControl: UIPageControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewPager.delegate = self
         viewPager.dataSource = self
+        viewPager.scrollable = false
         
-        pageControl.pageIndicatorTintColor = UIColor.lightGray
-        pageControl.currentPageIndicatorTintColor = UIColor.black
+        let navigationBar = BmoViewPagerNavigationBar(frame: CGRect(origin: .zero, size: .init(width: 200, height: 30)))
+        self.navigationItem.titleView = navigationBar
+        navigationBar.backgroundColor = UIColor.clear
+        navigationBar.viewPager = viewPager
     }
 }
 
 extension MainViewController: BmoViewPagerDataSource {
+    // Optional
+    func bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [NSAttributedStringKey : Any]? {
+        return [
+            NSAttributedStringKey.strokeWidth     : 1.0,
+            NSAttributedStringKey.strokeColor     : UIColor.black,
+            NSAttributedStringKey.foregroundColor : UIColor.groupTableViewBackground
+        ]
+    }
+    func bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [NSAttributedStringKey : Any]? {
+        return [
+            NSAttributedStringKey.foregroundColor : UIColor.black
+        ]
+    }
+    func bmoViewPagerDataSourceNaviagtionBarItemTitle(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> String? {
+        return page == 0 ? "DEMO" : "ABOUT"
+    }
+    func bmoViewPagerDataSourceNaviagtionBarItemSize(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> CGSize {
+        return CGSize(width: navigationBar.bounds.width / 2, height: navigationBar.bounds.height)
+    }
+    
+    // Required
     func bmoViewPagerDataSourceNumberOfPage(in viewPager: BmoViewPager) -> Int {
-        return 3
+        return 2
     }
     func bmoViewPagerDataSource(_ viewPager: BmoViewPager, viewControllerForPageAt page: Int) -> UIViewController {
         switch page {
         case 0:
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "ViewControllerPage1") as? ViewControllerPage1 {
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "DemoViewController") as? DemoViewController {
                 return vc
             }
         case 1:
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "ViewControllerPage2") as? ViewControllerPage2 {
-                return vc
-            }
-        case 2:
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "ViewControllerPage3") as? ViewControllerPage3 {
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "AboutViewController") as? AboutViewController {
                 return vc
             }
         default:
             break
         }
         return UIViewController()
-    }
-}
-
-extension MainViewController: BmoViewPagerDelegate {
-    func bmoViewPagerDelegate(_ viewPager: BmoViewPager, pageChanged page: Int) {
-        pageControl.currentPage = page
     }
 }

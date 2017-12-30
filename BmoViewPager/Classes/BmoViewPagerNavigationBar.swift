@@ -77,16 +77,20 @@ public class BmoViewPagerNavigationBar: UIView {
         (str2 as NSString).draw(at: str2Point, withAttributes: subAttributed)
     }
     
+    public override var intrinsicContentSize: CGSize {
+        return frame.size
+    }
+    
     /// if the viewpager position changed by navigation bar, cause the navigatoin position become weird, need to reset contentInset to solve cell wrong position issue
     public func resetContentInset() {
         self.pageListView?.collectionView?.contentInset = .zero
     }
     
-    public func reloadData() {
+    public func reloadData(autoAnimated: Bool = true) {
         guard let viewPager = viewPager else {
             return
         }
-        if isInterporationAnimated {
+        if isInterporationAnimated && autoAnimated {
             self.pageListView?.focusFrom(index: viewPager.lastPresentedPageIndex)
         } else {
             self.pageListView?.reloadData()

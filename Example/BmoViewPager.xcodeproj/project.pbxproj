@@ -13,6 +13,9 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		77B6379129F34BD8149479F5 /* Pods_BmoViewPager_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 747DC0516D7659089D876197 /* Pods_BmoViewPager_Example.framework */; };
 		C93E26F11F0017B7005D39C4 /* TargetLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93E26F01F0017B7005D39C4 /* TargetLineView.swift */; };
+		C93EB5C41FF67F5B009C3603 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93EB5C31FF67F5B009C3603 /* AboutViewController.swift */; };
+		C93EB5C61FF69FEC009C3603 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93EB5C51FF69FEC009C3603 /* DemoViewController.swift */; };
+		C93EB5C81FF7D457009C3603 /* AboutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93EB5C71FF7D457009C3603 /* AboutCell.swift */; };
 		C940E1F01EF64A2600F73BD7 /* DemoViewController0.swift in Sources */ = {isa = PBXBuildFile; fileRef = C940E1EF1EF64A2600F73BD7 /* DemoViewController0.swift */; };
 		C940E1F21EF64AD700F73BD7 /* pic2.png in Resources */ = {isa = PBXBuildFile; fileRef = C940E1F11EF64AD700F73BD7 /* pic2.png */; };
 		C95C10651F1B8E06006B0AB8 /* ViewControllerPage3.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95C10641F1B8E06006B0AB8 /* ViewControllerPage3.swift */; };
@@ -68,6 +71,9 @@
 		7D2E37F019AAB9761C230EDB /* BmoViewPager.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = BmoViewPager.podspec; path = ../BmoViewPager.podspec; sourceTree = "<group>"; };
 		846799C824A4F2F3A15BEA5D /* Pods-BmoViewPager_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BmoViewPager_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BmoViewPager_Tests/Pods-BmoViewPager_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		C93E26F01F0017B7005D39C4 /* TargetLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TargetLineView.swift; path = CustomView/TargetLineView.swift; sourceTree = "<group>"; };
+		C93EB5C31FF67F5B009C3603 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		C93EB5C51FF69FEC009C3603 /* DemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
+		C93EB5C71FF7D457009C3603 /* AboutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutCell.swift; sourceTree = "<group>"; };
 		C940E1EF1EF64A2600F73BD7 /* DemoViewController0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DemoViewController0.swift; path = DemoViewControllers/DemoViewController0.swift; sourceTree = "<group>"; };
 		C940E1F11EF64AD700F73BD7 /* pic2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pic2.png; path = Screenshot/pic2.png; sourceTree = "<group>"; };
 		C95C10641F1B8E06006B0AB8 /* ViewControllerPage3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerPage3.swift; sourceTree = "<group>"; };
@@ -152,6 +158,7 @@
 		607FACD21AFB9204008FA782 /* Example for BmoViewPager */ = {
 			isa = PBXGroup;
 			children = (
+				C93EB5C21FF67EEF009C3603 /* About */,
 				C9C67DC11EE3EC8500B112A2 /* Extension */,
 				C9C67DBC1EE3E1F900B112A2 /* Screenshot */,
 				C9C67DB51EE3DE4D00B112A2 /* CustomView */,
@@ -162,6 +169,7 @@
 				C9C67DB61EE3DF5000B112A2 /* ViewControllerPage1.swift */,
 				C9C67DB81EE3DF6100B112A2 /* ViewControllerPage2.swift */,
 				C95C10641F1B8E06006B0AB8 /* ViewControllerPage3.swift */,
+				C93EB5C51FF69FEC009C3603 /* DemoViewController.swift */,
 				C9C67DBA1EE3E02D00B112A2 /* MainViewController.swift */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
@@ -215,6 +223,15 @@
 				E2DD128F077E599091DFBB7E /* Pods_BmoViewPager_Tests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C93EB5C21FF67EEF009C3603 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				C93EB5C31FF67F5B009C3603 /* AboutViewController.swift */,
+				C93EB5C71FF7D457009C3603 /* AboutCell.swift */,
+			);
+			name = About;
 			sourceTree = "<group>";
 		};
 		C95C10661F1B9228006B0AB8 /* PageControlDemo */ = {
@@ -446,6 +463,7 @@
 				C9C67E001EE4335000B112A2 /* DemoViewController2.swift in Sources */,
 				C9B061841F13E21B008532E2 /* TargetLineHightlighedView.swift in Sources */,
 				C9C67DC91EE3FE6B00B112A2 /* SegmentedView.swift in Sources */,
+				C93EB5C81FF7D457009C3603 /* AboutCell.swift in Sources */,
 				C940E1F01EF64A2600F73BD7 /* DemoViewController0.swift in Sources */,
 				C93E26F11F0017B7005D39C4 /* TargetLineView.swift in Sources */,
 				C9C67DC01EE3EC4900B112A2 /* DemoButton.swift in Sources */,
@@ -454,10 +472,12 @@
 				C95C10681F1B9240006B0AB8 /* DemoPageViewController.swift in Sources */,
 				C9C67DB71EE3DF5000B112A2 /* ViewControllerPage1.swift in Sources */,
 				C9E1988D1F08CE21005AA17B /* Array+Safe.swift in Sources */,
+				C93EB5C61FF69FEC009C3603 /* DemoViewController.swift in Sources */,
 				C99854A11F1B67880066C1FD /* VerticalDemoViewController3.swift in Sources */,
 				C95C10651F1B8E06006B0AB8 /* ViewControllerPage3.swift in Sources */,
 				C9C67DF71EE4273F00B112A2 /* ImageViewController.swift in Sources */,
 				C998549D1F1B67740066C1FD /* VerticalDemoViewController1.swift in Sources */,
+				C93EB5C41FF67F5B009C3603 /* AboutViewController.swift in Sources */,
 				C9C67DCF1EE4018C00B112A2 /* NumberViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

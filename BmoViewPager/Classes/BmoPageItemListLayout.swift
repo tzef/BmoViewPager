@@ -16,6 +16,7 @@ class BmoPageItemListLayout: UICollectionViewLayout {
     weak var delegate: BmoPageItemListLayoutDelegate?
     
     var orientation: UIPageViewControllerNavigationOrientation = .horizontal
+    var direction: UIUserInterfaceLayoutDirection = .leftToRight
     var attributesList = [UICollectionViewLayoutAttributes]() {
         didSet {
             delegate?.bmoPageItemListLayoutAttributesChanged(attributesList, animated: false)
@@ -27,8 +28,9 @@ class BmoPageItemListLayout: UICollectionViewLayout {
     override init() {
         super.init()
     }
-    convenience init(orientation: UIPageViewControllerNavigationOrientation) {
+    convenience init(orientation: UIPageViewControllerNavigationOrientation, direction: UIUserInterfaceLayoutDirection) {
         self.init()
+        self.direction = direction
         self.orientation = orientation
     }
     required init?(coder aDecoder: NSCoder) {
@@ -57,10 +59,14 @@ class BmoPageItemListLayout: UICollectionViewLayout {
             contentSize = .zero
             return
         }
+        var indexArray: Array<Int> = Array((0..<cv.numberOfItems(inSection: 0)))
+        if direction == .rightToLeft && orientation == .horizontal {
+            indexArray = Array((0..<cv.numberOfItems(inSection: 0)).reversed())
+        }
         if attributesList.count != cv.numberOfItems(inSection: 0) || layoutChanged {
             layoutChanged = false
             var totalLength: CGFloat = 0.0
-            attributesList = (0..<cv.numberOfItems(inSection: 0)).map { (i) -> UICollectionViewLayoutAttributes in
+            attributesList = indexArray.map { (i) -> UICollectionViewLayoutAttributes in
                 let size = delegate?.bmoPageItemListLayout(sizeForItemAt: i) ?? CGSize.zero
                 let attributes = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: i, section: 0))
                 if orientation == .horizontal {

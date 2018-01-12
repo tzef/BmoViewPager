@@ -152,6 +152,8 @@ extension BmoViewPagerNavigationBar: BmoPageItemListDelegate {
             return
         }
         var reuseIt = false
+        let originIsScrollEnabled = pageViewController?.pageScrollView?.isScrollEnabled ?? true
+        pageViewController?.pageScrollView?.isScrollEnabled = false
         pageViewController?.pageScrollView?.subviews.forEach({ (view) in
             if view.subviews.first?.bmoVP.index() == index {
                 reuseIt = true
@@ -162,5 +164,6 @@ extension BmoViewPagerNavigationBar: BmoPageItemListDelegate {
             pageListView?.focusIndex = -1
             viewPager.presentedPageIndex = index
         }
+        pageViewController?.pageScrollView?.isScrollEnabled = originIsScrollEnabled
     }
 }

@@ -42,14 +42,15 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
     public var orientation: UIPageViewControllerNavigationOrientation = .horizontal {
         didSet {
             if orientation != pageViewController.navigationOrientation {
+                pageViewController.didMove(toParentViewController: nil)
                 pageViewController.view.removeFromSuperview()
                 pageViewController.removeFromParentViewController()
                 pageViewController = BmoPageViewController(viewPager: self, scrollDelegate: self, orientation: self.orientation)
                 
-                self.addSubview(pageViewController.view)
-                pageViewController.view.bmoVP.autoFit(self)
                 if let vc = parentViewController {
                     vc.addChildViewController(pageViewController)
+                    self.addSubview(pageViewController.view)
+                    pageViewController.view.bmoVP.autoFit(self)
                     pageViewController.didMove(toParentViewController: vc)
                 }
                 pageViewController.infinitScroll = infinitScroll
@@ -171,7 +172,7 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
     }
     public override func didMoveToWindow() {
         super.didMoveToWindow()
-        if inited == false {
+        if inited == false {            
             pageControlIndex = presentedPageIndex
             inited = true
             if let vc = self.parentViewController {

@@ -172,7 +172,7 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
     }
     public override func didMoveToWindow() {
         super.didMoveToWindow()
-        if inited == false {
+        if inited == false {            
             pageControlIndex = presentedPageIndex
             inited = true
             if let vc = self.parentViewController {

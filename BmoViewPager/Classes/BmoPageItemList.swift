@@ -14,7 +14,7 @@ protocol BmoPageItemListDelegate: class {
 }
 class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSource, BmoPageItemListLayoutDelegate {
     var collectionView: UICollectionView? = nil
-    let collectionLayout = BmoPageItemListLayout(orientation: .horizontal)
+    let collectionLayout = BmoPageItemListLayout(orientation: .horizontal, direction: .leftToRight)
     
     weak var bmoViewPager: BmoViewPager?
     weak var bmoDelegate: BmoPageItemListDelegate?
@@ -38,6 +38,9 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     
     // for interpolation
     let percentageLayer = PercentageLayer()
+    
+    // for userInterfaceLayoutDirection direction
+    var layoutDirection = UIUserInterfaceLayoutDirection.leftToRight
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -64,6 +67,12 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         collectionLayout.delegate = self
         if bmoViewPgaerNavigationBar?.orientation == .vertical {
             collectionLayout.orientation = .vertical
+        }
+        if #available(iOS 9.0, *) {
+            if UIView.userInterfaceLayoutDirection(for: self.semanticContentAttribute) == .rightToLeft {
+                collectionLayout.direction = .rightToLeft
+                layoutDirection = .rightToLeft
+            }
         }
         collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: collectionLayout)
         collectionView!.register(BmoPageItemCell.classForCoder(), forCellWithReuseIdentifier: reuseIdentifier)
@@ -106,6 +115,9 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         percentageLayer.displayDo = { [weak self] (percentage) in
             let interporation = Int(percentage)
             progress = percentage - CGFloat(interporation)
+            if self?.layoutDirection == .rightToLeft && viewPager.orientation == .horizontal {
+                progress *= -1
+            }
             self?.updateFocusProgress(&progress, index: index + interporation, enabledAutoFocusIfNeed: false)
             if index < viewPager.presentedPageIndex {
                 if percentage == 1.0 * CGFloat(viewPager.presentedPageIndex - index) {
@@ -134,6 +146,9 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         }
         if collectionLayout.attributesList.count == 0 {
             return
+        }
+        if self.layoutDirection == .rightToLeft && viewPager.orientation == .horizontal {
+            progress *= -1
         }
         if focusIndex != index {
             focusIndex = index
@@ -166,14 +181,20 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
                 }
             }
             
-            if let nextAttribute = collectionLayout.attributesList[safe: nextIndex] {
+            var positionNextIndex = nextIndex
+            var positionPreviousIndex = previousIndex
+            if self.layoutDirection == .rightToLeft && bmoViewPgaerNavigationBar?.orientation == .horizontal {
+                positionNextIndex = (bmoViewPagerCount - 1) - nextIndex
+                positionPreviousIndex = (bmoViewPagerCount - 1) - previousIndex
+            }
+            if let nextAttribute = collectionLayout.attributesList[safe: positionNextIndex] {
                 if navigationBar.orientation == .horizontal {
                     nextDistance = nextAttribute.center.x - collectionView.center.x - collectionOffSet
                 } else {
                     nextDistance = nextAttribute.center.y - collectionView.center.y - collectionOffSet
                 }
             }
-            if let previousAttribute = collectionLayout.attributesList[safe: previousIndex] {
+            if let previousAttribute = collectionLayout.attributesList[safe: positionPreviousIndex] {
                 if navigationBar.orientation == .horizontal {
                     previousDistance = collectionView.center.x + collectionOffSet - previousAttribute.center.x
                 } else {
@@ -190,54 +211,49 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
             if progress >= 1.0 || progress <= -1.0 {
                 progress = lastProgress
             }
+            if autoFocus && enabledAutoFocusIfNeed {
+                var willSetOffSet: CGFloat = collectionOffSet
+                if progress > 0 {
+                    willSetOffSet += nextDistance * progress
+                } else if progress < 0 {
+                    willSetOffSet += previousDistance * progress
+                }
+                if navigationBar.orientation == .horizontal {
+                    if willSetOffSet > collectionView.contentSize.width - collectionView.bounds.width {
+                        willSetOffSet = collectionView.contentSize.width - collectionView.bounds.width
+                    }
+                } else {
+                    if willSetOffSet > collectionView.contentSize.height - collectionView.bounds.height {
+                        willSetOffSet = collectionView.contentSize.height - collectionView.bounds.height
+                    }
+                }
+                if willSetOffSet < 0 {
+                    willSetOffSet = 0
+                }
+                if navigationBar.orientation == .horizontal {
+                    collectionView.setContentOffset(CGPoint(x: willSetOffSet, y: collectionView.contentOffset.y), animated: false)
+                } else {
+                    collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: willSetOffSet), animated: false)
+                }
+            }
             if progress > 0 {
-                if autoFocus && enabledAutoFocusIfNeed {
-                    var willSetOffSet = collectionOffSet + nextDistance * progress
-                    if navigationBar.orientation == .horizontal {
-                        if willSetOffSet > collectionView.contentSize.width - collectionView.bounds.width {
-                            willSetOffSet = collectionView.contentSize.width - collectionView.bounds.width
-                        }
-                    } else {
-                        if willSetOffSet > collectionView.contentSize.height - collectionView.bounds.height {
-                            willSetOffSet = collectionView.contentSize.height - collectionView.bounds.height
-                        }
-                    }
-                    if willSetOffSet < 0 {
-                        willSetOffSet = 0
-                    }
-                    if navigationBar.orientation == .horizontal {
-                        collectionView.setContentOffset(CGPoint(x: willSetOffSet, y: collectionView.contentOffset.y), animated: false)
-                    } else {
-                        collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: willSetOffSet), animated: false)
-                    }
-                }
                 previousCell?.titleLabel.maskProgress = 0.0
-                nextCell?.titleLabel.maskProgress = progress
-                focusCell?.titleLabel.maskProgress = -1 * progress
-            } else if progress < 0 {
-                if autoFocus && enabledAutoFocusIfNeed {
-                    var willSetOffSet = collectionOffSet + previousDistance * progress
-                    if navigationBar.orientation == .horizontal {
-                        if willSetOffSet > collectionView.contentSize.width - collectionView.bounds.width {
-                            willSetOffSet = collectionView.contentSize.width - collectionView.bounds.width
-                        }
-                    } else {
-                        if willSetOffSet > collectionView.contentSize.height - collectionView.bounds.height {
-                            willSetOffSet = collectionView.contentSize.height - collectionView.bounds.height
-                        }
-                    }
-                    if willSetOffSet < 0 {
-                        willSetOffSet = 0
-                    }
-                    if navigationBar.orientation == .horizontal {
-                        collectionView.setContentOffset(CGPoint(x: willSetOffSet, y: collectionView.contentOffset.y), animated: false)
-                    } else {
-                        collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: willSetOffSet), animated: false)
-                    }
+                if self.layoutDirection == .rightToLeft && bmoViewPgaerNavigationBar?.orientation == .horizontal {
+                    nextCell?.titleLabel.maskProgress = -1 * (1 - abs(progress))
+                    focusCell?.titleLabel.maskProgress = 1 - abs(progress)
+                } else {
+                    nextCell?.titleLabel.maskProgress = progress
+                    focusCell?.titleLabel.maskProgress = -1 * progress
                 }
+            } else if progress < 0 {
                 nextCell?.titleLabel.maskProgress = 0.0
-                previousCell?.titleLabel.maskProgress = -1 * (1 - abs(progress))
-                focusCell?.titleLabel.maskProgress = 1 - abs(progress)
+                if self.layoutDirection == .rightToLeft && bmoViewPgaerNavigationBar?.orientation == .horizontal {
+                    previousCell?.titleLabel.maskProgress = -1 * progress
+                    focusCell?.titleLabel.maskProgress = progress
+                } else {
+                    previousCell?.titleLabel.maskProgress = -1 * (1 - abs(progress))
+                    focusCell?.titleLabel.maskProgress = 1 - abs(progress)
+                }
             } else {
                 nextCell?.titleLabel.maskProgress = 0.0
                 previousCell?.titleLabel.maskProgress = 0.0
@@ -264,14 +280,13 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         }
         let title = bmoDataSource?.bmoViewPagerDataSourceNaviagtionBarItemTitle?(viewPager, navigationBar: navigationBar, forPageListAt: indexPath.row) ?? ""
         var fraction: CGFloat = 0.0
-        
+        if indexPath.row == viewPager.presentedPageIndex {
+            fraction = 1.0
+        }
         if indexPath.row == viewPager.presentedPageIndex - 1 {
             if previousCell == nil {
                 previousCell = cell
             }
-        }
-        if indexPath.row == viewPager.presentedPageIndex {
-            fraction = 1.0
         }
         if indexPath.row == viewPager.presentedPageIndex + 1 {
             if nextCell == nil {
@@ -294,7 +309,11 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         guard let collectionView = collectionView, let viewPager = bmoViewPager, let navigationBar = bmoViewPgaerNavigationBar else {
             return
         }
-        guard let attribute = collectionLayout.attributesList[safe: viewPager.presentedPageIndex] else {
+        var positionIndex = viewPager.presentedPageIndex
+        if self.layoutDirection == .rightToLeft && bmoViewPgaerNavigationBar?.orientation == .horizontal {
+            positionIndex = (bmoViewPagerCount - 1) - positionIndex
+        }
+        guard let attribute = collectionLayout.attributesList[safe: positionIndex] else {
             return
         }
         switch navigationBar.orientation {

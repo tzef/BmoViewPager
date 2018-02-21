@@ -22,6 +22,7 @@
 		C9C67DB21EE2F8B400B112A2 /* Array+BmoViewPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C67DAF1EE2F8B400B112A2 /* Array+BmoViewPager.swift */; };
 		C9C67DB31EE2F8B400B112A2 /* String+BmoViewPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C67DB01EE2F8B400B112A2 /* String+BmoViewPager.swift */; };
 		C9C67DB41EE2F8B400B112A2 /* UIView+BmoViewPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C67DB11EE2F8B400B112A2 /* UIView+BmoViewPager.swift */; };
+		C9F1F6752032963600351830 /* BmoViewPagerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F1F6742032963600351830 /* BmoViewPagerDelegateProxy.swift */; };
 		D06C01F26B648BB86B3065F7F2EC6853 /* Pods-BmoViewPager_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B5E5486376CDCCB105926417680B74D0 /* Pods-BmoViewPager_Example-dummy.m */; };
 		E7A4A90BBA394B8E874B56B2C19649E2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
 		F6053F3F5CC8DF7B276B3947A302A679 /* Pods-BmoViewPager_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A5135D831A80E38F06B9142CB4547C6 /* Pods-BmoViewPager_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -71,6 +72,7 @@
 		C9C67DAF1EE2F8B400B112A2 /* Array+BmoViewPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Array+BmoViewPager.swift"; path = "Extension/Array+BmoViewPager.swift"; sourceTree = "<group>"; };
 		C9C67DB01EE2F8B400B112A2 /* String+BmoViewPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+BmoViewPager.swift"; path = "Extension/String+BmoViewPager.swift"; sourceTree = "<group>"; };
 		C9C67DB11EE2F8B400B112A2 /* UIView+BmoViewPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+BmoViewPager.swift"; path = "Extension/UIView+BmoViewPager.swift"; sourceTree = "<group>"; };
+		C9F1F6742032963600351830 /* BmoViewPagerDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BmoViewPagerDelegateProxy.swift; sourceTree = "<group>"; };
 		CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		D75A33D1D051880AA0BB1F73A7BA679F /* BmoViewPager.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BmoViewPager.xcconfig; sourceTree = "<group>"; };
 		E3FBE769619BF49B6E6AA797E31009AA /* Pods-BmoViewPager_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-BmoViewPager_Tests-dummy.m"; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				C990D2A61E90D2AD009528A6 /* BmoPageItemList.swift */,
 				C9C67DAD1EE2F8AA00B112A2 /* BmoPageItemListLayout.swift */,
 				C940E1ED1EF537C400F73BD7 /* BmoViewPagerNavigationBar.swift */,
+				C9F1F6742032963600351830 /* BmoViewPagerDelegateProxy.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				C990D2971E8F8340009528A6 /* BmoViewPager.swift in Sources */,
 				C990D2A71E90D2AD009528A6 /* BmoPageItemList.swift in Sources */,
 				C9C67DB31EE2F8B400B112A2 /* String+BmoViewPager.swift in Sources */,
+				C9F1F6752032963600351830 /* BmoViewPagerDelegateProxy.swift in Sources */,
 				C990D2AA1E923552009528A6 /* BmoDoubleLabel.swift in Sources */,
 				C9C67DB41EE2F8B400B112A2 /* UIView+BmoViewPager.swift in Sources */,
 				C9C67DB21EE2F8B400B112A2 /* Array+BmoViewPager.swift in Sources */,

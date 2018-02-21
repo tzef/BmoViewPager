@@ -59,8 +59,8 @@ class BmoPageViewController: UIPageViewController, UIPageViewControllerDataSourc
         }
     }
     func setPageViewController() {
-        let count = bmoDataSource?.bmoViewPagerDataSourceNumberOfPage(in: bmoViewPager) ?? 1
-        if count == 0 {
+        guard let count = bmoDataSource?.bmoViewPagerDataSourceNumberOfPage(in: bmoViewPager), count > 0 else {
+            self.setViewControllers([UIViewController()], direction: .forward, animated: false, completion: nil)
             return
         }
         pageCount = count

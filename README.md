@@ -6,8 +6,12 @@
 [![Platform](https://img.shields.io/cocoapods/p/BmoViewPager.svg?style=flat)](http://cocoapods.org/pods/BmoViewPager)
 
 #### ⚠️ **The latest version for Swift 3.2 is 3.2.0** ⚠️  (Not Maintained)
-#### ⚠️ **The latest version for Swift 4.0 is 4.0.5** ⚠️ 
+#### ⚠️ **The latest version for Swift 4.0 is 4.1.0** ⚠️ 
 
+## 4.1.0 Migration
+Fix error spelling : `interporation` to interpolation, if you have access this variable, please change the naming
+
+## About
 A ViewPager with NavigationBar component based on UIPageViewController and UICollectionView, which is a convenience way to supply and manager each viewController.
 
 I want to make UIPageViewController more intuitive for using it, like UITableView, and supply a navigationBar quickly and simply.

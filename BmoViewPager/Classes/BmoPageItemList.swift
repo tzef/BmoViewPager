@@ -321,32 +321,40 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
             if collectionView.contentSize.width < collectionView.bounds.width {
                 return
             }
+            var targetX: CGFloat = 0.0
             let distance = attribute.center.x - collectionView.center.x
             switch distance {
             case ...0:
-                collectionView.setContentOffset(CGPoint(x: 0, y: collectionView.contentOffset.y), animated: animated)
+                targetX = 0
             case 0..<collectionView.contentSize.width - collectionView.bounds.width:
-                collectionView.setContentOffset(CGPoint(x: distance, y: collectionView.contentOffset.y), animated: animated)
+                targetX = distance
             case (collectionView.contentSize.width - collectionView.bounds.width)...:
-                collectionView.setContentOffset(CGPoint(x: collectionView.contentSize.width - collectionView.bounds.width, y: collectionView.contentOffset.y), animated: animated)
+                targetX = collectionView.contentSize.width - collectionView.bounds.width
             default:
                 break
             }
+            self.focusIndex = -1
+            collectionOffSet = targetX
+            collectionView.setContentOffset(CGPoint(x: targetX, y: collectionView.contentOffset.y), animated: animated)
         case .vertical:
             if collectionView.contentSize.height < collectionView.bounds.height {
                 return
             }
+            var targetY: CGFloat = 0.0
             let distance = attribute.center.y - collectionView.center.y
             switch distance {
             case ...0:
-                collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: 0), animated: animated)
+                targetY = 0
             case 0..<collectionView.contentSize.height - collectionView.bounds.height:
-                collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: distance), animated: animated)
+                targetY = distance
             case (collectionView.contentSize.height - collectionView.bounds.height)...:
-                collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: collectionView.contentSize.height - collectionView.bounds.height), animated: animated)
+                targetY = collectionView.contentSize.height - collectionView.bounds.height
             default:
                 break
             }
+            self.focusIndex = -1
+            collectionOffSet = targetY
+            collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: targetY), animated: animated)
         }
     }
     func bmoPageItemListLayout(sizeForItemAt index: Int) -> CGSize {

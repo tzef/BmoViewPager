@@ -18,9 +18,6 @@ class BmoViewPagerDelegateProxy: NSObject {
     weak var forwardDelegate: AnyObject?
     weak var delegate: BmoViewPagerDelegateProxyDataSource?
     
-    deinit {
-        print("BmoViewPagerDelegateProxy deinit")
-    }
     public init(viewPager: BmoViewPager?, forwardDelegate: AnyObject?, delegate: BmoViewPagerDelegateProxyDataSource?) {
         self.forwardDelegate = forwardDelegate
         self.viewPager = viewPager

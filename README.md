@@ -9,7 +9,7 @@
 #### ⚠️ **The latest version for Swift 4.0 is 4.1.0** ⚠️ 
 
 ## 4.1.0 Migration
-Fix error spelling : `interporation` to interpolation, if you have access this variable, please change the naming
+Fix error spelling : `interporation` to `interpolation`, if you have access this variable, please change the naming
 
 ## About
 A ViewPager with NavigationBar component based on UIPageViewController and UICollectionView, which is a convenience way to supply and manager each viewController.

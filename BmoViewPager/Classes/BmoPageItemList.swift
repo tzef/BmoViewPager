@@ -113,12 +113,12 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         var progress: CGFloat = 0.0
         percentageLayer.percentage = 0.0
         percentageLayer.displayDo = { [weak self] (percentage) in
-            let interporation = Int(percentage)
-            progress = percentage - CGFloat(interporation)
+            let interpolation = Int(percentage)
+            progress = percentage - CGFloat(interpolation)
             if self?.layoutDirection == .rightToLeft && viewPager.orientation == .horizontal {
                 progress *= -1
             }
-            self?.updateFocusProgress(&progress, index: index + interporation, enabledAutoFocusIfNeed: false)
+            self?.updateFocusProgress(&progress, index: index + interpolation, enabledAutoFocusIfNeed: false)
             if index < viewPager.presentedPageIndex {
                 if percentage == 1.0 * CGFloat(viewPager.presentedPageIndex - index) {
                     self?.percentageLayer.displayDo = nil

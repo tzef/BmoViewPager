@@ -23,7 +23,7 @@ class DemoViewController1: UIViewController {
         
         customViewPager.dataSource = self
         customViewPgareNavigationBar.viewPager = customViewPager
-        customViewPgareNavigationBar.isInterporationAnimated = true
+        customViewPgareNavigationBar.isInterpolationAnimated = true
         
         defaultViewPager.dataSource = self
         defaultViewPager.presentedPageIndex = 7

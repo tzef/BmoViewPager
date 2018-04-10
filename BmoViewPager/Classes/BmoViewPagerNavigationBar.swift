@@ -39,7 +39,7 @@ public class BmoViewPagerNavigationBar: UIView {
     public var isEnabledTapEvent: Bool = true
     
     /// enable navigation bar animation when change viewPager page by tap navigationItem
-    public var isInterporationAnimated: Bool = true
+    public var isInterpolationAnimated: Bool = true
     
     weak var pageViewController: BmoPageViewController?
     fileprivate weak var pageListView: BmoPageItemList?
@@ -90,7 +90,7 @@ public class BmoViewPagerNavigationBar: UIView {
         guard let viewPager = viewPager else {
             return
         }
-        if isInterporationAnimated && autoAnimated {
+        if isInterpolationAnimated && autoAnimated {
             self.pageListView?.focusFrom(index: viewPager.lastPresentedPageIndex)
         } else {
             self.pageListView?.reloadData()
@@ -159,7 +159,7 @@ extension BmoViewPagerNavigationBar: BmoPageItemListDelegate {
         if index == viewPager.presentedPageIndex - 1 {
             scrollPosition = 0
         }
-        if self.isInterporationAnimated {
+        if self.isInterpolationAnimated {
             if let container = pageViewController?.pageScrollView?.subviews[safe: scrollPosition] {
                 if let vc = viewPager.getReferencePageViewController(at: index) {
                     container.addSubview(vc.view)

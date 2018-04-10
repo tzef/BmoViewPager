@@ -27,7 +27,7 @@ import UIKit
 }
 
 @IBDesignable
-public class BmoViewPager: UIView, UIScrollViewDelegate {
+public class BmoViewPager: UIView {
     @IBInspectable var isHorizontal: Bool = true {
         didSet {
             if isHorizontal {
@@ -38,14 +38,25 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
         }
     }
     
+    lazy var delegateProxy: BmoViewPagerDelegateProxy = {
+        return BmoViewPagerDelegateProxy(viewPager: self, forwardDelegate: self, delegate: self)
+    }()
+    
+    /// UIScrollview in BmoViewPager's UIPageViewController
+    weak var scrollView: UIScrollView? {
+        get {
+            return pageViewController.pageScrollView
+        }
+    }
+
     /// vierPager scroll orientataion
     public var orientation: UIPageViewControllerNavigationOrientation = .horizontal {
         didSet {
             if orientation != pageViewController.navigationOrientation {
-                pageViewController.didMove(toParentViewController: nil)
+                pageViewController.willMove(toParentViewController: nil)
                 pageViewController.view.removeFromSuperview()
                 pageViewController.removeFromParentViewController()
-                pageViewController = BmoPageViewController(viewPager: self, scrollDelegate: self, orientation: self.orientation)
+                pageViewController = BmoPageViewController(viewPager: self, scrollDelegate: delegateProxy, orientation: self.orientation)
                 
                 if let vc = parentViewController {
                     vc.addChildViewController(pageViewController)
@@ -97,26 +108,23 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
             if oldValue != presentedPageIndex {
                 lastPresentedPageIndex = oldValue
                 if self.presentedPageIndex != self.pageControlIndex {
-                    navigationBars.forEach { (weakBar: WeakBmoVPbar<BmoViewPagerNavigationBar>) in
-                        if let bar = weakBar.bar {
-                            bar.reloadData()
-                            if bar.autoFocus {
-                                bar.focusToTargetItem()
+                    pageViewController.setViewPagerPageCompletion = { [weak self] (page) in
+                        self?.navigationBars.forEach { (weakBar: WeakBmoVPbar<BmoViewPagerNavigationBar>) in
+                            if let bar = weakBar.bar {
+                                bar.reloadData()
                             }
                         }
                     }
                 }
                 self.pageControlIndex = presentedPageIndex
-                var reuseIt = false
                 if let view = pageViewController.pageScrollView?.subviews[safe: 1] {
                     if let vc = view.subviews.first?.bmoVP.ownerVC(), view.subviews.first?.bmoVP.index() == presentedPageIndex {
                         self.delegate?.bmoViewPagerDelegate?(self, didAppear: vc, page: presentedPageIndex)
-                        reuseIt = true
+                        return
                     }
                 }
-                if reuseIt == false {
-                    pageViewController.setViewPagerPage(presentedPageIndex)
-                }
+                pageViewController.setViewControllerIng = false
+                pageViewController.setViewPagerPage(presentedPageIndex)
             }
         }
     }
@@ -138,15 +146,17 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
     }
     public weak var delegate: BmoViewPagerDelegate?
     
-    var navigationBars = [WeakBmoVPbar]()
-    
     lazy var pageViewController: BmoPageViewController = {
-        let pageVC = BmoPageViewController(viewPager: self, scrollDelegate: self, orientation: self.orientation)
+        let pageVC = BmoPageViewController(viewPager: self, scrollDelegate: delegateProxy, orientation: self.orientation)
+        
         self.addSubview(pageVC.view)
         pageVC.view.bmoVP.autoFit(self)
         return pageVC
     }()
     
+    internal var referencePageViewControllers = [Int : WeakBmoVPpageViewController]()
+    internal var navigationBars = [WeakBmoVPbar]()
+    fileprivate var delegateObserver: NSKeyValueObservation?
     fileprivate var lastContentOffSet: CGPoint? = nil
     fileprivate var boundChanged: Bool = false
     fileprivate var inited = false
@@ -154,8 +164,8 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
     public override var bounds: CGRect {
         didSet {
             boundChanged = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                self.boundChanged = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+                self?.boundChanged = false
             }
         }
     }
@@ -169,6 +179,16 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
         self.init()
         self.presentedPageIndex = initPage
         self.isHorizontal = (orientation == .horizontal)
+        delegateObserver = scrollView?.observe(\.delegate, options: [.new], changeHandler: { [weak self] (scrollView, value) in
+            if let newDelegate = (value.newValue as? UIScrollViewDelegate), !(newDelegate is BmoViewPagerDelegateProxy) {
+                if let delegate = self?.pageViewController.scrollViewDelegate as? BmoViewPagerDelegateProxy  {
+                    delegate.forwardDelegate = newDelegate
+                } else {
+                    self?.delegateProxy.forwardDelegate = newDelegate
+                    scrollView.delegate = self?.delegateProxy
+                }
+            }
+        })
     }
     public override func didMoveToWindow() {
         super.didMoveToWindow()
@@ -182,6 +202,10 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
             pageViewController.infinitScroll = self.infinitScroll
             pageViewController.scrollable = self.scrollable
             pageViewController.reloadData()
+            
+            if let existedDelegate = scrollView?.delegate, !(existedDelegate is BmoViewPagerDelegateProxy) {
+                delegateProxy.forwardDelegate = existedDelegate
+            }
         }
     }
     /// if the viewpager position changed by navigation bar, cause the navigatoin position become weird, need to reset contentInset to solve cell wrong position issue
@@ -194,69 +218,37 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
     }
     
     // MARK: - Public
-    public func reloadData() {
-        inited = false
-        if dataSource?.bmoViewPagerDataSourceNumberOfPage(in: self) ?? 0 <= presentedPageIndex {
-            presentedPageIndex = 0
+    public func setReferencePageViewController(_ vc: UIViewController, at page: Int) {
+        if getReferencePageViewController(at: page) == vc {
+            return
         }
-        navigationBars.forEach { (weakBar: WeakBmoVPbar<BmoViewPagerNavigationBar>) in
-            if let bar = weakBar.bar {
-                bar.reloadData()
+        for (key, element) in referencePageViewControllers {
+            if element.vc == nil {
+                referencePageViewControllers[key] = nil
             }
         }
-        pageViewController.reloadData()
-        inited = true
+        vc.view.bmoVP.setOwner(vc)
+        vc.view.bmoVP.setIndex(page)
+        referencePageViewControllers[page] = WeakBmoVPpageViewController(vc)
     }
-    
-    // MARK: - UIScrollViewDelegate
-    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if boundChanged { return }
-        let offSet = lastContentOffSet ?? scrollView.contentOffset
-        if self.orientation == .horizontal {
-            if abs(offSet.x - scrollView.contentOffset.x) > scrollView.bounds.width * 0.7 {
-                self.presentedPageIndex = self.pageControlIndex
+    public func getReferencePageViewController(at page: Int) -> UIViewController? {
+        return referencePageViewControllers[page]?.vc
+    }
+    public func reloadData(autoAnimated: Bool = true) {
+        if !inited { return }
+        DispatchQueue.main.async {
+            self.inited = false
+            self.referencePageViewControllers.removeAll()
+            if self.dataSource?.bmoViewPagerDataSourceNumberOfPage(in: self) ?? 0 <= self.presentedPageIndex {
+                self.presentedPageIndex = 0
             }
-            if scrollView.contentOffset.x == scrollView.bounds.width {
-                if let index = scrollView.subviews[safe: 1]?.subviews.first?.bmoVP.index() {
-                    pageControlIndex = index
+            self.navigationBars.forEach { (weakBar: WeakBmoVPbar<BmoViewPagerNavigationBar>) in
+                if let bar = weakBar.bar {
+                    bar.reloadData(autoAnimated: autoAnimated)
                 }
-                return
             }
-        } else {
-            if abs(offSet.y - scrollView.contentOffset.y) > scrollView.bounds.height * 0.7 {
-                self.presentedPageIndex = self.pageControlIndex
-            }
-            if scrollView.contentOffset.y == scrollView.bounds.height {
-                if let index = scrollView.subviews[safe: 1]?.subviews.first?.bmoVP.index() {
-                    pageControlIndex = index
-                }
-                return
-            }
-        }
-        lastContentOffSet = scrollView.contentOffset
-        var progressFraction: CGFloat = 0.0
-        if self.orientation == .horizontal {
-            let originX = scrollView.contentOffset.x
-            progressFraction = (originX - scrollView.bounds.width) / scrollView.bounds.width
-        } else {
-            let originY = scrollView.contentOffset.y
-            progressFraction = (originY - pageViewController.view.bounds.height) / pageViewController.view.bounds.height
-        }
-        var targetIndex = 0
-        if progressFraction > 0.0 {
-            targetIndex = (progressFraction > 0.5 ? 2 : 1)
-        }
-        if progressFraction < 0.0 {
-            targetIndex = (progressFraction < -0.5 ? 0 : 1)
-        }
-        if let index = scrollView.subviews[safe: targetIndex]?.subviews.first?.bmoVP.index() {
-            pageControlIndex = index
-        }
-        delegate?.bmoViewPagerDelegate?(self, scrollProgress: progressFraction, index: pageControlIndex)
-        navigationBars.forEach { (weakBar: WeakBmoVPbar<BmoViewPagerNavigationBar>) in
-            if let bar = weakBar.bar {
-                bar.updateFocusProgress(&progressFraction)
-            }
+            self.pageViewController.reloadData()
+            self.inited = true
         }
     }
     
@@ -295,3 +287,16 @@ public class BmoViewPager: UIView, UIScrollViewDelegate {
         (str4 as NSString).draw(at: str4Point, withAttributes: subAttributed)
     }
 }
+
+extension BmoViewPager: BmoViewPagerDelegateProxyDataSource {
+    func isBoundChanged() -> Bool {
+        return self.boundChanged
+    }
+    func getLastContentOffSet() -> CGPoint? {
+        return self.lastContentOffSet
+    }
+    func setLastContentOffSet(_ point: CGPoint) {
+        self.lastContentOffSet = point
+    }
+}
+

@@ -8,12 +8,19 @@
 
 import UIKit
 
+class WeakBmoVPpageViewController<T: UIViewController> {
+    weak var vc : T?
+    init (_ vc: T) {
+        self.vc = vc
+    }
+}
+
 class BmoPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     weak var scrollViewDelegate: UIScrollViewDelegate?
     weak var bmoDataSource: BmoViewPagerDataSource?
     weak var bmoViewPager: BmoViewPager!
     weak var pageScrollView: UIScrollView?
-    fileprivate var setViewControllerIng = false
+    var setViewControllerIng = false
     var infinitScroll: Bool = false
     var scrollable: Bool = true {
         didSet {
@@ -21,6 +28,7 @@ class BmoPageViewController: UIPageViewController, UIPageViewControllerDataSourc
         }
     }
     var pageCount = 0
+    var setViewPagerPageCompletion: ((_ page: Int) -> Void)?
     
     init(_ orientation: UIPageViewControllerNavigationOrientation) {
         super.init(transitionStyle: .scroll, navigationOrientation: orientation, options: nil)
@@ -46,7 +54,7 @@ class BmoPageViewController: UIPageViewController, UIPageViewControllerDataSourc
     }
     
     // MARK: - Private
-    func findScrollViewIfNeed() {
+    private func findScrollViewIfNeed() {
         if self.pageScrollView != nil {
             return
         }
@@ -58,17 +66,19 @@ class BmoPageViewController: UIPageViewController, UIPageViewControllerDataSourc
             }
         }
     }
-    func setPageViewController() {
-        let count = bmoDataSource?.bmoViewPagerDataSourceNumberOfPage(in: bmoViewPager) ?? 1
-        if count == 0 {
+    private func setPageViewController() {
+        guard let count = bmoDataSource?.bmoViewPagerDataSourceNumberOfPage(in: bmoViewPager), count > 0 else {
+            self.setViewControllers([UIViewController()], direction: .forward, animated: false, completion: nil)
             return
         }
         pageCount = count
-        if let firstVC = bmoDataSource?.bmoViewPagerDataSource(bmoViewPager, viewControllerForPageAt: bmoViewPager.presentedPageIndex) {
+        let cacheVC = bmoViewPager.getReferencePageViewController(at: bmoViewPager.presentedPageIndex)
+        if let firstVC = cacheVC ?? bmoDataSource?.bmoViewPagerDataSource(bmoViewPager, viewControllerForPageAt: bmoViewPager.presentedPageIndex) {
             self.delegate = self
             self.dataSource = self
             firstVC.view.bmoVP.setOwner(firstVC)
             firstVC.view.bmoVP.setIndex(bmoViewPager.presentedPageIndex)
+            bmoViewPager.setReferencePageViewController(firstVC, at: bmoViewPager.presentedPageIndex)
             setViewControllerIng = true
             self.setViewControllers([firstVC], direction: .forward, animated: false, completion: { [weak self] (finished) in
                 self?.setViewControllerIng = false
@@ -82,32 +92,27 @@ class BmoPageViewController: UIPageViewController, UIPageViewControllerDataSourc
     }
     
     // MARK: - Public
-    func reloadData() {
+    public func reloadData() {
         self.setPageViewController()
     }
-    func setViewPagerPage(_ page: Int) {
+    public func setViewPagerPage(_ page: Int) {
         if setViewControllerIng { return }
         if page >= pageCount { return }
-        if let vc = bmoDataSource?.bmoViewPagerDataSource(bmoViewPager, viewControllerForPageAt: page) {
+        let cacheVC = bmoViewPager.getReferencePageViewController(at: page)
+        if let vc = cacheVC ?? bmoDataSource?.bmoViewPagerDataSource(bmoViewPager, viewControllerForPageAt: page) {
             setViewControllerIng = true
             self.setViewControllers([vc], direction: .forward, animated: false, completion: { [weak self] (finished) in
+                if let viewPager = self?.bmoViewPager {
+                    viewPager.delegate?.bmoViewPagerDelegate?(viewPager, didAppear: vc, page: page)
+                    viewPager.setReferencePageViewController(vc, at: page)
+                    vc.view.bmoVP.setIndex(page)
+                    vc.view.bmoVP.setOwner(vc)
+                }
+                self?.setViewPagerPageCompletion?(page)
+                self?.setViewPagerPageCompletion = nil
                 self?.setViewControllerIng = false
             })
-            bmoViewPager.delegate?.bmoViewPagerDelegate?(bmoViewPager, didAppear: vc, page: page)
-            vc.view.bmoVP.setIndex(page)
-            vc.view.bmoVP.setOwner(vc)
         }
-    }
-    func setViewPagerPage(withViewController vc: UIViewController, at page: Int) {
-        if setViewControllerIng { return }
-        if page >= pageCount { return }
-        setViewControllerIng = true
-        self.setViewControllers([vc], direction: .forward, animated: false, completion: { [weak self] (finished) in
-            self?.setViewControllerIng = false
-        })
-        bmoViewPager.delegate?.bmoViewPagerDelegate?(bmoViewPager, didAppear: vc, page: page)
-        vc.view.bmoVP.setIndex(page)
-        vc.view.bmoVP.setOwner(vc)
     }
     
     // MARK: - PageViewDelegate
@@ -120,9 +125,13 @@ class BmoPageViewController: UIPageViewController, UIPageViewControllerDataSourc
                 return nil
             }
         }
+        if let vc = bmoViewPager.getReferencePageViewController(at: nextIndex) {
+            return vc
+        }
         guard let vc = bmoDataSource?.bmoViewPagerDataSource(bmoViewPager, viewControllerForPageAt: nextIndex) else {
             return nil
         }
+        bmoViewPager.setReferencePageViewController(vc, at: nextIndex)
         vc.view.bmoVP.setIndex(nextIndex)
         vc.view.bmoVP.setOwner(vc)
         return vc
@@ -136,9 +145,13 @@ class BmoPageViewController: UIPageViewController, UIPageViewControllerDataSourc
                 return nil
             }
         }
+        if let vc = bmoViewPager.getReferencePageViewController(at: nextIndex) {
+            return vc
+        }
         guard let vc = bmoDataSource?.bmoViewPagerDataSource(bmoViewPager, viewControllerForPageAt: nextIndex) else {
             return nil
         }
+        bmoViewPager.setReferencePageViewController(vc, at: nextIndex)
         vc.view.bmoVP.setIndex(nextIndex)
         vc.view.bmoVP.setOwner(vc)
         return vc

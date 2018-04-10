@@ -85,7 +85,7 @@ if you don't want use default style, you can custom your own background view and
 #### BmoViewPager infinitScroll (Default is false)
 #### BmoViewPager presentedPageIndex can programmatically assign the present page
 #### Custom NavigationBar animation, you can get scroll progress from BmoViewPagerDelegate
-#### Navigation bar interporation animation when change viewPager page by tap navigationItem
+#### Navigation bar interpolation animation when change viewPager page by tap navigationItem
 
 <table>
   <tr>

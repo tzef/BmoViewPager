@@ -15,16 +15,30 @@ class DemoViewController1: UIViewController {
     @IBOutlet weak var customViewPgareNavigationBar: BmoViewPagerNavigationBar!
     @IBOutlet weak var customViewPager: BmoViewPager!
     
+    var  customPage1 = ImageViewController(image: #imageLiteral(resourceName: "item0.jpg"))
+    var  customPage2 = ImageViewController(image: #imageLiteral(resourceName: "item1.jpg"))
+    var  customPage3 = ImageViewController(image: #imageLiteral(resourceName: "item2.jpg"))
     override func viewDidLoad() {
         super.viewDidLoad()
         
         customViewPager.dataSource = self
         customViewPgareNavigationBar.viewPager = customViewPager
-        customViewPgareNavigationBar.isInterporationAnimated = false
+        customViewPgareNavigationBar.isInterpolationAnimated = true
         
         defaultViewPager.dataSource = self
         defaultViewPager.presentedPageIndex = 7
         defaultViewPagerNavigationBar.viewPager = defaultViewPager
+        
+        if #available(iOS 9.0, *) {
+            customPage1.loadViewIfNeeded()
+            customPage2.loadViewIfNeeded()
+            customPage3.loadViewIfNeeded()
+        } else {
+        }
+        
+        customViewPager.setReferencePageViewController(customPage1, at: 0)
+        customViewPager.setReferencePageViewController(customPage2, at: 1)
+        customViewPager.setReferencePageViewController(customPage3, at: 2)
     }
 }
 
@@ -73,7 +87,16 @@ extension DemoViewController1: BmoViewPagerDataSource {
     }
     func bmoViewPagerDataSource(_ viewPager: BmoViewPager, viewControllerForPageAt page: Int) -> UIViewController {
         if viewPager == customViewPager {
-            return ImageViewController(image: UIImage(named: "item\(page).jpg"))
+            switch page {
+            case 0:
+                return customPage1
+            case 1:
+                return customPage2
+            case 2:
+                return customPage3
+            default:
+                return UIViewController()
+            }
         } else {
             return NumberViewController(number: page)
         }

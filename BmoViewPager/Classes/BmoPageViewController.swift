@@ -81,6 +81,7 @@ class BmoPageViewController: UIPageViewController, UIPageViewControllerDataSourc
             bmoViewPager.setReferencePageViewController(firstVC, at: bmoViewPager.presentedPageIndex)
             setViewControllerIng = true
             self.setViewControllers([firstVC], direction: .forward, animated: false, completion: { [weak self] (finished) in
+                self?.pageScrollView?.isScrollEnabled = self?.bmoViewPager.scrollable ?? true
                 self?.setViewControllerIng = false
             })
             bmoViewPager.delegate?.bmoViewPagerDelegate?(bmoViewPager, pageChanged: bmoViewPager.pageControlIndex)

@@ -371,7 +371,8 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         calculateSizeLabel.sizeToFit()
         let size = calculateSizeLabel.bounds.size
         if navigationBar.orientation == .horizontal {
-            return CGSize(width: size.width + 32, height: collectionView.bounds.size.height)
+            let width = UIScreen.main.bounds.width / 2
+            return CGSize(width: width, height: collectionView.bounds.size.height)
         } else {
             return CGSize(width: collectionView.bounds.size.width, height: size.height + 32)
         }

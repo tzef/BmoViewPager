@@ -55,7 +55,7 @@ extension BmoViewPagerDelegateProxy: UIScrollViewDelegate {
         let offSet = delegate?.getLastContentOffSet() ?? scrollView.contentOffset
         if pager.orientation == .horizontal {
             if abs(offSet.x - scrollView.contentOffset.x) > scrollView.bounds.width * 0.7 {
-                pager.presentedPageIndex = pager.pageControlIndex
+                pager.internalSetPresentedIndex(pager.pageControlIndex)
             }
             if scrollView.contentOffset.x == scrollView.bounds.width {
                 if let index = scrollView.subviews[safe: 1]?.subviews.first?.bmoVP.index() {
@@ -65,7 +65,7 @@ extension BmoViewPagerDelegateProxy: UIScrollViewDelegate {
             }
         } else {
             if abs(offSet.y - scrollView.contentOffset.y) > scrollView.bounds.height * 0.7 {
-                pager.presentedPageIndex = pager.pageControlIndex
+                pager.internalSetPresentedIndex(pager.pageControlIndex)
             }
             if scrollView.contentOffset.y == scrollView.bounds.height {
                 if let index = scrollView.subviews[safe: 1]?.subviews.first?.bmoVP.index() {

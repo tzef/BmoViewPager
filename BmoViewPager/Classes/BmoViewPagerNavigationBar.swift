@@ -43,6 +43,7 @@ public class BmoViewPagerNavigationBar: UIView {
     
     weak var pageViewController: BmoPageViewController?
     fileprivate weak var pageListView: BmoPageItemList?
+    fileprivate var itemListSelectBlock = false
     fileprivate var inited = false
     
     public override func didMoveToWindow() {
@@ -141,8 +142,8 @@ public class BmoViewPagerNavigationBar: UIView {
 }
 
 extension BmoViewPagerNavigationBar: BmoPageItemListDelegate {
-    func bmoViewPageItemList(_ itemList: BmoPageItemList, didSelectItemAt index: Int) {
-        if isEnabledTapEvent == false {
+    func bmoViewPageItemList(didSelectItemAt index: Int, previousIndex: Int?) {
+        if isEnabledTapEvent == false || itemListSelectBlock {
             return
         }
         guard let viewPager = viewPager else {
@@ -151,31 +152,34 @@ extension BmoViewPagerNavigationBar: BmoPageItemListDelegate {
         if viewPager.delegate?.bmoViewPagerDelegate?(viewPager, shouldSelect: index) == false {
             return
         }
+        itemListSelectBlock = true
         pageViewController?.pageScrollView?.isScrollEnabled = false
         var scrollPosition = -1
-        if index == viewPager.presentedPageIndex + 1 {
+        if index == (previousIndex ?? viewPager.presentedPageIndex) + 1 {
             scrollPosition = 2
         }
-        if index == viewPager.presentedPageIndex - 1 {
+        if index == (previousIndex ?? viewPager.presentedPageIndex) - 1 {
             scrollPosition = 0
         }
-        if self.isInterpolationAnimated {
+        let changePage = { [weak self] in
+            self?.itemListSelectBlock = false
+            self?.pageListView?.focusIndex = -1
+            self?.viewPager?.internalSetPresentedIndex(index)
+            self?.pageViewController?.pageScrollView?.isScrollEnabled = viewPager.scrollable
+        }
+        if viewPager.isInterporationAnimated {
             if let container = pageViewController?.pageScrollView?.subviews[safe: scrollPosition] {
                 if let vc = viewPager.getReferencePageViewController(at: index) {
                     container.addSubview(vc.view)
                     vc.view.frame = container.bounds
                     pageViewController?.pageScrollView?.setContentOffset(container.frame.origin, animated: true)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) { [weak self] in
-                        self?.pageListView?.focusIndex = -1
-                        self?.viewPager?.presentedPageIndex = index
-                        self?.pageViewController?.pageScrollView?.isScrollEnabled = viewPager.scrollable
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
+                        changePage()
                     }
                     return
                 }
             }
         }
-        pageListView?.focusIndex = -1
-        viewPager.presentedPageIndex = index
-        pageViewController?.pageScrollView?.isScrollEnabled = viewPager.scrollable
+        changePage()
     }
 }

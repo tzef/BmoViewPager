@@ -10,7 +10,7 @@ import UIKit
 
 private let reuseIdentifier = "reuseIdentifier"
 protocol BmoPageItemListDelegate: class {
-    func bmoViewPageItemList(_ itemList: BmoPageItemList, didSelectItemAt index: Int)
+    func bmoViewPageItemList(didSelectItemAt index: Int, previousIndex: Int?)
 }
 class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSource, BmoPageItemListLayoutDelegate {
     var collectionView: UICollectionView? = nil
@@ -266,7 +266,7 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     // MAKR: - UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if percentageLayer.animation(forKey: "percentage") == nil {
-            bmoDelegate?.bmoViewPageItemList(self, didSelectItemAt: indexPath.row)
+            bmoDelegate?.bmoViewPageItemList(didSelectItemAt: indexPath.row, previousIndex: nil)
         }
     }
     

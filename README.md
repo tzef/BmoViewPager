@@ -6,7 +6,7 @@
 [![Platform](https://img.shields.io/cocoapods/p/BmoViewPager.svg?style=flat)](http://cocoapods.org/pods/BmoViewPager)
 
 #### ⚠️ **The latest version for Swift 3.2 is 3.2.0** ⚠️  (Not Maintained)
-#### ⚠️ **The latest version for Swift 4.0 is 4.1.1** ⚠️ 
+#### ⚠️ **The latest version for Swift 4.0 is 4.1.2** ⚠️ 
 
 ## 4.1.0 Migration
 Fix error spelling : `interporation` to `interpolation`, if you have access this variable, please change the naming
@@ -126,6 +126,61 @@ but sometimes the index have a little bug, if you feel the way too, hope it help
     </td>
   </tr>
 </table>
+
+## Popular Issue
+
+### How to animate changing pages on BmoViewPager ?
+There is a property `isInterpolationAnimated` in `BmoViewPager` and `BmoViewPagerNavigationBar`, default value both true.
+Most importantly, If you want to have scroll animation every time, the pageViewController need be initialed before BmoViewPagerDataSource ask it. and told `BmoViewPager` the reference by `public func setReferencePageViewController(_ vc: UIViewController, at page: Int)`
+
+For example, I always keep the UIViewController of previous page, current page and next page in a dictionary `cachedPageViewControllers`
+```swift
+var cachedPageViewControllers = [Int: UIViewController]()
+func bmoViewPagerDelegate(_ viewPager: BmoViewPager, didAppear viewController: UIViewController, page: Int) {
+    switch page {
+    case 0:
+        self.prepareCachedPageViewControllers(pages: [pageCount - 1, page, page + 1])
+    case 1..<(pageCount - 1):
+        self.prepareCachedPageViewControllers(pages: [page - 1, page, page + 1])
+    case pageCount - 1:
+        self.prepareCachedPageViewControllers(pages: [page - 1, page, 0])
+    default:
+        break
+    }
+}
+func bmoViewPagerDataSource(_ viewPager: BmoViewPager, viewControllerForPageAt page: Int) -> UIViewController {
+    if let cacheVC = cachedPageViewControllers[page] {
+        return cacheVC
+    } else {
+        let vc = createPageViewController(page)
+        viewPager.setReferencePageViewController(vc, at: page)
+        cachedPageViewControllers[page] = vc
+        return vc
+    }
+}
+private func prepareCachedPageViewControllers(pages: [Int]) {
+    cachedPageViewControllers.forEach({ (key, vc) in
+        if !pages.contains(key) {
+            cachedPageViewControllers[key] = nil
+        }
+    })
+    pages.forEach { (page) in
+        if cachedPageViewController[page] == nil {
+            let vc = createPageViewController(page)
+            viewPager.setReferencePageViewController(vc, at: page)
+            cachedPageViewControllers[page] = vc
+        }
+    }
+}
+private func createPageViewController(_ page: Int) -> UIViewController {
+    //TODO: return your own UIViewController
+}
+```
+
+
+### Be sure to return different UIViewController for every page
+Because `BmoViewPager` is based on `UIPageViewController`, and when the scroll view scroll to edge, it will ask `UIPageViewControllerDataSource` to get the next and the previous page. 
+At the same time, `BmoViewPager` save the view controller and page number in the view controller's view, it will let the this page view controller has wrong property.
 
 ## Example
 

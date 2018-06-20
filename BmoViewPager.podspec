@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'BmoViewPager'
-  s.version          = '4.1.1'
+  s.version          = '4.1.2'
   s.summary          = 'A ViewPager with NavigationBar component based on UIPageViewController and UICollectionView'
 
 # This description is used to generate tags and improve search results.

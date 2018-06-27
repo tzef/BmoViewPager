@@ -6,7 +6,7 @@
 [![Platform](https://img.shields.io/cocoapods/p/BmoViewPager.svg?style=flat)](http://cocoapods.org/pods/BmoViewPager)
 
 #### ⚠️ **The latest version for Swift 3.2 is 3.2.0** ⚠️  (Not Maintained)
-#### ⚠️ **The latest version for Swift 4.0 is 4.1.2** ⚠️ 
+#### ⚠️ **The latest version for Swift 4.0 is 4.1.3** ⚠️ 
 
 ## 4.1.0 Migration
 Fix error spelling : `interporation` to `interpolation`, if you have access this variable, please change the naming

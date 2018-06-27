@@ -111,7 +111,10 @@ public class BmoViewPager: UIView {
             return _presentedPageIndex
         }
         set {
-            guard inited else { return }
+            guard inited else {
+                _presentedPageIndex = newValue
+                return
+            }
             if _presentedPageIndex != newValue {
                 if !presentedIndexInternalFlag && isInterporationAnimated {
                     if let bar = self.navigationBars.first?.bar {

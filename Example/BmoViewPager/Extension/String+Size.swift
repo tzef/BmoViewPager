@@ -9,7 +9,7 @@
 import UIKit
 
 extension String {
-    func size(attribute: [NSAttributedStringKey : Any], size: CGSize) -> CGSize {
+    func size(attribute: [NSAttributedString.Key : Any], size: CGSize) -> CGSize {
         let attributedText = NSAttributedString(string: self, attributes: attribute)
         return attributedText.boundingRect(with: size, options: NSStringDrawingOptions.usesLineFragmentOrigin, context: nil).size
     }

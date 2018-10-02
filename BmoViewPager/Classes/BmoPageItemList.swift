@@ -394,7 +394,7 @@ class BmoPageItemCell: UICollectionViewCell {
         titleLabel.bmoVP.autoFit(self.contentView)
     }
     func configureCell(title: String, focusProgress: CGFloat, orientation: UIPageViewControllerNavigationOrientation,
-                       rearAttributed: [NSAttributedStringKey : Any]?, foreAttributed: [NSAttributedStringKey : Any]?,
+                       rearAttributed: [NSAttributedString.Key : Any]?, foreAttributed: [NSAttributedString.Key : Any]?,
                        backgroundView: UIView?, foreBackgroundView: UIView?) {
         titleLabel.text = title
         titleLabel.orientation = orientation

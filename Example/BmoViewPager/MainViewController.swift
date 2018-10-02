@@ -26,16 +26,16 @@ class MainViewController: UIViewController {
 
 extension MainViewController: BmoViewPagerDataSource {
     // Optional
-    func bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [NSAttributedStringKey : Any]? {
+    func bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [NSAttributedString.Key : Any]? {
         return [
-            NSAttributedStringKey.strokeWidth     : 1.0,
-            NSAttributedStringKey.strokeColor     : UIColor.black,
-            NSAttributedStringKey.foregroundColor : UIColor.groupTableViewBackground
+            NSAttributedString.Key.strokeWidth     : 1.0,
+            NSAttributedString.Key.strokeColor     : UIColor.black,
+            NSAttributedString.Key.foregroundColor : UIColor.groupTableViewBackground
         ]
     }
-    func bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [NSAttributedStringKey : Any]? {
+    func bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [NSAttributedString.Key : Any]? {
         return [
-            NSAttributedStringKey.foregroundColor : UIColor.black
+            NSAttributedString.Key.foregroundColor : UIColor.black
         ]
     }
     func bmoViewPagerDataSourceNaviagtionBarItemTitle(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> String? {

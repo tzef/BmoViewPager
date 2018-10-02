@@ -7,8 +7,12 @@
 
 #### ⚠️ **The latest version for Swift 3.2 is 3.2.0** ⚠️  (Not Maintained)
 #### ⚠️ **The latest version for Swift 4.0 is 4.1.3** ⚠️ 
+#### ⚠️ **The latest version for Swift 4.2 is 4.2.0** ⚠️ 
 
-## 4.1.0 Migration
+## 4.1.0 Migrating to 4.2.0
+Syntax renaming : `NSAttributedStringKey` to `NSAttributedString.Key`
+
+## 3.2.0 to 4.1.0 Migration
 Fix error spelling : `interporation` to `interpolation`, if you have access this variable, please change the naming
 
 ## About
@@ -52,18 +56,18 @@ func bmoViewPagerDataSourceNaviagtionBarItemTitle(_ viewPager: BmoViewPager, nav
 
 navigation item title can custom attributed
 ```swift
-func bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [NSAttributedStringKey : Any]? {
+func bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [NSAttributedString.Key : Any]? {
     return [
-        NSAttributedStringKey.foregroundColor : UIColor.lightGray,
-        NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14.0)
+        NSAttributedString.Key.foregroundColor : UIColor.lightGray,
+        NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14.0)
     ]
 }
 ```
 ```swift
-func bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [NSAttributedStringKey : Any]? {
+func bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [NSAttributedString.Key : Any]? {
     return [
-        NSAttributedStringKey.foregroundColor : UIColor.red,
-        NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 14.0)
+        NSAttributedString.Key.foregroundColor : UIColor.red,
+        NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14.0)
     ]
 }
 ```

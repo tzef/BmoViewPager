@@ -28,16 +28,16 @@ class ViewControllerPage2: UIViewController {
 
 extension ViewControllerPage2: BmoViewPagerDataSource {
     // Optional
-    func bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [NSAttributedStringKey : Any]? {
+    func bmoViewPagerDataSourceNaviagtionBarItemNormalAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [NSAttributedString.Key : Any]? {
         return [
-            NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 17.0),
-            NSAttributedStringKey.foregroundColor : UIColor.groupTableViewBackground
+            NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 17.0),
+            NSAttributedString.Key.foregroundColor : UIColor.groupTableViewBackground
         ]
     }
-    func bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [NSAttributedStringKey : Any]? {
+    func bmoViewPagerDataSourceNaviagtionBarItemHighlightedAttributed(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> [NSAttributedString.Key : Any]? {
         return [
-            NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 17.0),
-            NSAttributedStringKey.foregroundColor : mainColor
+            NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 17.0),
+            NSAttributedString.Key.foregroundColor : mainColor
         ]
     }
     func bmoViewPagerDataSourceNaviagtionBarItemHighlightedBackgroundView(_ viewPager: BmoViewPager, navigationBar: BmoViewPagerNavigationBar, forPageListAt page: Int) -> UIView? {

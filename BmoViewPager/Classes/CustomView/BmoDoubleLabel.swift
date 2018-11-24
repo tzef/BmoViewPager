@@ -24,7 +24,12 @@ class BmoDoubleLabel: UILabel {
     var rearView = UIView()
     var foreView = UIView()
     
+    #if swift(>=4.2)
+    var orientation: UIPageViewController.NavigationOrientation = .horizontal
+    #else
     var orientation: UIPageViewControllerNavigationOrientation = .horizontal
+    #endif
+    
     var maskProgress: CGFloat = 0.0 {
         didSet {
             self.setNeedsDisplay()

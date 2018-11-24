@@ -30,11 +30,11 @@ class BmoPageViewController: UIPageViewController, UIPageViewControllerDataSourc
     var pageCount = 0
     var setViewPagerPageCompletion: ((_ page: Int) -> Void)?
     
-    init(_ orientation: UIPageViewControllerNavigationOrientation) {
+    init(_ orientation: UIPageViewController.NavigationOrientation) {
         super.init(transitionStyle: .scroll, navigationOrientation: orientation, options: nil)
     }
     convenience init(viewPager: BmoViewPager, scrollDelegate: UIScrollViewDelegate?,
-                     orientation: UIPageViewControllerNavigationOrientation = .horizontal) {
+                     orientation: UIPageViewController.NavigationOrientation = .horizontal) {
         self.init(orientation)
         self.bmoViewPager = viewPager
         self.view.backgroundColor = .clear

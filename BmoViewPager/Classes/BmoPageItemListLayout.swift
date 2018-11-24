@@ -15,7 +15,12 @@ protocol BmoPageItemListLayoutDelegate: class {
 class BmoPageItemListLayout: UICollectionViewLayout {
     weak var delegate: BmoPageItemListLayoutDelegate?
     
+    #if swift(>=4.2)
+    var orientation: UIPageViewController.NavigationOrientation = .horizontal
+    #else
     var orientation: UIPageViewControllerNavigationOrientation = .horizontal
+    #endif
+    
     var direction: UIUserInterfaceLayoutDirection = .leftToRight
     var attributesList = [UICollectionViewLayoutAttributes]() {
         didSet {
@@ -28,7 +33,7 @@ class BmoPageItemListLayout: UICollectionViewLayout {
     override init() {
         super.init()
     }
-    convenience init(orientation: UIPageViewControllerNavigationOrientation, direction: UIUserInterfaceLayoutDirection) {
+    convenience init(orientation: UIPageViewController.NavigationOrientation, direction: UIUserInterfaceLayoutDirection) {
         self.init()
         self.direction = direction
         self.orientation = orientation

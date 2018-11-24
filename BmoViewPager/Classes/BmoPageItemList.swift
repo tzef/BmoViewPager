@@ -393,7 +393,7 @@ class BmoPageItemCell: UICollectionViewCell {
         self.contentView.addSubview(titleLabel)
         titleLabel.bmoVP.autoFit(self.contentView)
     }
-    func configureCell(title: String, focusProgress: CGFloat, orientation: UIPageViewControllerNavigationOrientation,
+    func configureCell(title: String, focusProgress: CGFloat, orientation: UIPageViewController.NavigationOrientation,
                        rearAttributed: [NSAttributedString.Key : Any]?, foreAttributed: [NSAttributedString.Key : Any]?,
                        backgroundView: UIView?, foreBackgroundView: UIView?) {
         titleLabel.text = title
@@ -459,7 +459,11 @@ class PercentageLayer: CALayer {
         }
         if key == "percentage" {
             let animation = CABasicAnimation(keyPath: key)
+            #if swift(>=4.2)
+            animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+            #else
             animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            #endif
             animation.fromValue = presentationLayer.percentage
             animation.duration = 0.33
             return animation

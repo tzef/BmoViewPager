@@ -31,9 +31,9 @@ public class BmoViewPager: UIView {
     @IBInspectable var isHorizontal: Bool = true {
         didSet {
             if isHorizontal {
-                orientation = UIPageViewControllerNavigationOrientation.horizontal
+                orientation = UIPageViewController.NavigationOrientation.horizontal
             } else {
-                orientation = UIPageViewControllerNavigationOrientation.vertical
+                orientation = UIPageViewController.NavigationOrientation.vertical
             }
         }
     }
@@ -50,19 +50,32 @@ public class BmoViewPager: UIView {
     }
 
     /// vierPager scroll orientataion
-    public var orientation: UIPageViewControllerNavigationOrientation = .horizontal {
+    public var orientation: UIPageViewController.NavigationOrientation = .horizontal {
         didSet {
             if orientation != pageViewController.navigationOrientation {
+                #if swift(>=4.2)
+                pageViewController.willMove(toParent: nil)
+                pageViewController.view.removeFromSuperview()
+                pageViewController.removeFromParent()
+                #else
                 pageViewController.willMove(toParentViewController: nil)
                 pageViewController.view.removeFromSuperview()
                 pageViewController.removeFromParentViewController()
+                #endif
                 pageViewController = BmoPageViewController(viewPager: self, scrollDelegate: delegateProxy, orientation: self.orientation)
                 
                 if let vc = parentViewController {
+                    #if swift(>=4.2)
+                    vc.addChild(pageViewController)
+                    self.addSubview(pageViewController.view)
+                    pageViewController.view.bmoVP.autoFit(self)
+                    pageViewController.didMove(toParent: vc)
+                    #else
                     vc.addChildViewController(pageViewController)
                     self.addSubview(pageViewController.view)
                     pageViewController.view.bmoVP.autoFit(self)
                     pageViewController.didMove(toParentViewController: vc)
+                    #endif
                 }
                 pageViewController.infinitScroll = infinitScroll
                 pageViewController.bmoDataSource = dataSource
@@ -79,9 +92,15 @@ public class BmoViewPager: UIView {
     public weak var parentViewController: UIViewController? {
         didSet {
             if let vc = parentViewController {
+                #if swift(>=4.2)
+                vc.addChild(pageViewController)
+                vc.automaticallyAdjustsScrollViewInsets = false
+                pageViewController.didMove(toParent: vc)
+                #else
                 vc.addChildViewController(pageViewController)
                 vc.automaticallyAdjustsScrollViewInsets = false
                 pageViewController.didMove(toParentViewController: vc)
+                #endif
             }
         }
     }
@@ -198,7 +217,7 @@ public class BmoViewPager: UIView {
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    convenience init(initPage: Int, orientation: UIPageViewControllerNavigationOrientation = .horizontal) {
+    convenience init(initPage: Int, orientation: UIPageViewController.NavigationOrientation = .horizontal) {
         self.init()
         self.internalSetPresentedIndex(initPage)
         self.isHorizontal = (orientation == .horizontal)
@@ -219,8 +238,13 @@ public class BmoViewPager: UIView {
             pageControlIndex = presentedPageIndex
             inited = true
             if let vc = self.parentViewController {
+                #if swift(>=4.2)
+                vc.addChild(pageViewController)
+                pageViewController.didMove(toParent: vc)
+                #else
                 vc.addChildViewController(pageViewController)
                 pageViewController.didMove(toParentViewController: vc)
+                #endif
             }
             pageViewController.infinitScroll = self.infinitScroll
             pageViewController.scrollable = self.scrollable

@@ -93,7 +93,7 @@ extension ViewBmoVPProxy where Type: UIView {
             NSLayoutConstraint(item: base, attribute: .top, relatedBy: .equal,
                                toItem: toView, attribute: .top, multiplier: 1.0, constant: 0))
         layoutConstraints.append(
-            NSLayoutConstraint(item: base, attribute: NSLayoutAttribute.height, relatedBy: .equal,
+            NSLayoutConstraint(item: base, attribute: NSLayoutConstraint.Attribute.height, relatedBy: .equal,
                                toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: height)
         )
         NSLayoutConstraint.activate(layoutConstraints)

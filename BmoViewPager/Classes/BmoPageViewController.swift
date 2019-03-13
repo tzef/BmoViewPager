@@ -19,7 +19,11 @@ class BmoPageViewController: UIPageViewController, UIPageViewControllerDataSourc
     weak var scrollViewDelegate: UIScrollViewDelegate?
     weak var bmoDataSource: BmoViewPagerDataSource?
     weak var bmoViewPager: BmoViewPager!
-    weak var pageScrollView: UIScrollView?
+    weak var pageScrollView: UIScrollView? {
+        didSet {
+            bmoViewPager.scrollView = pageScrollView
+        }
+    }
     var setViewControllerIng = false
     var infinitScroll: Bool = false
     var scrollable: Bool = true {

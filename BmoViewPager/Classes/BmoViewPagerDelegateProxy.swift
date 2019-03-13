@@ -8,6 +8,7 @@
 import UIKit
 
 protocol BmoViewPagerDelegateProxyDataSource: class {
+    func setLastScrollAbsProgress(_ fraction: CGFloat)
     func setLastContentOffSet(_ point: CGPoint)
     func getLastContentOffSet() -> CGPoint?
     func isBoundChanged() -> Bool
@@ -93,11 +94,15 @@ extension BmoViewPagerDelegateProxy: UIScrollViewDelegate {
         if let index = scrollView.subviews[safe: targetIndex]?.subviews.first?.bmoVP.index() {
             pager.pageControlIndex = index
         }
+        self.delegate?.setLastScrollAbsProgress(abs(progressFraction))
         pager.delegate?.bmoViewPagerDelegate?(pager, scrollProgress: progressFraction, index: pager.pageControlIndex)
         pager.navigationBars.forEach { (weakBar: WeakBmoVPbar<BmoViewPagerNavigationBar>) in
             if let bar = weakBar.bar {
                 bar.updateFocusProgress(&progressFraction)
             }
+        }
+        if let delegate = self.forwardDelegate, delegate.responds(to: #selector(UIScrollViewDelegate.scrollViewDidScroll(_:))) {
+            delegate.scrollViewDidScroll(scrollView)
         }
     }
 }

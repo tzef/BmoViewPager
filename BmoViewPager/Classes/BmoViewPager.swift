@@ -27,6 +27,7 @@ import UIKit
 }
 
 @IBDesignable
+
 public class BmoViewPager: UIView {
     @IBInspectable var isHorizontal: Bool = true {
         didSet {
@@ -39,13 +40,30 @@ public class BmoViewPager: UIView {
     }
     
     lazy var delegateProxy: BmoViewPagerDelegateProxy = {
-        return BmoViewPagerDelegateProxy(viewPager: self, forwardDelegate: self, delegate: self)
+        return BmoViewPagerDelegateProxy(viewPager: self, forwardDelegate: scrollViewDelegate ?? self, delegate: self)
     }()
-    
+
+    /// delegate of UIScrollview in BmoViewPager's UIPageViewController
+    public weak var scrollViewDelegate: UIScrollViewDelegate? {
+        didSet {
+            delegateProxy.forwardDelegate = scrollViewDelegate
+        }
+    }
+
     /// UIScrollview in BmoViewPager's UIPageViewController
     weak var scrollView: UIScrollView? {
-        get {
-            return pageViewController.pageScrollView
+        didSet {
+            delegateObserver = scrollView?.observe(\.delegate, options: [.new], changeHandler: { [weak self] (scrollView, value) in
+                if let newDelegate = (value.newValue as? UIScrollViewDelegate), !(newDelegate is BmoViewPagerDelegateProxy) {
+                    if let delegate = self?.pageViewController.scrollViewDelegate as? BmoViewPagerDelegateProxy {
+                        delegate.forwardDelegate = newDelegate
+                        scrollView.delegate = delegate
+                    } else {
+                        self?.delegateProxy.forwardDelegate = newDelegate
+                        scrollView.delegate = self?.delegateProxy
+                    }
+                }
+            })
         }
     }
 
@@ -123,6 +141,11 @@ public class BmoViewPager: UIView {
         }
     }
 
+    /// between 0.0 to 1.0, default is 0.0
+    public var edgeMaskPercentage: Float = 0.0
+    /// how much offset let mask enlarge to max, default is 32.0
+    public var edgeMaskTriggerOffset: Float = 32.0
+
     public var lastPresentedPageIndex: Int = 0
     private var _presentedPageIndex: Int = 0
     public var presentedPageIndex: Int {
@@ -193,15 +216,34 @@ public class BmoViewPager: UIView {
         pageVC.view.bmoVP.autoFit(self)
         return pageVC
     }()
+
+    internal var referencePageViewControllers = [Int : WeakBmoVPpageViewController]()
+    internal var navigationBars = [WeakBmoVPbar]()
     
     private let defaultNavigaionBar = BmoViewPagerNavigationBar()
     private var presentedIndexInternalFlag = false
-    internal var referencePageViewControllers = [Int : WeakBmoVPpageViewController]()
-    internal var navigationBars = [WeakBmoVPbar]()
-    fileprivate var delegateObserver: NSKeyValueObservation?
-    fileprivate var lastContentOffSet: CGPoint? = nil
-    fileprivate var boundChanged: Bool = false
-    fileprivate var inited = false
+    private var delegateObserver: NSKeyValueObservation?
+    private var lastContentOffSet: CGPoint? = nil
+    private var boundChanged: Bool = false
+    private lazy var maskLayerHorizontal: CAGradientLayer = {
+        let layer = CAGradientLayer()
+        layer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor, UIColor.black.cgColor, UIColor.clear.cgColor]
+        layer.backgroundColor = UIColor.clear.cgColor
+        layer.startPoint = CGPoint(x: 0.0, y: 0.5)
+        layer.endPoint = CGPoint(x: 1.0, y: 0.5)
+        layer.locations = [0.0, 0.0, 1.0, 1.0]
+        return layer
+    }()
+    private lazy var maskLayerVertical: CAGradientLayer = {
+        let layer = CAGradientLayer()
+        layer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor, UIColor.black.cgColor, UIColor.clear.cgColor]
+        layer.backgroundColor = UIColor.clear.cgColor
+        layer.startPoint = CGPoint(x: 0.5, y: 0.0)
+        layer.endPoint = CGPoint(x: 0.5, y: 1.0)
+        layer.locations = [0.0, 0.0, 1.0, 1.0]
+        return layer
+    }()
+    private var inited = false
     
     public override var bounds: CGRect {
         didSet {
@@ -210,6 +252,10 @@ public class BmoViewPager: UIView {
                 self?.boundChanged = false
             }
         }
+    }
+    deinit {
+        delegateObserver?.invalidate()
+        delegateObserver = nil
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -250,8 +296,10 @@ public class BmoViewPager: UIView {
             pageViewController.scrollable = self.scrollable
             pageViewController.reloadData()
             
-            if let existedDelegate = scrollView?.delegate, !(existedDelegate is BmoViewPagerDelegateProxy) {
-                delegateProxy.forwardDelegate = existedDelegate
+            if self.orientation == .horizontal {
+                self.pageViewController.view.layer.mask = maskLayerHorizontal
+            } else {
+                self.pageViewController.view.layer.mask = maskLayerVertical
             }
         }
     }
@@ -301,6 +349,8 @@ public class BmoViewPager: UIView {
     
     public override func layoutSubviews() {
         super.layoutSubviews()
+        self.maskLayerVertical.frame = self.bounds
+        self.maskLayerHorizontal.frame = self.bounds
         self.pageViewController.view.setNeedsLayout()
     }
     
@@ -350,6 +400,22 @@ extension BmoViewPager: BmoViewPagerDelegateProxyDataSource {
     }
     func setLastContentOffSet(_ point: CGPoint) {
         self.lastContentOffSet = point
+    }
+    func setLastScrollAbsProgress(_ fraction: CGFloat) {
+        if let bounds = scrollView?.bounds, self.edgeMaskPercentage > 0.0 {
+            let length = (self.orientation == .horizontal ? bounds.width : bounds.height)
+            var offsetValue: Float = 0.0
+            if fraction > 0.5 {
+                offsetValue = Float(length * (1 - fraction))
+            } else {
+                offsetValue = Float(length * fraction)
+            }
+            let percentage = (1 - max((self.edgeMaskTriggerOffset - offsetValue), 0) / self.edgeMaskTriggerOffset) * self.edgeMaskPercentage
+            let fraction1 = NSNumber(value: percentage * 0.5)
+            let fraction2 = NSNumber(value: 1 - percentage * 0.5)
+            self.maskLayerVertical.locations = [0.0, fraction1, fraction2, 1.0]
+            self.maskLayerHorizontal.locations = [0.0, fraction1, fraction2, 1.0]
+        }
     }
 }
 

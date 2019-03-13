@@ -27,6 +27,7 @@ class DemoViewController1: UIViewController {
         
         defaultViewPager.dataSource = self
         defaultViewPager.presentedPageIndex = 7
+        defaultViewPagerNavigationBar.edgeMaskPercentage = 0.3
         defaultViewPagerNavigationBar.viewPager = defaultViewPager
         
         if #available(iOS 9.0, *) {

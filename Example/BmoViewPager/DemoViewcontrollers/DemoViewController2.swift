@@ -20,9 +20,14 @@ class DemoViewController2: UIViewController {
         viewPagerNavigationBar.viewPager = viewPager
         viewPagerNavigationBar.layer.masksToBounds = true
         viewPagerNavigationBar.layer.cornerRadius = viewPagerSegmentedView.layer.cornerRadius
+        viewPager.edgeMaskPercentage = 0.5
         viewPager.presentedPageIndex = 1
         viewPager.infinitScroll = true
         viewPager.dataSource = self
+    }
+
+    override func viewDidLayoutSubviews() {
+        viewPager.edgeMaskTriggerOffset = Float(self.view.bounds.width / 2)
     }
 }
 

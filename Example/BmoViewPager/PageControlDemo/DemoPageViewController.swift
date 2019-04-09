@@ -26,14 +26,14 @@ class DemoPageViewController: UIPageViewController, UIPageViewControllerDataSour
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        nowPage = controllers.index(of: viewController) ?? controllers.count - 1
+        nowPage = controllers.firstIndex(of: viewController) ?? controllers.count - 1
         if nowPage + 1 >= controllers.count {
             return nil
         }
         return controllers[nowPage + 1]
     }
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        nowPage = controllers.index(of: viewController) ?? 0
+        nowPage = controllers.firstIndex(of: viewController) ?? 0
         if nowPage - 1 < 0 {
             return nil
         }

@@ -296,11 +296,13 @@ public class BmoViewPager: UIView {
             pageViewController.infinitScroll = self.infinitScroll
             pageViewController.scrollable = self.scrollable
             pageViewController.reloadData()
-            
-            if self.orientation == .horizontal {
-                self.pageViewController.view.layer.mask = maskLayerHorizontal
-            } else {
-                self.pageViewController.view.layer.mask = maskLayerVertical
+
+            if edgeMaskPercentage > 0.0 {
+                if self.orientation == .horizontal {
+                    self.pageViewController.view.layer.mask = maskLayerHorizontal
+                } else {
+                    self.pageViewController.view.layer.mask = maskLayerVertical
+                }
             }
         }
     }

@@ -83,10 +83,12 @@ public class BmoViewPagerNavigationBar: UIView {
                 self.resetViewPager(viewPager)
             }
         }
-        if self.orientation == .horizontal {
-            self.pageListView?.layer.mask = maskLayerHorizontal
-        } else {
-            self.pageListView?.layer.mask = maskLayerVertical
+        if edgeMaskPercentage > 0.0 {
+            if self.orientation == .horizontal {
+                self.pageListView?.layer.mask = maskLayerHorizontal
+            } else {
+                self.pageListView?.layer.mask = maskLayerVertical
+            }
         }
         self.contentOffsetObserver = pageListView?.collectionView?.observe(\.contentOffset, options: [.new], changeHandler: { [unowned self] (collectionView, value) in
             if let offset = value.newValue, self.edgeMaskPercentage > 0.0 {
@@ -95,13 +97,13 @@ public class BmoViewPagerNavigationBar: UIView {
                 let fraction1 = NSNumber(value: percentage * 0.5)
                 var fraction2 = NSNumber(value: 1 - percentage * 0.5)
                 if self.orientation == .horizontal {
-                    if offset.x + collectionView.bounds.width >= collectionView.contentSize.width {
+                    if floor(offset.x + collectionView.bounds.width) >= floor(collectionView.contentSize.width) {
                         fraction2 = 1.0
                     } else if percentage < 1.0 {
                         fraction2 = NSNumber(value: 1 - self.edgeMaskPercentage * 0.5)
                     }
                 } else {
-                    if offset.y + collectionView.bounds.height >= collectionView.contentSize.height {
+                    if floor(offset.y + collectionView.bounds.height) >= floor(collectionView.contentSize.height) {
                         fraction2 = 1.0
                     } else if percentage < 1.0 {
                         fraction2 = NSNumber(value: 1 - self.edgeMaskPercentage * 0.5)

@@ -147,6 +147,7 @@ public class BmoViewPager: UIView {
     /// how much offset let mask enlarge to max, default is 32.0
     public var edgeMaskTriggerOffset: Float = 32.0
 
+    private(set) var presentedPageSettingCount: UInt32 = 0
     public var lastPresentedPageIndex: Int = 0
     private var _presentedPageIndex: Int = 0
     public var presentedPageIndex: Int {
@@ -159,6 +160,10 @@ public class BmoViewPager: UIView {
                 return
             }
             if _presentedPageIndex != newValue {
+                presentedPageSettingCount += 1
+                if presentedPageSettingCount >= (UINT32_MAX - 1) {
+                    presentedPageSettingCount = 0
+                }
                 if !presentedIndexInternalFlag && isInterporationAnimated {
                     if let bar = self.navigationBars.first?.bar {
                         bar.bmoViewPageItemList(didSelectItemAt: newValue, previousIndex: _presentedPageIndex)
@@ -334,19 +339,28 @@ public class BmoViewPager: UIView {
     }
     public func reloadData(autoAnimated: Bool = true) {
         if !inited { return }
-        DispatchQueue.main.async {
-            self.inited = false
-            self.referencePageViewControllers.removeAll()
-            if self.dataSource?.bmoViewPagerDataSourceNumberOfPage(in: self) ?? 0 <= self.presentedPageIndex {
-                self.internalSetPresentedIndex(0)
-            }
-            self.navigationBars.forEach { (weakBar: WeakBmoVPbar<BmoViewPagerNavigationBar>) in
-                if let bar = weakBar.bar {
-                    bar.reloadData(autoAnimated: autoAnimated)
+        let reloadClosure = { [weak self] in
+            if let strongSelf = self {
+                strongSelf.inited = false
+                strongSelf.referencePageViewControllers.removeAll()
+                if strongSelf.dataSource?.bmoViewPagerDataSourceNumberOfPage(in: strongSelf) ?? 0 <= strongSelf.presentedPageIndex {
+                    strongSelf.internalSetPresentedIndex(0)
                 }
+                strongSelf.navigationBars.forEach { (weakBar: WeakBmoVPbar<BmoViewPagerNavigationBar>) in
+                    if let bar = weakBar.bar {
+                        bar.reloadData(autoAnimated: autoAnimated)
+                    }
+                }
+                strongSelf.pageViewController.reloadData()
+                strongSelf.inited = true
             }
-            self.pageViewController.reloadData()
-            self.inited = true
+        }
+        if Thread.current == .main {
+            reloadClosure()
+        } else {
+            DispatchQueue.main.async {
+                reloadClosure()
+            }
         }
     }
     

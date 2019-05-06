@@ -229,10 +229,13 @@ extension BmoViewPagerNavigationBar: BmoPageItemListDelegate {
                 scrollPosition = 2
             }
         }
+        let baseSettingCount = self.viewPager?.presentedPageSettingCount
         let changePage = { [weak self] in
+            if self?.viewPager?.presentedPageSettingCount == baseSettingCount {
+                self?.pageListView?.focusIndex = -1
+                self?.viewPager?.internalSetPresentedIndex(index)
+            }
             self?.itemListSelectBlock = false
-            self?.pageListView?.focusIndex = -1
-            self?.viewPager?.internalSetPresentedIndex(index)
             self?.pageViewController?.pageScrollView?.isScrollEnabled = viewPager.scrollable
         }
         if viewPager.isInterporationAnimated {

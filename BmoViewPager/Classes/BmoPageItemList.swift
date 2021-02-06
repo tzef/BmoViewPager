@@ -355,6 +355,8 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
             self.focusIndex = -1
             collectionOffSet = targetY
             collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: targetY), animated: animated)
+        @unknown default:
+            fatalError("shouldn't been executed")
         }
     }
     func bmoPageItemListLayout(sizeForItemAt index: Int) -> CGSize {

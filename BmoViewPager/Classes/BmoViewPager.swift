@@ -113,7 +113,11 @@ public class BmoViewPager: UIView {
             if let vc = parentViewController {
                 #if swift(>=4.2)
                 vc.addChild(pageViewController)
-                vc.automaticallyAdjustsScrollViewInsets = false
+                if #available(iOS 11.0, *) {
+                    scrollView?.contentInsetAdjustmentBehavior = .never
+                } else {
+                    vc.automaticallyAdjustsScrollViewInsets = false
+                }
                 pageViewController.didMove(toParent: vc)
                 #else
                 vc.addChildViewController(pageViewController)

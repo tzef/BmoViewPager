@@ -206,7 +206,11 @@ public class BmoViewPager: UIView {
         didSet {
             if !inited { return }
             if oldValue != pageControlIndex {
-                self.delegate?.bmoViewPagerDelegate?(self, pageChanged: pageControlIndex)
+                if BmoViewPager.isRTL, let totalCount = dataSource?.bmoViewPagerDataSourceNumberOfPage(in: self) {
+                    self.delegate?.bmoViewPagerDelegate?(self, pageChanged: totalCount - pageControlIndex - 1)
+                } else {
+                    self.delegate?.bmoViewPagerDelegate?(self, pageChanged: pageControlIndex)
+                }
             }
         }
     }
@@ -437,6 +441,15 @@ extension BmoViewPager: BmoViewPagerDelegateProxyDataSource {
             self.maskLayerVertical.locations = [0.0, fraction1, fraction2, 1.0]
             self.maskLayerHorizontal.locations = [0.0, fraction1, fraction2, 1.0]
         }
+    }
+}
+
+extension BmoViewPager {
+    public class var isRTL: Bool {
+        guard let language = Locale.preferredLanguages.first else {
+            return false
+        }
+        return Locale.characterDirection(forLanguage: language) == .rightToLeft
     }
 }
 

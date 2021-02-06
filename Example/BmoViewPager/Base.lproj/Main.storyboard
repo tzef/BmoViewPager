@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="c4t-y1-aQg">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="c4t-y1-aQg">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Eet-MG-HaL">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="reuseCell" rowHeight="120" id="WSo-WL-ulh" customClass="AboutCell" customModule="BmoViewPager_Example" customModuleProvider="target">
@@ -48,7 +46,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                    <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstItem="SA8-nb-Xqd" firstAttribute="top" secondItem="uIZ-ub-yjh" secondAttribute="top" constant="8" id="Fkx-S0-mwG"/>
                                                         <constraint firstAttribute="bottom" secondItem="SA8-nb-Xqd" secondAttribute="bottom" constant="8" id="GBC-UX-I8V"/>
@@ -106,14 +104,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wWC-QH-tbm" customClass="BmoViewPager" customModule="BmoViewPager">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                             </view>
                             <pageControl opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="L00-0O-by9">
-                                <rect key="frame" x="168" y="614" width="39" height="37"/>
+                                <rect key="frame" x="126.5" y="623.5" width="122.5" height="27.5"/>
                             </pageControl>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="wWC-QH-tbm" firstAttribute="top" secondItem="UR0-wy-RKw" secondAttribute="bottom" id="53h-st-ftn"/>
                             <constraint firstItem="L00-0O-by9" firstAttribute="centerX" secondItem="Znf-Hw-tH7" secondAttribute="centerX" id="T1f-S6-TeC"/>
@@ -149,7 +147,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ct7-xS-MYJ" customClass="BmoViewPager" customModule="BmoViewPager">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -182,7 +180,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fHV-eS-bJ1">
-                                <rect key="frame" x="0.0" y="20" width="375" height="541"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hj9-KG-RXa">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="520"/>
@@ -275,14 +273,14 @@
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pts-9B-pfZ" customClass="DemoButton" customModule="BmoViewPager_Example" customModuleProvider="target">
-                                <rect key="frame" x="103" y="569" width="169" height="34"/>
+                                <rect key="frame" x="100" y="559" width="175" height="44"/>
                                 <state key="normal" title="See Advanced Demo"/>
                                 <connections>
                                     <action selector="moreDemoAction:" destination="YJR-ZV-hsP" eventType="touchUpInside" id="0G1-ei-54e"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Pts-9B-pfZ" firstAttribute="centerX" secondItem="vAr-we-E6K" secondAttribute="centerX" id="IHu-ne-XJ7"/>
                             <constraint firstAttribute="trailing" secondItem="fHV-eS-bJ1" secondAttribute="trailing" id="IYu-Ln-TVM"/>
@@ -324,7 +322,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Dp7-Pe-SB1" firstAttribute="leading" secondItem="zg7-MK-sl3" secondAttribute="leading" constant="16" id="3Ey-mA-det"/>
                             <constraint firstItem="Dp7-Pe-SB1" firstAttribute="top" secondItem="zg7-MK-sl3" secondAttribute="top" constant="16" id="AEq-mV-z5Z"/>
@@ -357,10 +355,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jrC-rD-O2Y">
-                                <rect key="frame" x="8" y="28" width="359" height="631"/>
+                                <rect key="frame" x="8" y="8" width="359" height="651"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="With NavigationBar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xUa-gq-RIj">
-                                        <rect key="frame" x="8" y="8" width="163.5" height="23"/>
+                                        <rect key="frame" x="8" y="8" width="162.5" height="23"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -390,7 +388,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="OCq-rv-Hwl" firstAttribute="top" secondItem="zes-aQ-qcC" secondAttribute="bottom" constant="8" id="8QM-Xh-9HE"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xUa-gq-RIj" secondAttribute="trailing" constant="20" symbolic="YES" id="AJr-Lf-7Z7"/>
@@ -436,10 +434,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="06h-qd-ScP">
-                                <rect key="frame" x="8" y="28" width="359" height="631"/>
+                                <rect key="frame" x="8" y="8" width="359" height="651"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ViewPage Navaigtion Bar Style" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bLf-f3-ovC">
-                                        <rect key="frame" x="8" y="8" width="260" height="23"/>
+                                        <rect key="frame" x="8" y="8" width="258" height="23"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -478,11 +476,11 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HES-GA-0ki" customClass="BmoViewPager" customModule="BmoViewPager">
-                                        <rect key="frame" x="16" y="317" width="327" height="298"/>
+                                        <rect key="frame" x="16" y="317" width="327" height="318"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="HES-GA-0ki" firstAttribute="leading" secondItem="06h-qd-ScP" secondAttribute="leading" constant="16" id="3q4-24-skj"/>
                                     <constraint firstItem="HES-GA-0ki" firstAttribute="top" secondItem="BLh-Qe-Mt2" secondAttribute="bottom" id="3ux-Mf-vqV"/>
@@ -541,7 +539,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uJC-wJ-fpL">
-                                <rect key="frame" x="8" y="28" width="359" height="631"/>
+                                <rect key="frame" x="8" y="8" width="359" height="651"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MqH-2j-13t" customClass="BmoViewPagerNavigationBar" customModule="BmoViewPager">
                                         <rect key="frame" x="16" y="16" width="327" height="30"/>
@@ -569,29 +567,29 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Example like Segmented Control" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="45N-ZC-ojM">
-                                        <rect key="frame" x="16" y="54" width="275.5" height="23"/>
+                                        <rect key="frame" x="16" y="54" width="273.5" height="23"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Input a segmented background" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QVl-C9-AIV">
-                                        <rect key="frame" x="16" y="85" width="238.5" height="18"/>
+                                        <rect key="frame" x="16" y="85" width="239.5" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set viewPager's infinitScroll to true" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2c7-W1-4U2">
-                                        <rect key="frame" x="16" y="111" width="238.5" height="18"/>
+                                        <rect key="frame" x="16" y="111" width="239.5" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qHD-qI-jTY" customClass="BmoViewPager" customModule="BmoViewPager">
-                                        <rect key="frame" x="8" y="137" width="343" height="486"/>
+                                        <rect key="frame" x="8" y="137" width="343" height="506"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="QVl-C9-AIV" firstAttribute="leading" secondItem="45N-ZC-ojM" secondAttribute="leading" id="Bp3-89-EfQ"/>
                                     <constraint firstItem="45N-ZC-ojM" firstAttribute="top" secondItem="MqH-2j-13t" secondAttribute="bottom" constant="8" id="Fdj-xg-eCE"/>
@@ -642,39 +640,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PageControl Compare" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ij-BY-8yl">
-                                <rect key="frame" x="24" y="36" width="327" height="23"/>
+                                <rect key="frame" x="24" y="16" width="327" height="23"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Native PageViewController" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Udf-0L-EeX">
-                                <rect key="frame" x="24" y="64" width="327" height="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Native PageViewController (Didn't support RTL)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Udf-0L-EeX">
+                                <rect key="frame" x="24" y="44" width="327" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YBB-hJ-rgj">
-                                <rect key="frame" x="24" y="90" width="327" height="220"/>
+                                <rect key="frame" x="24" y="70" width="327" height="220"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="cmX-5q-rWq" kind="embed" id="CtU-xU-gbY"/>
                                 </connections>
                             </containerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BMO ViewPager" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nAi-YY-O9S">
-                                <rect key="frame" x="24" y="318" width="111" height="18"/>
+                                <rect key="frame" x="24" y="298" width="111" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kXJ-FD-Ct9">
-                                <rect key="frame" x="24" y="344" width="327" height="220"/>
+                                <rect key="frame" x="24" y="324" width="327" height="220"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ko9-fK-2wh" customClass="BmoViewPager" customModule="BmoViewPager">
                                         <rect key="frame" x="0.0" y="0.0" width="327" height="185"/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <pageControl opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="hA2-SI-J7M">
-                                        <rect key="frame" x="144" y="183" width="39" height="37"/>
+                                        <rect key="frame" x="102.5" y="192.5" width="122.5" height="27.5"/>
                                     </pageControl>
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -739,7 +737,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aUw-N6-3gP">
-                                <rect key="frame" x="8" y="28" width="359" height="631"/>
+                                <rect key="frame" x="8" y="8" width="359" height="651"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k42-E8-ZnC" customClass="BmoViewPagerNavigationBar" customModule="BmoViewPager">
                                         <rect key="frame" x="8" y="8" width="44" height="50"/>
@@ -749,19 +747,19 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="loE-X0-VtJ" customClass="BmoViewPagerNavigationBar" customModule="BmoViewPager">
-                                        <rect key="frame" x="8" y="66" width="44" height="557"/>
+                                        <rect key="frame" x="8" y="66" width="44" height="577"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DIb-Su-EsQ" customClass="TargetLineHightlighedView" customModule="BmoViewPager_Example" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="135.5" width="44" height="418"/>
+                                        <rect key="frame" x="8" y="138" width="44" height="433"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8WJ-Cu-U2a" customClass="BmoViewPager" customModule="BmoViewPager">
-                                        <rect key="frame" x="60" y="8" width="291" height="615"/>
+                                        <rect key="frame" x="60" y="8" width="291" height="635"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="8WJ-Cu-U2a" firstAttribute="leading" secondItem="k42-E8-ZnC" secondAttribute="trailing" constant="8" id="2C2-Ix-ZHS"/>
                                     <constraint firstItem="DIb-Su-EsQ" firstAttribute="leading" secondItem="loE-X0-VtJ" secondAttribute="leading" id="4fm-W1-du6"/>
@@ -939,7 +937,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="c4t-y1-aQg" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9J5-k9-dcJ">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -952,9 +950,35 @@
             <point key="canvasLocation" x="-1436" y="1501"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="BLh-Qe-Mt2">
+            <size key="intrinsicContentSize" width="327" height="44"/>
+        </designable>
+        <designable name="Dp7-Pe-SB1">
+            <size key="intrinsicContentSize" width="343" height="44"/>
+        </designable>
+        <designable name="MqH-2j-13t">
+            <size key="intrinsicContentSize" width="327" height="30"/>
+        </designable>
+        <designable name="Pts-9B-pfZ">
+            <size key="intrinsicContentSize" width="174.6279296875" height="44"/>
+        </designable>
+        <designable name="k42-E8-ZnC">
+            <size key="intrinsicContentSize" width="44" height="50"/>
+        </designable>
+        <designable name="loE-X0-VtJ">
+            <size key="intrinsicContentSize" width="44" height="577"/>
+        </designable>
+        <designable name="yZX-gQ-3yN">
+            <size key="intrinsicContentSize" width="327" height="30"/>
+        </designable>
+    </designables>
     <resources>
         <image name="github-512" width="512" height="512"/>
-        <image name="pic1.png" width="920" height="730"/>
-        <image name="pic2.png" width="1080" height="900"/>
+        <image name="pic1.png" width="460" height="365"/>
+        <image name="pic2.png" width="540" height="450"/>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

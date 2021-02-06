@@ -68,11 +68,9 @@ class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         if bmoViewPgaerNavigationBar?.orientation == .vertical {
             collectionLayout.orientation = .vertical
         }
-        if #available(iOS 9.0, *) {
-            if UIView.userInterfaceLayoutDirection(for: self.semanticContentAttribute) == .rightToLeft {
-                collectionLayout.direction = .rightToLeft
-                layoutDirection = .rightToLeft
-            }
+        if BmoViewPager.isRTL {
+            collectionLayout.direction = .rightToLeft
+            layoutDirection = .rightToLeft
         }
         collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: collectionLayout)
         collectionView!.register(BmoPageItemCell.classForCoder(), forCellWithReuseIdentifier: reuseIdentifier)

@@ -88,7 +88,11 @@ class BmoPageViewController: UIPageViewController, UIPageViewControllerDataSourc
                 self?.pageScrollView?.isScrollEnabled = self?.bmoViewPager.scrollable ?? true
                 self?.setViewControllerIng = false
             })
-            bmoViewPager.delegate?.bmoViewPagerDelegate?(bmoViewPager, pageChanged: bmoViewPager.pageControlIndex)
+            if BmoViewPager.isRTL {
+                bmoViewPager.delegate?.bmoViewPagerDelegate?(bmoViewPager, pageChanged: count - bmoViewPager.pageControlIndex - 1)
+            } else {
+                bmoViewPager.delegate?.bmoViewPagerDelegate?(bmoViewPager, pageChanged: bmoViewPager.pageControlIndex)
+            }
             bmoViewPager.delegate?.bmoViewPagerDelegate?(bmoViewPager, didAppear: firstVC, page: bmoViewPager.presentedPageIndex)
         }
         if pageCount == 1 {
@@ -121,11 +125,11 @@ class BmoPageViewController: UIPageViewController, UIPageViewControllerDataSourc
     }
     
     // MARK: - PageViewDelegate
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        var nextIndex = (viewController.view.bmoVP.index() ?? bmoViewPager.presentedPageIndex) - 1
-        if nextIndex < 0 {
+    private func getPageNextTo(_ viewController: UIViewController, offset: Int) -> UIViewController? {
+        var nextIndex = (viewController.view.bmoVP.index() ?? bmoViewPager.presentedPageIndex) + offset
+        if !(0 ... pageCount-1 ~= nextIndex) {
             if self.infinitScroll {
-                nextIndex = pageCount - 1
+                nextIndex = offset < 0 ? pageCount - 1 : 0
             } else {
                 return nil
             }
@@ -141,24 +145,19 @@ class BmoPageViewController: UIPageViewController, UIPageViewControllerDataSourc
         vc.view.bmoVP.setOwner(vc)
         return vc
     }
+
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        if BmoViewPager.isRTL {
+            return getPageNextTo(viewController, offset: 1)
+        } else {
+            return getPageNextTo(viewController, offset: -1)
+        }
+    }
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        var nextIndex = (viewController.view.bmoVP.index() ?? bmoViewPager.presentedPageIndex) + 1
-        if nextIndex > pageCount - 1 {
-            if self.infinitScroll {
-                nextIndex = 0
-            } else {
-                return nil
-            }
+        if BmoViewPager.isRTL {
+            return getPageNextTo(viewController, offset: -1)
+        } else {
+            return getPageNextTo(viewController, offset: 1)
         }
-        if let vc = bmoViewPager.getReferencePageViewController(at: nextIndex) {
-            return vc
-        }
-        guard let vc = bmoDataSource?.bmoViewPagerDataSource(bmoViewPager, viewControllerForPageAt: nextIndex) else {
-            return nil
-        }
-        bmoViewPager.setReferencePageViewController(vc, at: nextIndex)
-        vc.view.bmoVP.setIndex(nextIndex)
-        vc.view.bmoVP.setOwner(vc)
-        return vc
     }
 }

@@ -8,7 +8,7 @@
 #### ⚠️ **The latest version for Swift 3.2 is 3.2.0** ⚠️  (Not Maintained)
 #### ⚠️ **The latest version for Swift 4.0 is 4.1.3** ⚠️ 
 #### ⚠️ **The latest version for Swift 4.2 is 4.2.2** ⚠️
-#### ⚠️ **The latest version for Swift 5 is 5.0.0** ⚠️
+#### ⚠️ **The latest version for Swift 5 is 5.1.0** ⚠️
 
 ## 4.1.0 Migrating to 4.2.0
 Syntax renaming : `NSAttributedStringKey` to `NSAttributedString.Key`
@@ -194,8 +194,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 ## Requirements
 
 - iOS 9.0+ 
-- Xcode 8.0+
-- Swift 3.0+
+- Swift 5.0+
 
 ## Installation
 

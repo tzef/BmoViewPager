@@ -213,7 +213,7 @@ To integrate BmoViewPager into your Xcode project using CocoaPods, specify it in
 use_frameworks!
 
 target '<Your Target Name>' do
-    pod 'BmoViewPager', '~> 4.0.0'
+    pod 'BmoViewPager', '~> 5.1.0'
 end
 ```
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol BmoPageItemListLayoutDelegate: class {
+protocol BmoPageItemListLayoutDelegate: AnyObject {
     func bmoPageItemListLayout(sizeForItemAt index: Int) -> CGSize
     func bmoPageItemListLayoutAttributesChanged(_ attributes: [UICollectionViewLayoutAttributes], animated: Bool)
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol BmoViewPagerDelegateProxyDataSource: class {
+protocol BmoViewPagerDelegateProxyDataSource: AnyObject {
     func setLastScrollAbsProgress(_ fraction: CGFloat)
     func setLastContentOffSet(_ point: CGPoint)
     func getLastContentOffSet() -> CGPoint?

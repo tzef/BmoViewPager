@@ -9,7 +9,7 @@
 import UIKit
 
 private let reuseIdentifier = "reuseIdentifier"
-protocol BmoPageItemListDelegate: class {
+protocol BmoPageItemListDelegate: AnyObject {
     func bmoViewPageItemList(didSelectItemAt index: Int, previousIndex: Int?)
 }
 class BmoPageItemList: UIView, UICollectionViewDelegate, UICollectionViewDataSource, BmoPageItemListLayoutDelegate {

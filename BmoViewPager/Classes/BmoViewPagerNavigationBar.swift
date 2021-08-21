@@ -50,6 +50,9 @@ public class BmoViewPagerNavigationBar: UIView {
     
     /// enable navigation bar animation when change viewPager page by tap navigationItem
     public var isInterpolationAnimated: Bool = true
+
+    /// `contentOffset` getter for the collectionView of BmoNavigationBar
+    @objc public dynamic var contentOffset: CGPoint = .zero
     
     weak var pageViewController: BmoPageViewController?
     private weak var pageListView: BmoPageItemList?
@@ -92,6 +95,7 @@ public class BmoViewPagerNavigationBar: UIView {
         }
         self.contentOffsetObserver = pageListView?.collectionView?.observe(\.contentOffset, options: [.new], changeHandler: { [unowned self] (collectionView, value) in
             if let offset = value.newValue, self.edgeMaskPercentage > 0.0 {
+                self.contentOffset = offset
                 let offsetValue: Float = self.orientation == .horizontal ? Float(offset.x) : Float(offset.y)
                 let percentage = (1 - max((self.edgeMaskTriggerOffset - offsetValue), 0) / self.edgeMaskTriggerOffset) * self.edgeMaskPercentage
                 let fraction1 = NSNumber(value: percentage * 0.5)

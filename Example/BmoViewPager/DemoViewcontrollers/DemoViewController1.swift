@@ -14,7 +14,14 @@ class DemoViewController1: UIViewController {
     @IBOutlet weak var defaultViewPager: BmoViewPager!
     @IBOutlet weak var customViewPgareNavigationBar: BmoViewPagerNavigationBar!
     @IBOutlet weak var customViewPager: BmoViewPager!
-    
+
+    private var contentOffsetObserver: NSKeyValueObservation?
+
+    deinit {
+        contentOffsetObserver?.invalidate()
+        contentOffsetObserver = nil
+    }
+
     var  customPage1 = ImageViewController(image: #imageLiteral(resourceName: "item0.jpg"))
     var  customPage2 = ImageViewController(image: #imageLiteral(resourceName: "item1.jpg"))
     var  customPage3 = ImageViewController(image: #imageLiteral(resourceName: "item2.jpg"))
@@ -40,6 +47,11 @@ class DemoViewController1: UIViewController {
         customViewPager.setReferencePageViewController(customPage1, at: 0)
         customViewPager.setReferencePageViewController(customPage2, at: 1)
         customViewPager.setReferencePageViewController(customPage3, at: 2)
+
+        self.contentOffsetObserver = defaultViewPagerNavigationBar.observe(\.contentOffset, options: [.new], changeHandler: { (collectionView, value) in
+            guard let offset = value.newValue else { return }
+            print("DEBUG: offset of navigaion bar \(offset)")
+        })
     }
 }
 

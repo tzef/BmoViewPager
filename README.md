@@ -8,7 +8,7 @@
 #### ⚠️ **The latest version for Swift 3.2 is 3.2.0** ⚠️  (Not Maintained)
 #### ⚠️ **The latest version for Swift 4.0 is 4.1.3** ⚠️ 
 #### ⚠️ **The latest version for Swift 4.2 is 4.2.2** ⚠️
-#### ⚠️ **The latest version for Swift 5 is 5.1.0** ⚠️
+#### ⚠️ **The latest version for Swift 5 is 5.2.0** ⚠️
 
 ## 4.1.0 Migrating to 4.2.0
 Syntax renaming : `NSAttributedStringKey` to `NSAttributedString.Key`
@@ -213,7 +213,7 @@ To integrate BmoViewPager into your Xcode project using CocoaPods, specify it in
 use_frameworks!
 
 target '<Your Target Name>' do
-    pod 'BmoViewPager', '~> 5.1.0'
+    pod 'BmoViewPager', '~> 5.2.0'
 end
 ```
 

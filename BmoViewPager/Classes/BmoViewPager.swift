@@ -172,9 +172,9 @@ public class BmoViewPager: UIView {
                     if let bar = self.navigationBars.first?.bar {
                         bar.bmoViewPageItemList(didSelectItemAt: newValue, previousIndex: _presentedPageIndex)
                     } else {
-                        self.addSubview(defaultNavigaionBar)
-                        defaultNavigaionBar.viewPager = self
-                        defaultNavigaionBar.bmoViewPageItemList(didSelectItemAt: newValue, previousIndex: _presentedPageIndex)
+                        self.addSubview(defaultNavigationBar)
+                        defaultNavigationBar.viewPager = self
+                        defaultNavigationBar.bmoViewPageItemList(didSelectItemAt: newValue, previousIndex: _presentedPageIndex)
                     }
                     return
                 }
@@ -234,7 +234,7 @@ public class BmoViewPager: UIView {
     internal var referencePageViewControllers = [Int : WeakBmoVPpageViewController]()
     internal var navigationBars = [WeakBmoVPbar]()
     
-    private let defaultNavigaionBar = BmoViewPagerNavigationBar()
+    private let defaultNavigationBar = BmoViewPagerNavigationBar()
     private var presentedIndexInternalFlag = false
     private var delegateObserver: NSKeyValueObservation?
     private var lastContentOffSet: CGPoint? = nil

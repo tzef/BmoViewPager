@@ -50,7 +50,7 @@ class DemoViewController1: UIViewController {
 
         self.contentOffsetObserver = defaultViewPagerNavigationBar.observe(\.contentOffset, options: [.new], changeHandler: { (collectionView, value) in
             guard let offset = value.newValue else { return }
-            print("DEBUG: offset of navigaion bar \(offset)")
+            print("DEBUG: offset of navigation bar \(offset)")
         })
     }
 }

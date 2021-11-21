@@ -268,6 +268,16 @@ public class BmoViewPager: UIView {
         }
     }
     deinit {
+#if swift(>=4.2)
+        pageViewController.willMove(toParent: nil)
+        pageViewController.view.removeFromSuperview()
+        pageViewController.removeFromParent()
+#else
+        pageViewController.willMove(toParentViewController: nil)
+        pageViewController.view.removeFromSuperview()
+        pageViewController.removeFromParentViewController()
+#endif
+        
         delegateObserver?.invalidate()
         delegateObserver = nil
     }
